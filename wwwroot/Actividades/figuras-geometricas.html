@@ -1,0 +1,296 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>Figuras Geométricas - EduClick</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .game-wrap {
+            background: #fff;
+            border-radius: 24px;
+            padding: 32px;
+            text-align: center;
+            max-width: 720px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,.12);
+        }
+
+        .game-title {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+
+        .game-sub {
+            font-size: 16px;
+            color: #718096;
+            margin-bottom: 24px;
+        }
+
+        .board {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            gap: 16px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+        }
+
+        .slot {
+            width: 100px;
+            height: 100px;
+            border: 3px dashed #cbd5e0;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #f7fafc;
+            transition: all .2s;
+        }
+
+            .slot.filled {
+                border-style: solid;
+                border-color: #1D9E75;
+                background: #E1F5EE;
+            }
+
+            .slot.over {
+                border-color: #1D9E75;
+                background: #f0fff4;
+            }
+
+        .slot-label {
+            position: absolute;
+            bottom: -26px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #718096;
+        }
+
+        .shapes-tray {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            min-height: 90px;
+        }
+
+        .shape {
+            width: 80px;
+            height: 80px;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform .15s, opacity .15s;
+        }
+
+            .shape:hover {
+                transform: scale(1.08);
+            }
+
+            .shape:active {
+                cursor: grabbing;
+            }
+
+            .shape.dragging {
+                opacity: .35;
+            }
+
+            .shape.placed {
+                visibility: hidden;
+            }
+
+        .feedback {
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 16px;
+            min-height: 26px;
+        }
+
+            .feedback.ok {
+                color: #0F6E56;
+            }
+
+            .feedback.bad {
+                color: #993C1D;
+            }
+
+        .score-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .star {
+            font-size: 30px;
+            color: #e2e8f0;
+            transition: color .2s, transform .2s;
+        }
+
+            .star.on {
+                color: #FFC107;
+                transform: scale(1.15);
+            }
+
+        .restart-btn {
+            margin-top: 20px;
+            display: none;
+            background: #1D9E75;
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+            .restart-btn:hover {
+                background: #178a64;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="game-wrap">
+        <div class="game-title">Figuras geométricas</div>
+        <div class="game-sub">Arrastra cada figura hasta su contorno</div>
+
+        <div class="score-row" id="stars">
+            <span class="star" id="s0">★</span>
+            <span class="star" id="s1">★</span>
+            <span class="star" id="s2">★</span>
+        </div>
+
+        <div class="board" id="board">
+            <div class="slot" data-shape="circle">
+                <svg viewBox="0 0 70 70" width="70" height="70"><circle cx="35" cy="35" r="30" fill="none" stroke="#cbd5e0" stroke-width="3" stroke-dasharray="6 5" /></svg>
+                <span class="slot-label">Círculo</span>
+            </div>
+            <div class="slot" data-shape="square">
+                <svg viewBox="0 0 70 70" width="70" height="70"><rect x="8" y="8" width="54" height="54" fill="none" stroke="#cbd5e0" stroke-width="3" stroke-dasharray="6 5" /></svg>
+                <span class="slot-label">Cuadrado</span>
+            </div>
+            <div class="slot" data-shape="triangle">
+                <svg viewBox="0 0 70 70" width="70" height="70"><polygon points="35,8 62,60 8,60" fill="none" stroke="#cbd5e0" stroke-width="3" stroke-dasharray="6 5" /></svg>
+                <span class="slot-label">Triángulo</span>
+            </div>
+            <div class="slot" data-shape="star">
+                <svg viewBox="0 0 70 70" width="70" height="70"><polygon points="35,5 43,27 66,27 47,41 54,63 35,49 16,63 23,41 4,27 27,27" fill="none" stroke="#cbd5e0" stroke-width="3" stroke-dasharray="6 5" /></svg>
+                <span class="slot-label">Estrella</span>
+            </div>
+        </div>
+
+        <div class="shapes-tray" id="tray">
+            <div class="shape" draggable="true" data-shape="triangle" id="shape-triangle">
+                <svg viewBox="0 0 70 70" width="70" height="70"><polygon points="35,8 62,60 8,60" fill="#F0997B" /></svg>
+            </div>
+            <div class="shape" draggable="true" data-shape="circle" id="shape-circle">
+                <svg viewBox="0 0 70 70" width="70" height="70"><circle cx="35" cy="35" r="30" fill="#85B7EB" /></svg>
+            </div>
+            <div class="shape" draggable="true" data-shape="star" id="shape-star">
+                <svg viewBox="0 0 70 70" width="70" height="70"><polygon points="35,5 43,27 66,27 47,41 54,63 35,49 16,63 23,41 4,27 27,27" fill="#FAC775" /></svg>
+            </div>
+            <div class="shape" draggable="true" data-shape="square" id="shape-square">
+                <svg viewBox="0 0 70 70" width="70" height="70"><rect x="8" y="8" width="54" height="54" fill="#97C459" /></svg>
+            </div>
+        </div>
+
+        <div class="feedback" id="feedback"></div>
+        <button class="restart-btn" id="restartBtn">Jugar de nuevo</button>
+    </div>
+
+    <script>(function () {
+            let placed = 0;
+            let correct = 0;
+            const totalShapes = 4;
+            let dragged = null;
+
+            const shapes = document.querySelectorAll('.shape');
+            const slots = document.querySelectorAll('.slot');
+            const feedback = document.getElementById('feedback');
+            const restartBtn = document.getElementById('restartBtn');
+
+            shapes.forEach(shape => {
+                shape.addEventListener('dragstart', () => {
+                    dragged = shape;
+                    shape.classList.add('dragging');
+                });
+                shape.addEventListener('dragend', () => {
+                    shape.classList.remove('dragging');
+                });
+            });
+
+            slots.forEach(slot => {
+                slot.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    slot.classList.add('over');
+                });
+                slot.addEventListener('dragleave', () => {
+                    slot.classList.remove('over');
+                });
+                slot.addEventListener('drop', e => {
+                    e.preventDefault();
+                    slot.classList.remove('over');
+                    if (!dragged || dragged.classList.contains('placed')) return;
+
+                    const shapeType = dragged.dataset.shape;
+                    const slotType = slot.dataset.shape;
+
+                    if (shapeType === slotType) {
+                        dragged.classList.add('placed');
+                        slot.classList.add('filled');
+
+                        const newSvg = dragged.querySelector('svg').cloneNode(true);
+                        const oldSvg = slot.querySelector('svg');
+                        slot.replaceChild(newSvg, oldSvg);
+
+                        placed++;
+                        correct++;
+                        feedback.textContent = '¡Muy bien! Esa figura es correcta';
+                        feedback.className = 'feedback ok';
+                        updateStars();
+
+                        if (placed === totalShapes) {
+                            feedback.textContent = '¡Completaste la actividad! Ganaste ' + correct + ' de ' + totalShapes + ' estrellas';
+                            restartBtn.style.display = 'inline-block';
+                        }
+                    } else {
+                        feedback.textContent = 'Esa figura no va ahí, intenta otra vez';
+                        feedback.className = 'feedback bad';
+                    }
+                });
+            });
+
+            function updateStars() {
+                const starEls = [document.getElementById('s0'), document.getElementById('s1'), document.getElementById('s2')];
+                const earned = Math.min(3, Math.round((correct / totalShapes) * 3));
+                starEls.forEach((s, i) => s.classList.toggle('on', i < earned));
+            }
+
+            restartBtn.addEventListener('click', () => location.reload());
+        })();</script>
+</body>
+</html>

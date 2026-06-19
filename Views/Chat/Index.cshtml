@@ -1,0 +1,179 @@
+﻿@{
+    ViewData["Title"] = "EduBot";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EduBot</title>
+
+    <link rel="stylesheet" href="~/css/Chat.css" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+    <div class="dashboard">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                <img src="~/CHAT/Logo.png" alt="Logotipo EduClick">
+            </div>
+
+        </aside>
+
+        <main class="main">
+
+            <div class="topbar">
+
+                <div class="saludo">
+                    <h2>¡Hola, Sofía! 👋</h2>
+                    <p>Estoy aquí para ayudarte a aprender y resolver tus dudas</p>
+                </div>
+
+                <div class="top-right">
+
+                    <div class="puntos">
+                        <img src="~/CHAT/puntos.png" alt="Icono de puntos estrella">
+                        <div>
+                            <h3>1200</h3>
+                            <span>Puntos</span>
+                        </div>
+                    </div>
+
+                    <div class="notificacion">
+                        <i class="fa-regular fa-bell"></i>
+                        <span>3</span>
+                    </div>
+
+                    <div class="perfil">
+                        <img src="~/CHAT/avatar.png" alt="Avatar del perfil de Sofía">
+                        <div>
+                            <h4>Sofía</h4>
+                            <span>Estudiante</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="chat-card">
+
+                <div class="chat-header">
+
+                    <div class="chat-title">
+                        <img src="~/CHAT/icono robot.png" alt="Icono de EduBot">
+                        <div>
+                            <h2>EduBot</h2>
+                            <span>Tu asistente de aprendizaje inteligente</span>
+                        </div>
+                    </div>
+
+                    <div class="estado">
+                        ● En línea
+                    </div>
+
+                </div>
+
+                <div class="chat-body">
+
+                    <div class="mensaje bot">
+                        <img src="~/CHAT/icono robot.png" alt="EduBot">
+                        <div class="burbuja">
+                            <strong>¡Hola, Sofía! 😊</strong>
+                            <p>Soy EduBot, tu asistente inteligente.</p>
+                            <p>¿En qué puedo ayudarte hoy?</p>
+                        </div>
+                    </div>
+
+                    <div class="mensaje usuario">
+                        <div class="burbuja user">
+                            Hola EduBot 👋<br />
+                            ¿Puedes explicarme qué es el sistema solar?
+                        </div>
+                        <img src="~/CHAT/icono avatar.png" alt="Sofía">
+                    </div>
+
+                    <div class="mensaje bot">
+                        <img src="~/CHAT/robot.png" alt="EduBot respondiendo">
+
+                        <div class="respuesta">
+
+                            <div class="burbuja">
+                                <strong>¡Claro que sí! 🌎✨</strong>
+                                <p>
+                                    El sistema solar es un conjunto de planetas,
+                                    lunas, asteroides y otros cuerpos celestes que
+                                    giran alrededor del Sol.
+                                </p>
+                            </div>
+
+                            <div class="contenido-solar">
+                                <img src="~/CHAT/imagen.png" alt="Ilustración didáctica del sistema solar">
+
+                                <div class="info">
+                                    <h4>Nuestro sistema solar</h4>
+                                    <ul>
+                                        <li>8 planetas</li>
+                                        <li>El Sol es una estrella</li>
+                                        <li>Hay lunas y asteroides</li>
+                                        <li>Todos orbitan al Sol</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="preguntas">
+                    <button type="button">¿Cuántos planetas hay?</button>
+                    <button type="button">¿Qué es una estrella?</button>
+                    <button type="button">¿Qué es la gravedad?</button>
+                </div>
+
+                <div class="input-chat">
+                    <input type="text" placeholder="Escribe tu pregunta aquí...">
+                    <button type="button" aria-label="Enviar mensaje">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+
+            </div>
+
+        </main>
+
+        <aside class="right-panel">
+
+            <div class="panel">
+                <h3>⚡ Acciones rápidas</h3>
+                <button type="button">📖 Explicar un tema</button>
+                <button type="button">🧩 Resolver un problema</button>
+                <button type="button">💡 Darme un consejo</button>
+                <button type="button">🎮 Recomendar actividad</button>
+            </div>
+
+            <div class="panel">
+                <h3>⭐ Temas populares</h3>
+                <ul>
+                    <li>🌍 El sistema solar</li>
+                    <li>🦖 Los dinosaurios</li>
+                    <li>📊 Fracciones</li>
+                    <li>🌋 Los volcanes</li>
+                    <li>❤️ El cuerpo humano</li>
+                </ul>
+            </div>
+
+        </aside>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+﻿@{
+    ViewData["Title"] = "Nosotros";
+}
+
+<link rel="stylesheet" href="~/css/SobreNosotros.css" />
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="contenedor">
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">
+            <img src="~/SOBRE NOSOTROS/Logo.png" alt="logo">
+            <div>
+                <h2>EduClick</h2>
+                <p>Aprender es la aventura más emocionante</p>
+            </div>
+        </div>
+
+        <nav>
+            <a asp-controller="Home" asp-action="Index">
+                <i class="fa-solid fa-house"></i>
+                <span>Inicio</span>
+            </a>
+
+            <a asp-controller="Beneficios" asp-action="Index">
+                <i class="fa-solid fa-star"></i>
+                <span>Beneficios</span>
+            </a>
+
+            <a asp-controller="SobreNosotros" asp-action="Index">
+                <i class="fa-solid fa-book"></i>
+                <span>Nosotros</span>
+            </a>
+
+            <a asp-controller="Contacto" asp-action="Index">
+                <i class="fa-solid fa-phone"></i>
+                <span>Contacto</span>
+            </a>
+
+        </nav>
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+        <div class="hero-texto">
+            <h1>Sobre <span>Nosotros</span></h1>
+
+            <p>
+                En EduClick creemos que cada niño tiene un potencial único y
+                que el aprendizaje debe ser una experiencia divertida,
+                segura e inspiradora.
+            </p>
+        </div>
+
+        <div class="hero-img">
+            <img src="~/SOBRE NOSOTROS/tigre.png" alt="">
+        </div>
+
+    </section>
+
+
+    <!-- TARJETAS -->
+    <section class="cards">
+
+        <div class="card">
+            <img src="~/SOBRE NOSOTROS/nuestra mision.png">
+            <h3 class="verde">Nuestra Misión</h3>
+            <p>
+                Ofrecer una plataforma educativa innovadora que fomente
+                el aprendizaje integral.
+            </p>
+        </div>
+
+        <div class="card">
+            <img src="~/SOBRE NOSOTROS/nuestra mision.png">
+            <h3 class="azul">Nuestra Visión</h3>
+            <p>
+                Ser una plataforma educativa líder que inspire a nuevas
+                generaciones.
+            </p>
+        </div>
+
+        <div class="card">
+            <img src="~/SOBRE NOSOTROS/nuestros valores.png">
+            <h3 class="morado">Nuestros Valores</h3>
+
+            <ul>
+                <li>Seguridad</li>
+                <li>Innovación</li>
+                <li>Respeto</li>
+                <li>Compromiso</li>
+                <li>Diversión</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="~/SOBRE NOSOTROS/nuestro compromiso.png">
+            <h3 class="naranja">Nuestro Compromiso</h3>
+            <p>
+                Brindar un entorno confiable, accesible y enriquecedor
+                para niños, padres y docentes.
+            </p>
+        </div>
+
+        <div class="card">
+            <img src="~/SOBRE NOSOTROS/para todos.png">
+            <h3 class="turquesa">Para Todos</h3>
+            <p>
+                Diseñado para acompañar a niños de diferentes edades
+                en su camino de aprendizaje.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER CTA -->
+    <section class="cta">
+
+        <img class="mascota" src="~/SOBRE NOSOTROS/tigre 2.png">
+
+        <div class="texto">
+            Somos más que una plataforma, somos compañeros
+            de aventura en cada paso del aprendizaje.
+        </div>
+
+        <button>¡Únete a EduClick! 🚀</button>
+
+        <img class="mochila" src="~/SOBRE NOSOTROS/maleta.png">
+
+    </section>
+
+</div>

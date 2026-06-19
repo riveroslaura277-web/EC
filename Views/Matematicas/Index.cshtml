@@ -1,0 +1,193 @@
+﻿@{
+    ViewData["Title"] = "Actividades Matemáticas";
+}
+
+<link rel="stylesheet" href="~/css/matem.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+<header class="topbar">
+
+    <div class="logo">
+        <img src="~/IMA MATE/Logo.png" alt="EduClick">
+
+        <div>
+            <h1>EduClick</h1>
+            <p>Aprender es la aventura más emocionante</p>
+        </div>
+    </div>
+
+    <div class="saludo">
+        <h2>¡Hola, Sofía! 👋</h2>
+        <p>Hoy es un gran día para aprender cosas nuevas 🌿</p>
+    </div>
+
+    <div class="usuario">
+
+        <div class="puntos">
+            ⭐
+            <div>
+                <strong>1200</strong>
+                <span>Puntos</span>
+            </div>
+        </div>
+
+        <div class="notificacion">
+            🔔
+        </div>
+
+        <div class="perfil">
+            <img src="~/Imagenesmate/icono avatar.png" alt="Perfil">
+
+            <div>
+                <strong>Sofía</strong>
+                <span>Estudiante</span>
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+<section class="banner-mate">
+
+    <div class="icono-mate">
+        <img src="~/Imagenesmate/iconomate (2).png" alt="Números y Conteo">
+    </div>
+
+    <div class="info-banner">
+
+        <div class="ruta">
+            <span>Actividades Matemáticas</span>
+            <span>&gt;</span>
+            <span>Grado Primero</span>
+        </div>
+
+        <h1>Grado Primero</h1>
+
+        <p>
+            Explora los temas y diviértete aprendiendo.
+        </p>
+
+    </div>
+
+</section>
+
+<div class="pagina">
+
+
+    <main class="contenido">
+
+        <div class="grid-actividades">
+
+            <div class="card">
+                <span class="numero">1</span>
+                <img src="~/Imagenesmate/conteo numeros.png" alt="Contar números">
+                <h3>Contar Números</h3>
+                <a href="@Url.Action("Index","ActiMate")" class="btn-explorar">
+                    Explorar →
+                </a>
+            </div>
+
+            <div class="card">
+                <span class="numero">2</span>
+                <img src="~/Imagenesmate/orden numeros.png" alt="Comparación y Orden">
+                <h3>Comparación y Orden</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">3</span>
+                <img src="~/Imagenesmate/sumas.png" alt="Sumas">
+                <h3>Sumas</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">4</span>
+                <img src="~/Imagenesmate/restas.png" alt="Restas">
+                <h3>Restas</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">5</span>
+                <img src="~/Imagenesmate/decenas.png" alt="Decenas y Unidades">
+                <h3>Decenas y Unidades</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">6</span>
+                <img src="~/Imagenesmate/resolucion.png" alt="Resolución de Problemas">
+                <h3>Resolución de Problemas</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">7</span>
+                <img src="~/Imagenesmate/figuras.png" alt="Figuras Geométricas">
+                <h3>Figuras Geométricas</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">8</span>
+                <img src="~/Imagenesmate/ubicacion.png" alt="Ubicación Espacial">
+                <h3>Ubicación Espacial</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">9</span>
+                <img src="~/Imagenesmate/medidas.png" alt="Medidas">
+                <h3>Medidas</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">10</span>
+                <img src="~/Imagenesmate/tiempo.png" alt="Tiempo y Calendario">
+                <h3>Tiempo y Calendario</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">11</span>
+                <img src="~/Imagenesmate/patrones.png" alt="Patrones y Secuencias">
+                <h3>Patrones y Secuencias</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">12</span>
+                <img src="~/Imagenesmate/recolecion.png" alt="Recolección de Datos">
+                <h3>Recolección de Datos</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">13</span>
+                <img src="~/Imagenesmate/grafica.png" alt="Gráficas Simples">
+                <h3>Gráficas Simples</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">14</span>
+                <img src="~/Imagenesmate/retos.png" alt="Retos Matemáticos">
+                <h3>Retos Matemáticos</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+            <div class="card">
+                <span class="numero">15</span>
+                <img src="~/Imagenesmate/juegos.png" alt="Juegos Matemáticos">
+                <h3>Juegos Matemáticos</h3>
+                <a href="#" class="btn-explorar">Explorar →</a>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>

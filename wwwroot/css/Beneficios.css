@@ -1,0 +1,509 @@
+﻿/* =======================================
+   RESET
+======================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI',sans-serif;
+    background: #f6f9fc;
+    color: #222;
+    overflow-x: hidden;
+}
+
+.contenedor {
+    width: 100%;
+}
+
+/* =======================================
+   NAVBAR
+======================================= */
+
+.navbar {
+    width: 98%;
+    margin: 18px auto;
+    background: #fff;
+    border-radius: 24px;
+    padding: 18px 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+    .logo img {
+        width: 74px;
+    }
+
+    .logo h2 {
+        font-size: 54px;
+        font-weight: 800;
+        line-height: 1;
+    }
+
+    .logo p {
+        margin-top: 4px;
+        color: #444;
+        font-size: 14px;
+    }
+
+.verde {
+    color: #11a93f;
+}
+
+.azul {
+    color: #1d75ff;
+}
+
+nav {
+    display: flex;
+    gap: 60px;
+}
+
+    nav a {
+        text-decoration: none;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        font-weight: 600;
+        transition: .3s;
+    }
+
+        nav a i {
+            font-size: 34px;
+        }
+
+        nav a:hover {
+            color: #17af41;
+            transform: translateY(-3px);
+        }
+
+/* =======================================
+   HERO
+======================================= */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 30px 90px;
+    min-height: 420px;
+    background: linear-gradient(#eef8ff,#ffffff);
+    overflow: hidden;
+}
+
+.hero-texto h1 {
+    font-size: 76px;
+    line-height: 1.02;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.hero-texto p {
+    font-size: 22px;
+    line-height: 1.7;
+    max-width: 620px;
+    color: #333;
+}
+
+.hero-imagen {
+    display: flex;
+    justify-content: center;
+}
+
+    .hero-imagen img {
+        width: 640px;
+        max-width: 100%;
+    }
+
+/* =======================================
+   GRID BENEFICIOS
+======================================= */
+
+.beneficios-grid {
+    width: 90%;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(2,minmax(520px,1fr));
+    justify-content: center;
+    gap: 25px;
+}
+
+/* =======================================
+   TARJETAS
+======================================= */
+
+.card {
+    background: white;
+    border-radius: 22px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    min-height: 190px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,.05);
+}
+
+    .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 25px rgba(0,0,0,.10);
+    }
+
+.icono-box {
+    width: 145px;
+    min-width: 145px;
+    height: 145px;
+    border-radius: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .icono-box img {
+        width: 90px;
+        height: 90px;
+        object-fit: contain;
+    }
+
+/* Fondos */
+
+.bg-verde {
+    background: #eaf8eb;
+}
+
+.bg-azul {
+    background: #eaf1ff;
+}
+
+.bg-amarillo {
+    background: #fff6df;
+}
+
+.bg-morado {
+    background: #f3edff;
+}
+
+.bg-rosa {
+    background: #ffeaf2;
+}
+
+.bg-cyan {
+    background: #e9f7f7;
+}
+
+/* Texto */
+
+.card div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    word-break: normal;
+}
+
+.card p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #333;
+    word-break: normal;
+}
+/* ===========================================
+   COLORES DE LOS TITULOS
+=========================================== */
+
+.verde-text {
+    color: #0ea93f;
+}
+
+.azul-text {
+    color: #1d75ff;
+}
+
+.amarillo-text {
+    color: #f4a300;
+}
+
+.morado-text {
+    color: #5540d8;
+}
+
+.rosa-text {
+    color: #f03275;
+}
+
+.cyan-text {
+    color: #008e99;
+}
+
+/* ===========================================
+   FOOTER
+=========================================== */
+
+.footer-box {
+    width: 89%;
+    margin: 25px auto 50px;
+    background: white;
+    border: 2px solid #dcefdc;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 30px;
+    box-shadow: 0 3px 10px rgba(0,0,0,.04);
+}
+
+.footer-left {
+    width: 170px;
+    display: flex;
+    justify-content: center;
+}
+
+    .footer-left img {
+        width: 135px;
+    }
+
+.footer-center {
+    flex: 1;
+    text-align: center;
+}
+
+    .footer-center h2 {
+        font-size: 24px;
+        line-height: 1.45;
+        font-weight: 700;
+    }
+
+    .footer-center .verde {
+        color: #10a33c;
+    }
+
+    .footer-center .azul {
+        color: #1d75ff;
+    }
+
+.footer-right {
+    width: 260px;
+    display: flex;
+    justify-content: center;
+}
+
+    .footer-right button {
+        border: none;
+        background: #10b341;
+        color: white;
+        font-size: 25px;
+        font-weight: 700;
+        padding: 18px 40px;
+        border-radius: 45px;
+        cursor: pointer;
+        transition: .3s;
+        box-shadow: 0 10px 20px rgba(16,179,65,.25);
+    }
+
+        .footer-right button:hover {
+            background: #0d9837;
+            transform: scale(1.05);
+        }
+
+/* ===========================================
+   EFECTOS GENERALES
+=========================================== */
+
+img {
+    user-select: none;
+}
+
+button {
+    font-family: 'Segoe UI',sans-serif;
+}
+
+.card img {
+    transition: .35s;
+}
+
+.card:hover img {
+    transform: scale(1.08);
+}
+
+/* ===========================================
+   RESPONSIVE
+=========================================== */
+
+@media(max-width:1300px) {
+
+    .hero {
+        padding: 35px 60px;
+    }
+
+    .hero-texto h1 {
+        font-size: 64px;
+    }
+
+    .hero-imagen img {
+        width: 520px;
+    }
+
+    .beneficios-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+/* =============================== */
+
+@media(max-width:992px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 25px;
+        padding: 25px;
+    }
+
+    nav {
+        gap: 35px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .hero-texto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .hero-texto h1 {
+            font-size: 56px;
+        }
+
+        .hero-texto p {
+            max-width: 700px;
+        }
+
+    .hero-imagen img {
+        width: 430px;
+    }
+
+    .beneficios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        min-height: 190px;
+    }
+
+    .footer-box {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .footer-right {
+        width: 100%;
+    }
+}
+
+/* =============================== */
+
+@media(max-width:768px) {
+
+    .hero {
+        padding: 35px 25px;
+    }
+
+    .hero-texto h1 {
+        font-size: 46px;
+    }
+
+    .hero-texto p {
+        font-size: 18px;
+    }
+
+    .hero-imagen img {
+        width: 320px;
+    }
+
+    .card {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px;
+        min-height: auto;
+    }
+
+    .icono-box {
+        width: 120px;
+        min-width: 120px;
+        height: 120px;
+    }
+
+        .icono-box img {
+            width: 75px;
+            height: 75px;
+        }
+
+    .card div {
+        align-items: center;
+    }
+
+    .card h3 {
+        font-size: 26px;
+    }
+
+    .card p {
+        font-size: 17px;
+    }
+
+    .footer-center h2 {
+        font-size: 20px;
+    }
+
+    .footer-right button {
+        width: 100%;
+        font-size: 20px;
+        padding: 16px 20px;
+    }
+}
+
+/* ===========================================
+   ANIMACIONES
+=========================================== */
+
+.card {
+    animation: subir .5s ease;
+}
+
+@keyframes subir {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

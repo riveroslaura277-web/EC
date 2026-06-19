@@ -1,0 +1,386 @@
+﻿/* =========================================
+   VARIABLES Y FUENTES GLOBALES
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap');
+
+:root {
+    --fondo-app: #F4F9FD; /* Azul muy suave para no cansar la vista */
+    --color-principal: #4A90E2; /* Azul brillante */
+    --color-acento: #FFAB00; /* Naranja/Dorado para estrellas y botones */
+    --color-texto: #333333;
+    --color-texto-suave: #666666;
+    --blanco: #FFFFFF;
+    /* Bordes y Sombras */
+    --borde-radio-lg: 24px;
+    --borde-radio-md: 16px;
+    --sombra-suave: 0 8px 24px rgba(0, 0, 0, 0.05);
+    --sombra-hover: 0 12px 32px rgba(74, 144, 226, 0.15);
+    /* Animaciones */
+    --transicion-rapida: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--fondo-app);
+    color: var(--color-texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================
+   TOPBAR (Barra Superior)
+   ========================================= */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--blanco);
+    padding: 15px 40px;
+    box-shadow: var(--sombra-suave);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+    .logo img {
+        width: 60px;
+        border-radius: 50%;
+        /* Animación de giro suave al pasar el mouse */
+        transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .logo:hover img {
+        transform: rotate(15deg) scale(1.1);
+    }
+
+    .logo h1 {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: var(--color-principal);
+        letter-spacing: -0.5px;
+    }
+
+    .logo p {
+        font-size: 0.9rem;
+        color: var(--color-texto-suave);
+    }
+
+.saludo h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.saludo p {
+    font-size: 1rem;
+    color: var(--color-texto-suave);
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.puntos {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #FFF4E5;
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 2px solid var(--color-acento);
+}
+
+    .puntos div {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.1;
+    }
+
+    .puntos strong {
+        color: var(--color-acento);
+        font-size: 1.2rem;
+    }
+
+    .puntos span {
+        font-size: 0.75rem;
+        font-weight: 700;
+    }
+
+.notificacion {
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+}
+
+    .notificacion:hover {
+        transform: scale(1.2) translateY(-2px);
+    }
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+    .perfil img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 3px solid var(--color-principal);
+    }
+
+    .perfil div {
+        display: flex;
+        flex-direction: column;
+    }
+
+/* =========================================
+   BANNER PRINCIPAL
+   ========================================= */
+.banner-mate {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: linear-gradient(135deg, #4A90E2 0%, #50E3C2 100%);
+    margin: 30px 40px;
+    padding: 40px;
+    border-radius: var(--borde-radio-lg);
+    color: var(--blanco);
+    box-shadow: 0 15px 30px rgba(74, 144, 226, 0.3);
+}
+
+.icono-mate img {
+    width: 120px;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+    animation: flotar 3s ease-in-out infinite;
+}
+
+@keyframes flotar {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.info-banner .ruta {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 8px;
+}
+
+.info-banner h1 {
+    font-size: 3rem;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.info-banner p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+/* =========================================
+   ESTRUCTURA PRINCIPAL (PÁGINA)
+   ========================================= */
+.pagina {
+    display: flex;
+    gap: 30px;
+    padding: 0 40px 40px 40px;
+    flex: 1;
+}
+
+/* =========================================
+   MENÚ LATERAL (SIDEBAR)
+   ========================================= */
+.sidebar {
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.menu {
+    background-color: var(--blanco);
+    padding: 20px 15px;
+    border-radius: var(--borde-radio-lg);
+    box-shadow: var(--sombra-suave);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .menu a {
+        text-decoration: none;
+        color: var(--color-texto-suave);
+        font-size: 1.1rem;
+        font-weight: 700;
+        padding: 15px 20px;
+        border-radius: var(--borde-radio-md);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        transition: var(--transicion-rapida);
+    }
+
+        .menu a i {
+            font-size: 1.3rem;
+            width: 25px;
+            text-align: center;
+        }
+
+        .menu a:hover, .menu a.active {
+            background-color: #EBF3FA;
+            color: var(--color-principal);
+            transform: translateX(5px);
+        }
+
+        .menu a.active {
+            border-left: 5px solid var(--color-principal);
+        }
+
+/* Mascota Motivacional */
+.mascota {
+    background-color: #FFF9E6;
+    border-radius: var(--borde-radio-lg);
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    border: 2px dashed var(--color-acento);
+}
+
+    .mascota img {
+        width: 100px;
+        margin-top: -50px; /* Hace que el tigre sobresalga por arriba */
+        transition: var(--transicion-rapida);
+    }
+
+    .mascota:hover img {
+        transform: translateY(-10px);
+    }
+
+    .mascota .mensaje h3 {
+        color: var(--color-acento);
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+    }
+
+    .mascota .mensaje p {
+        font-size: 0.9rem;
+        color: var(--color-texto-suave);
+        font-weight: 600;
+    }
+
+/* =========================================
+   CONTENIDO Y GRID DE ACTIVIDADES
+   ========================================= */
+.contenido {
+    flex: 1;
+}
+
+.grid-actividades {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--blanco);
+    border-radius: var(--borde-radio-lg);
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: var(--sombra-suave);
+    position: relative;
+    transition: var(--transicion-rapida);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid transparent; /* Para el hover */
+}
+
+    .card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: var(--sombra-hover);
+        border-color: var(--color-principal);
+    }
+
+    /* El número de la tarjeta tipo "Pin" */
+    .card .numero {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background-color: #FF5A5F;
+        color: var(--blanco);
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 900;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 8px rgba(255, 90, 95, 0.4);
+    }
+
+    .card img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        margin-bottom: 20px;
+        transition: var(--transicion-rapida);
+    }
+
+    .card:hover img {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .card h3 {
+        font-size: 1.2rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        color: var(--color-texto);
+        flex-grow: 1; /* Empuja el botón hacia abajo si el texto es corto */
+    }
+
+.btn-explorar {
+    text-decoration: none;
+    background-color: var(--color-acento);
+    color: var(--blanco);
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1rem;
+    transition: var(--transicion-rapida);
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(255, 171, 0, 0.3);
+}
+
+    .btn-explorar:hover {
+        background-color: #E69A00;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(255, 171, 0, 0.4);
+    }
