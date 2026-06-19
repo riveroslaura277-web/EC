@@ -1,0 +1,463 @@
+﻿@{
+    ViewData["Title"] = "Dashboard Estudiante";
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/css/estudiante-dashboard.css" />
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <img src="~/Estudiantes/Logo.png" alt="Logo">
+        </div>
+
+        <nav>
+
+            <a asp-controller="Home" asp-action="Index" class="activo">
+                <i class="fa-solid fa-house"></i>
+                Inicio
+            </a>
+
+            <a asp-controller="Evidencias" asp-action="Index">
+                <i class="fa-solid fa-list-check"></i>
+                Evidencias
+            </a>
+
+            <a asp-controller="Juegos" asp-action="Index">
+                <i class="fa-solid fa-chart-column"></i>
+                Juegos
+            </a>
+
+            <a asp-controller="Videos" asp-action="Index">
+                <i class="fa-solid fa-gamepad"></i>
+                Videos
+            </a>
+
+            <a asp-controller="Chat" asp-action="Index">
+                <i class="fa-solid fa-robot"></i>
+                Chat IA
+            </a>
+
+            <a asp-controller="Calendario" asp-action="Index">
+                <i class="fa-solid fa-calendar"></i>
+                Calendario
+            </a>
+        </nav>
+        <img class="buho"
+             src="~/Estudiantes/buhuo.png"
+             alt="Búho">
+
+    </aside>
+
+    <!-- CONTENIDO CENTRAL -->
+    <main class="contenido">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <div class="saludo">
+
+                <h2>¡Hola, Sofía! 👋</h2>
+
+                <p>
+                    Cada pequeño paso te acerca a grandes logros.
+                    ¡Sigue aprendiendo!
+                </p>
+
+            </div>
+
+            <div class="usuario">
+
+                <div class="puntos">
+                    <img src="~/Estudiantes/Puntos.png" alt="">
+                    <span>1200</span>
+                </div>
+
+                <img class="avatar"
+                     src="~/Estudiantes/icono avatar.png"
+                     alt="Avatar">
+
+                <div>
+                    <h4>Sofía</h4>
+                    <p>Estudiante</p>
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- BANNER -->
+        <section class="banner">
+
+            <!-- Imagen de fondo -->
+            <img src="~/Estudiantes/icono banner.png" alt="Banner">
+
+            <div class="texto-banner">
+
+                <h1>
+                    Aprender es descubrir
+                    que puedes lograr
+                    cosas increíbles
+                </h1>
+
+                <button>
+                    ¡Comenzar aventura!
+                </button>
+
+            </div>
+
+        </section>
+
+        <!-- MATERIAS -->
+        <section class="materias">
+
+            <h3>📚 Mis Materias</h3>
+
+            <div class="materias-grid">
+
+                <!-- Matemáticas -->
+                <a asp-controller="Matematicas"
+                   asp-action="Index"
+                   class="materia">
+
+                    <img src="~/Estudiantes/calculadora.png" alt="Matemáticas">
+
+                    <h4>Matemáticas</h4>
+
+                    <p>Aprende números, operaciones y problemas.</p>
+
+                </a>
+
+                <!-- Lectura -->
+                <a asp-controller="Materias"
+                   asp-action="Lectura"
+                   class="materia">
+
+                    <img src="~/Estudiantes/libro .png" alt="Lectura">
+
+                    <h4>Lectura</h4>
+
+                    <p>Mejora tu comprensión leyendo cuentos y textos.</p>
+
+                </a>
+
+                <!-- Ciencias -->
+                <a asp-controller="Materias"
+                   asp-action="Ciencias"
+                   class="materia">
+
+                    <img src="~/Estudiantes/mundo .png" alt="Ciencias">
+
+                    <h4>Ciencias</h4>
+
+                    <p>Descubre el mundo que te rodea.</p>
+
+                </a>
+
+                <!-- Inglés -->
+                <a asp-controller="Materias"
+                   asp-action="Ingles"
+                   class="materia">
+
+                    <img src="~/Estudiantes/ingles.png" alt="Inglés">
+
+                    <h4>Inglés</h4>
+
+                    <p>Aprende nuevas palabras y expresiones.</p>
+
+                </a>
+
+                <!-- Sociales -->
+                <a asp-controller="Materias"
+                   asp-action="Sociales"
+                   class="materia">
+
+                    <img src="~/Estudiantes/sociales.png" alt="Sociales">
+
+                    <h4>Sociales</h4>
+
+                    <p>Conoce la historia y la cultura de nuestro mundo.</p>
+
+                </a>
+
+                <!-- Tecnología -->
+                <a asp-controller="Materias"
+                   asp-action="Tecnologia"
+                   class="materia">
+
+                    <img src="~/Estudiantes/tecnologia.png" alt="Tecnología">
+
+                    <h4>Tecnología</h4>
+
+                    <p>Explora, crea e innova con la tecnología.</p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- SECCIÓN INFERIOR -->
+        <section class="bottom">
+
+            <!-- ACTIVIDAD RECIENTE -->
+            <div class="actividad-box">
+
+                <div class="box-header">
+                    <h2><i class="fas fa-leaf"></i> Actividad reciente</h2>
+                    <a href="#">Ver todas <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="actividad-item">
+                    <div class="item-icon morado">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <h4>Completaste el quiz "División de fracciones"</h4>
+                        <p>Matemáticas</p>
+                    </div>
+
+                    <div class="item-right">
+                        <span>Hace 30 min</span>
+                        <strong>+20 pts</strong>
+                    </div>
+                </div>
+
+                <div class="actividad-item">
+                    <div class="item-icon rojo">
+                        <i class="fas fa-play"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <h4>Viste el video "El ciclo del agua"</h4>
+                        <p>Ciencias Naturales</p>
+                    </div>
+
+                    <div class="item-right">
+                        <span>Hace 2 horas</span>
+                        <strong>+15 pts</strong>
+                    </div>
+                </div>
+
+                <div class="actividad-item">
+                    <div class="item-icon verde">
+                        <i class="fas fa-comments"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <h4>Participaste en el foro "Cuidado del planeta"</h4>
+                        <p>Ciencias Naturales</p>
+                    </div>
+
+                    <div class="item-right">
+                        <span>Ayer</span>
+                        <strong>+10 pts</strong>
+                    </div>
+                </div>
+
+                <div class="actividad-item">
+                    <div class="item-icon oscuro">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <h4>Ganaste en "Aventuras de Historia"</h4>
+                        <p>Sociales</p>
+                    </div>
+
+                    <div class="item-right">
+                        <span>Ayer</span>
+                        <strong>+25 pts</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SUGERENCIAS -->
+            <div class="sugerencias-box">
+
+                <div class="box-header">
+                    <h2><i class="fas fa-lightbulb"></i> Sugerencias para ti</h2>
+                </div>
+
+                <div class="sugerencia-item">
+
+                    <div class="item-icon azul">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <h4>Practica sumas y restas</h4>
+                        <p>Refuerza tus habilidades matemáticas.</p>
+                    </div>
+
+                    <a href="#" class="btn-ir">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+                <div class="sugerencia-item">
+
+                    <div class="item-icon naranja">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <h4>Lee "El Principito"</h4>
+                        <p>Una historia que te encantará.</p>
+                    </div>
+
+                    <a href="#" class="btn-ir">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+                <div class="sugerencia-item">
+
+                    <div class="item-icon verde">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <h4>Explora el sistema solar</h4>
+                        <p>Aprende sobre los planetas.</p>
+                    </div>
+
+                    <a href="#" class="btn-ir">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+                <div class="sugerencia-item">
+
+                    <div class="item-icon oscuro">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+
+                    <div class="item-info">
+                        <h4>Juega "Trivia de animales"</h4>
+                        <p>Pon a prueba tus conocimientos.</p>
+                    </div>
+
+                    <a href="#" class="btn-ir">
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <!-- PANEL DERECHO -->
+    <aside class="panel-derecho">
+
+        <div class="progreso-card">
+
+            <div class="titulo-progreso">
+                <h3>Mi progreso</h3>
+            </div>
+
+            <div class="contenido-progreso">
+
+                <div class="circulo">
+                    <div class="porcentaje">72%</div>
+                </div>
+
+                <p class="mensaje">¡Vas excelente!</p>
+
+                <div class="estadisticas">
+
+                    <div class="dato">
+                        <span>⭐ 1200</span>
+                        <p>Puntos</p>
+                    </div>
+
+                    <div class="dato">
+                        <span>🔥 18</span>
+                        <p>Días racha</p>
+                    </div>
+
+                    <div class="dato">
+                        <span>🏅 7</span>
+                        <p>Nivel</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <div class="tareas-card">
+
+            <div class="header-tareas">
+                <h3>Próximas tareas</h3>
+                <a href="#">Ver todas →</a>
+            </div>
+
+            <div class="lista-tareas">
+
+                <div class="tarea">
+                    <div class="icono">🍃</div>
+
+                    <div class="info">
+                        <h4>Mapa conceptual: Los ecosistemas</h4>
+                        <p>Ciencias Naturales</p>
+                    </div>
+
+                    <span class="estado verde">Mañana</span>
+                </div>
+
+
+                <div class="tarea">
+                    <div class="icono">🧮</div>
+
+                    <div class="info">
+                        <h4>Ejercicios de fracciones</h4>
+                        <p>Matemáticas</p>
+                    </div>
+
+                    <span class="estado azul">2 días</span>
+                </div>
+
+
+                <div class="tarea">
+                    <div class="icono">🏛️</div>
+
+                    <div class="info">
+                        <h4>Resumen: La Revolución Francesa</h4>
+                        <p>Sociales</p>
+                    </div>
+
+                    <span class="estado rojo">3 días</span>
+                </div>
+
+
+                <div class="tarea">
+                    <div class="icono">🖥️</div>
+
+                    <div class="info">
+                        <h4>Presentación: Energías renovables</h4>
+                        <p>Tecnología</p>
+                    </div>
+
+                    <span class="estado amarillo">5 días</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+</div>

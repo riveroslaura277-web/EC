@@ -1,0 +1,161 @@
+﻿@{
+    ViewData["Title"] = "Calendario";
+}
+
+<link rel="stylesheet" href="~/css/Calendario.css" />
+
+<div class="calendario-page">
+
+    <!-- HEADER -->
+    <div class="header-card">
+        <div class="header-left">
+            <div class="calendar-icon">📅</div>
+
+            <div>
+                <h1>Calendario</h1>
+                <p>Fechas importantes para aprender y celebrar</p>
+            </div>
+        </div>
+
+        <div class="header-right">
+            ⭐ ¡Cada día es una nueva oportunidad para aprender!
+        </div>
+    </div>
+
+    <div class="contenido">
+
+        <!-- CALENDARIO -->
+        <div class="calendar-container">
+
+            <div class="calendar-header">
+                <button class="nav-btn">❮</button>
+                <h2>Junio 2025</h2>
+                <button class="nav-btn">❯</button>
+            </div>
+
+            <div class="calendar-grid">
+
+                <div class="day-name">Lun</div>
+                <div class="day-name">Mar</div>
+                <div class="day-name">Mié</div>
+                <div class="day-name">Jue</div>
+                <div class="day-name">Vie</div>
+                <div class="day-name sabado">Sáb</div>
+                <div class="day-name domingo">Dom</div>
+
+                <!-- Semana -->
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+                <div class="day"></div>
+
+                <div class="day">
+                    <span class="numero">1</span>
+                </div>
+
+                <div class="day"><span class="numero">2</span></div>
+                <div class="day"><span class="numero">3</span></div>
+                <div class="day"><span class="numero">4</span></div>
+
+                <div class="day">
+                    <span class="numero">5</span>
+                    <div class="evento verde">
+                        🌿 Día del Medio Ambiente
+                    </div>
+                </div>
+
+                <div class="day"><span class="numero">6</span></div>
+                <div class="day"><span class="numero">7</span></div>
+
+                <div class="day">
+                    <span class="numero domingo">8</span>
+                    <div class="evento rosado">
+                        ❤️ Día de la Amistad
+                    </div>
+                </div>
+
+                <div class="day"><span class="numero">9</span></div>
+                <div class="day"><span class="numero">10</span></div>
+                <div class="day"><span class="numero">11</span></div>
+
+                <div class="day">
+                    <span class="numero">12</span>
+                    <div class="evento morado">
+                        🎨 Día del Juego
+                    </div>
+                </div>
+
+                <div class="day"><span class="numero">13</span></div>
+
+                <div class="day">
+                    <span class="numero">14</span>
+                    <div class="evento naranja">
+                        📖 Libro Infantil
+                    </div>
+                </div>
+
+                <div class="day">
+                    <span class="numero domingo">15</span>
+                </div>
+
+            </div>
+
+            <!-- BANNER -->
+            <div class="footer-banner">
+
+                <div class="robot">
+                    <img src="~/CALENDARIO/robot.png" alt="Robot">
+                </div>
+
+                <div class="texto">
+                    <h3>¡No te pierdas estas fechas especiales!</h3>
+
+                    <p>
+                        Cada celebración es una oportunidad para aprender,
+                        divertirte y descubrir algo nuevo.
+                    </p>
+                </div>
+
+                <div class="kids">
+                    <img src="~/CALENDARIO/niños.png" alt="Niños">
+                </div>
+
+            </div>
+
+        </div> <!-- FIN calendar-container -->
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+
+            <div class="card-eventos">
+
+                <h3>🎉 Próximos eventos</h3>
+
+                <div class="evento-card verde">
+                    🌿 Día Mundial del Medio Ambiente
+                    <span>5 de junio</span>
+                </div>
+
+                <div class="evento-card rosado">
+                    ❤️ Día de la Amistad
+                    <span>8 de junio</span>
+                </div>
+
+                <div class="evento-card morado">
+                    🎨 Día Mundial del Juego
+                    <span>12 de junio</span>
+                </div>
+
+                <div class="evento-card naranja">
+                    📖 Día del Libro Infantil
+                    <span>14 de junio</span>
+                </div>
+
+            </div>
+
+        </div> <!-- FIN sidebar -->
+
+    </div> <!-- FIN contenido -->
+
+</div> <!-- FIN calendario-page -->

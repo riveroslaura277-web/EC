@@ -1,0 +1,224 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI',sans-serif;
+}
+
+body {
+    background: linear-gradient(180deg,#dff5ff,#f6fcff);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.contenedor {
+    max-width: 1500px;
+    margin: auto;
+}
+
+/* HEADER */
+
+.header-videos {
+    background: white;
+    border-radius: 25px;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.logo-seccion img {
+    width: 80px;
+}
+
+.saludo h2 {
+    color: #2b73ff;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.saludo p {
+    margin-top: 5px;
+    font-size: 22px;
+}
+
+.acciones {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.puntos {
+    background: #fff;
+    border: 2px solid #ececec;
+    border-radius: 20px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .puntos img {
+        width: 55px;
+    }
+
+    .puntos h3 {
+        font-size: 28px;
+    }
+
+    .puntos span {
+        color: #777;
+    }
+
+.notificacion {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #e9e9e9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+    .notificacion i {
+        font-size: 30px;
+        color: #6d5cf6;
+    }
+
+    .notificacion span {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: #ff3f57;
+        color: white;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .perfil img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+
+    .perfil h4 {
+        font-size: 28px;
+    }
+
+    .perfil p {
+        color: #777;
+    }
+
+/* TITULO */
+
+.titulo-videos {
+    margin-top: 25px;
+    background: white;
+    border-radius: 25px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.icono-video {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#7b4dff,#4b00c9);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}
+
+.titulo-videos h1 {
+    color: #5527d8;
+    font-size: 50px;
+}
+
+.titulo-videos p {
+    font-size: 24px;
+    color: #555;
+}
+
+/* CATEGORIAS */
+
+.categorias {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+    .categorias button {
+        border: none;
+        background: white;
+        padding: 14px 22px;
+        border-radius: 30px;
+        font-size: 18px;
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .categorias .activo {
+        background: #6d39ff;
+        color: white;
+    }
+
+/* TARJETAS */
+
+.grid-videos {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
+    gap: 20px;
+}
+
+.card-video {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    transition: .3s;
+}
+
+    .card-video:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-video img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+    }
+
+.info-video {
+    padding: 15px;
+}
+
+    .info-video h3 {
+        font-size: 20px;
+        margin-bottom: 8px;
+        color: #1d1d1d;
+    }
+
+    .info-video span {
+        color: #666;
+        font-size: 15px;
+    }

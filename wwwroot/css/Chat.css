@@ -1,0 +1,556 @@
+﻿/* =========================================
+   VARIABLES Y FUENTES GLOBALES
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+    --fondo-app: #F4F9FD;
+    --color-principal: #4A90E2; /* Azul EduClick */
+    --color-secundario: #50E3C2; /* Turquesa */
+    --color-acento: #FFAB00; /* Naranja/Dorado */
+    --color-bot: #E8F1F8; /* Azul muy clarito para el bot */
+    --color-texto: #333333;
+    --color-texto-suave: #666666;
+    --blanco: #FFFFFF;
+    --borde-radio-lg: 24px;
+    --borde-radio-md: 16px;
+    --sombra-suave: 0 8px 24px rgba(0, 0, 0, 0.05);
+    --transicion-rapida: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--fondo-app);
+    color: var(--color-texto);
+    height: 100vh;
+    overflow: hidden; /* Evita que toda la página haga scroll */
+}
+
+/* =========================================
+   LAYOUT PRINCIPAL (DASHBOARD)
+   ========================================= */
+.dashboard {
+    display: flex;
+    height: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   SIDEBAR (Menú Lateral Izquierdo)
+   ========================================= */
+.sidebar {
+    width: 250px;
+    background-color: var(--blanco);
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.03);
+    z-index: 10;
+}
+
+    .sidebar .logo {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+        .sidebar .logo img {
+            width: 60px;
+            transition: var(--transicion-rapida);
+        }
+
+        .sidebar .logo:hover img {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+    .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+        .sidebar nav a {
+            text-decoration: none;
+            color: var(--color-texto-suave);
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 12px 15px;
+            border-radius: var(--borde-radio-md);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transicion-rapida);
+        }
+
+            .sidebar nav a i {
+                font-size: 1.2rem;
+                width: 25px;
+                text-align: center;
+            }
+
+            .sidebar nav a:hover, .sidebar nav a.active {
+                background-color: #EBF3FA;
+                color: var(--color-principal);
+                transform: translateX(5px);
+            }
+
+            .sidebar nav a.active {
+                border-left: 5px solid var(--color-principal);
+            }
+
+/* =========================================
+   ÁREA PRINCIPAL CENTRAL (Main & Topbar)
+   ========================================= */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 30px;
+    background-color: var(--fondo-app);
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.saludo h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--color-principal);
+}
+
+.saludo p {
+    font-size: 1rem;
+    color: var(--color-texto-suave);
+    font-weight: 600;
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.puntos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #FFF4E5;
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 2px solid var(--color-acento);
+}
+
+    .puntos img {
+        width: 25px;
+    }
+
+    .puntos h3 {
+        color: var(--color-acento);
+        font-size: 1.2rem;
+        line-height: 1;
+    }
+
+    .puntos span {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--color-texto-suave);
+    }
+
+.notificacion {
+    background-color: var(--blanco);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    color: var(--color-texto-suave);
+    box-shadow: var(--sombra-suave);
+    position: relative;
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+}
+
+    .notificacion:hover {
+        transform: scale(1.1);
+    }
+
+    .notificacion span {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background-color: #FF5A5F;
+        color: white;
+        font-size: 0.7rem;
+        font-weight: bold;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--blanco);
+    padding: 5px 15px 5px 5px;
+    border-radius: 50px;
+    box-shadow: var(--sombra-suave);
+    cursor: pointer;
+}
+
+    .perfil img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid var(--color-secundario);
+    }
+
+    .perfil h4 {
+        font-size: 0.9rem;
+        font-weight: 800;
+    }
+
+    .perfil span {
+        font-size: 0.8rem;
+        color: var(--color-texto-suave);
+    }
+
+/* =========================================
+   TARJETA DEL CHAT (Interfaz EduBot)
+   ========================================= */
+.chat-card {
+    background-color: var(--blanco);
+    border-radius: var(--borde-radio-lg);
+    box-shadow: var(--sombra-suave);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Mantiene todo dentro de los bordes redondeados */
+}
+
+.chat-header {
+    background: linear-gradient(to right, #ffffff, #F4F9FD);
+    padding: 15px 25px;
+    border-bottom: 2px solid #EBF3FA;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+    .chat-title img {
+        width: 50px;
+        background-color: var(--color-bot);
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    .chat-title h2 {
+        font-size: 1.4rem;
+        font-weight: 900;
+        color: var(--color-principal);
+    }
+
+    .chat-title span {
+        font-size: 0.9rem;
+        color: var(--color-texto-suave);
+    }
+
+.estado {
+    color: #4CAF50;
+    font-weight: 800;
+    font-size: 0.9rem;
+    background-color: #E8F5E9;
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+/* Cuerpo del Chat (Scrolleable) */
+.chat-body {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+    /* Personalización del Scrollbar para niños */
+    .chat-body::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .chat-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .chat-body::-webkit-scrollbar-thumb {
+        background: #D9E6F2;
+        border-radius: 10px;
+    }
+
+        .chat-body::-webkit-scrollbar-thumb:hover {
+            background: var(--color-principal);
+        }
+
+/* Mensajes Generales */
+.mensaje {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    max-width: 80%;
+}
+
+    .mensaje img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+.burbuja {
+    padding: 15px 20px;
+    border-radius: var(--borde-radio-md);
+    font-size: 1rem;
+    line-height: 1.5;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+/* Mensaje Bot */
+.mensaje.bot {
+    align-self: flex-start;
+}
+
+    .mensaje.bot .burbuja {
+        background-color: var(--color-bot);
+        color: var(--color-texto);
+        border-bottom-left-radius: 0; /* Efecto de cola de globo */
+    }
+
+    .mensaje.bot strong {
+        color: var(--color-principal);
+        display: block;
+        margin-bottom: 5px;
+    }
+
+/* Mensaje Usuario */
+.mensaje.usuario {
+    align-self: flex-end;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+    .mensaje.usuario .burbuja.user {
+        background-color: var(--color-principal);
+        color: var(--blanco);
+        border-bottom-right-radius: 0;
+    }
+
+/* Contenido Multimedia del Bot (Ej: Sistema Solar) */
+.respuesta {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contenido-solar {
+    background-color: var(--blanco);
+    border: 2px solid #EBF3FA;
+    border-radius: var(--borde-radio-md);
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    box-shadow: var(--sombra-suave);
+}
+
+    .contenido-solar img {
+        width: 100px;
+        height: 100px;
+        border-radius: 10px;
+    }
+
+    .contenido-solar .info h4 {
+        color: var(--color-principal);
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+    }
+
+    .contenido-solar .info ul {
+        list-style-position: inside;
+        color: var(--color-texto-suave);
+        font-size: 0.9rem;
+    }
+
+    .contenido-solar .info li {
+        margin-bottom: 3px;
+    }
+
+/* Preguntas Sugeridas */
+.preguntas {
+    padding: 0 25px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+    .preguntas button {
+        background-color: var(--blanco);
+        border: 2px solid var(--color-secundario);
+        color: #3AA996;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-family: inherit;
+        font-weight: 700;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: var(--transicion-rapida);
+    }
+
+        .preguntas button:hover {
+            background-color: var(--color-secundario);
+            color: var(--blanco);
+            transform: translateY(-2px);
+        }
+
+/* Zona de Input */
+.input-chat {
+    padding: 20px 25px;
+    background-color: var(--blanco);
+    border-top: 2px solid #EBF3FA;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+    .input-chat input {
+        flex: 1;
+        background-color: var(--fondo-app);
+        border: none;
+        padding: 15px 20px;
+        border-radius: 50px;
+        font-family: inherit;
+        font-size: 1rem;
+        color: var(--color-texto);
+        outline: none;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .input-chat input:focus {
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        }
+
+    .input-chat button {
+        background-color: var(--color-principal);
+        color: var(--blanco);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: var(--transicion-rapida);
+        box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
+    }
+
+        .input-chat button:hover {
+            transform: scale(1.1) rotate(10deg);
+            background-color: #357ABD;
+        }
+
+/* =========================================
+   PANEL DERECHO (Acciones y Temas)
+   ========================================= */
+.right-panel {
+    width: 280px;
+    background-color: var(--blanco);
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.03);
+    z-index: 10;
+}
+
+.panel h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-principal);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.panel button {
+    width: 100%;
+    background-color: var(--fondo-app);
+    border: none;
+    padding: 12px 15px;
+    border-radius: var(--borde-radio-md);
+    text-align: left;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-texto-suave);
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+    .panel button:hover {
+        background-color: var(--color-principal);
+        color: var(--blanco);
+        transform: translateX(-5px);
+    }
+
+.panel ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.panel li {
+    background-color: #FFF9E6;
+    padding: 12px 15px;
+    border-radius: var(--borde-radio-md);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--color-texto);
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+    border: 1px solid transparent;
+}
+
+    .panel li:hover {
+        border-color: var(--color-acento);
+        transform: scale(1.02);
+    }

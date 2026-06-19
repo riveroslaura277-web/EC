@@ -1,0 +1,246 @@
+﻿body {
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    background: linear-gradient( 180deg, #dff5ff 0%, #f8fdff 40%, #d8f7c6 100% );
+    padding: 20px;
+}
+
+.calendario-page {
+    max-width: 1600px;
+    margin: auto;
+}
+
+/* HEADER */
+
+.header-card {
+    background: white;
+    border-radius: 30px;
+    padding: 25px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.06);
+}
+
+.header-left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.calendar-icon {
+    font-size: 55px;
+}
+
+.header-left h1 {
+    color: #5a35d6;
+    font-size: 52px;
+    font-weight: 800;
+}
+
+.header-left p {
+    color: #6f7390;
+    font-size: 20px;
+}
+
+.header-right {
+    background: #fffaf0;
+    border: 2px solid #ffe9a8;
+    padding: 18px 25px;
+    border-radius: 20px;
+    font-size: 20px;
+    color: #5a35d6;
+    font-weight: 600;
+}
+
+/* CONTENIDO */
+
+.contenido {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 25px;
+}
+
+/* CALENDARIO */
+
+.calendar-container {
+    background: white;
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.05);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 25px;
+}
+
+    .calendar-header h2 {
+        color: #5030d7;
+        font-size: 42px;
+        font-weight: 800;
+    }
+
+.nav-btn {
+    width: 55px;
+    height: 55px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+    cursor: pointer;
+    font-size: 22px;
+}
+
+/* GRID */
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+}
+
+.day-name {
+    text-align: center;
+    padding: 15px;
+    font-weight: 700;
+    color: #40486b;
+}
+
+.sabado {
+    color: #3d69ff;
+}
+
+.domingo {
+    color: #ff3f7f;
+}
+
+.day {
+    min-height: 130px;
+    border: 1px solid #edf0f7;
+    padding: 10px;
+    position: relative;
+    background: white;
+}
+
+.numero {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.evento {
+    margin-top: 12px;
+    border-radius: 14px;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.verde {
+    background: #eaf8eb;
+    color: #2f8a3c;
+}
+
+.rosado {
+    background: #fff0f5;
+    color: #e63b72;
+}
+
+.morado {
+    background: #f1ecff;
+    color: #6a43ff;
+}
+
+.naranja {
+    background: #fff3e4;
+    color: #ff8a00;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-eventos {
+    background: white;
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.05);
+}
+
+    .card-eventos h3 {
+        color: #5030d7;
+        margin-bottom: 20px;
+        font-size: 28px;
+    }
+
+.evento-card {
+    padding: 18px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+    .evento-card span {
+        display: block;
+        margin-top: 8px;
+        font-size: 14px;
+    }
+
+/* FOOTER */
+
+.footer-banner {
+    margin-top: 25px;
+    background: #f8f6ff;
+    border-radius: 25px;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.robot,
+.kids {
+    font-size: 80px;
+}
+
+.texto h3 {
+    color: #4d2fd3;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.texto p {
+    color: #666;
+    font-size: 18px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px) {
+
+    .contenido {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        order: -1;
+    }
+
+    .header-card {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

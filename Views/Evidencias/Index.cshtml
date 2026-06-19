@@ -1,0 +1,217 @@
+﻿@{
+    ViewBag.Title = "Evidencias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/css/Evidencias.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+<div class="evidencias-container">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo-card">
+            <img src="~/EVIDENCIAS/Logo.png" alt="Logo">
+
+            <div>
+                <h2>EduClick</h2>
+                <p>Aprender es la aventura más emocionante</p>
+            </div>
+        </div>
+
+        <div class="welcome-card">
+            <h3>¡Hola, <span>Sofía!</span> 👋</h3>
+            <p>
+                Aquí puedes subir las evidencias
+                de tus actividades.
+            </p>
+        </div>
+
+        <div class="header-right">
+
+            <div class="points-box">
+                <img src="~/EVIDENCIAS/Puntos.png" alt="Puntos">
+                <span>1200</span>
+            </div>
+
+            <div class="notification-box">
+
+                <img src="~/EVIDENCIAS/iconos notificaciones.png"
+                     alt="Notificaciones">
+
+                <span class="badge">3</span>
+            </div>
+
+            <div class="profile-card">
+
+                <img src="~/EVIDENCIAS/icono avatar.png"
+                     alt="Avatar">
+
+                <div>
+                    <h4>Sofía</h4>
+                    <small>Estudiante</small>
+                </div>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENIDO -->
+    <main class="content-grid">
+
+        <!-- LEFT -->
+        <aside class="left-panel">
+
+            <a asp-controller="Home" asp-action="Index">
+                <i class="fa-solid fa-arrow-left"></i>
+                Volver al inicio
+            </a>
+
+            <div class="speech-card">
+                ¡Cada evidencia cuenta tu esfuerzo
+                y aprendizaje! 💜
+            </div>
+
+            <img src="~/EVIDENCIAS/tigreEvidencias.png"
+                 class="tiger"
+                 alt="Tigre">
+
+        </aside>
+        <!-- CENTRO -->
+        <section class="main-card">
+
+            <div class="title-section">
+
+                <div class="folder-icon">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+
+                <div>
+                    <h1>Mis evidencias</h1>
+
+                    <p>
+                        Sube aquí las evidencias
+                        de tus actividades de aprendizaje.
+                    </p>
+                </div>
+
+            </div>
+
+            @if (ViewBag.Mensaje != null)
+            {
+                <div class="alerta-exito">
+                    @ViewBag.Mensaje
+                </div>
+            }
+
+            @using (Html.BeginForm(
+            "SubirArchivo",
+            "Evidencias",
+            FormMethod.Post,
+            new { enctype = "multipart/form-data" }))
+            {
+                <label class="upload-area" for="archivo">
+
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+
+                    <h2>
+                        Arrastra y suelta tu evidencia aquí
+                    </h2>
+
+                    <p>
+                        o haz clic para seleccionar un archivo
+                    </p>
+
+                    <div class="upload-btn">
+                        <i class="fa-solid fa-file-circle-plus"></i>
+                        Seleccionar archivo
+                    </div>
+
+                    <div class="formats">
+
+                        <span class="jpg">JPG</span>
+
+                        <span class="png">PNG</span>
+
+                        <span class="pdf">PDF</span>
+
+                    </div>
+
+                    <small>
+                        Tamaño máximo: 10 MB
+                    </small>
+
+                </label>
+
+                <input type="file"
+                       id="archivo"
+                       name="archivo"
+                       hidden
+                       accept=".jpg,.jpeg,.png,.pdf"
+                       onchange="this.form.submit()" />
+            }
+
+            <div class="bottom-info">
+                <i class="fa-solid fa-shield-heart"></i>
+
+                Recuerda: Sube solo evidencias
+                relacionadas con tus actividades
+                de aprendizaje
+            </div>
+
+        </section>
+
+        <!-- RIGHT -->
+        <aside class="right-panel">
+
+            <img src="~/EVIDENCIAS/Consejos.png"
+                 class="tips-image"
+                 alt="Consejos">
+
+            <h3>¿Qué puedes subir?</h3>
+
+            <p>
+                Fotos de tus trabajos, dibujos,
+                tareas, proyectos y más.
+            </p>
+
+            <hr>
+
+            <h3>Consejos</h3>
+
+            <ul>
+
+                <li>
+                    📷 Asegúrate de que la imagen
+                    sea clara y esté bien enfocada.
+                </li>
+
+                <li>
+                    💡 Verifica que sea tu propio trabajo.
+                </li>
+
+                <li>
+                    ⭐ ¡Tú puedes! Sigue aprendiendo
+                    y compartiendo tus logros.
+                </li>
+
+            </ul>
+
+        </aside>
+
+    </main>
+
+</div>
