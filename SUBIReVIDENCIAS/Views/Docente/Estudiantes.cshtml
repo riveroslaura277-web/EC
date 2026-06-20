@@ -1,0 +1,87 @@
+﻿@model IEnumerable<SUBIReVIDENCIAS.Models.Estudiantes>
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-white">
+            <h2 class="mb-0">🎓 Lista de Estudiantes</h2>
+        </div>
+        <div class="card-body">
+            <p class="text-muted mb-4">Aquí el docente puede ver y gestionar los estudiantes registrados.</p>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-striped align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Curso</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var est in Model)
+                        {
+                            <tr>
+                                <td>@est.Nombre</td>
+                                <td>@est.Correo</td>
+                                <td><span class="badge bg-info text-dark">@est.Curso</span></td>
+                                <td>
+                                    <div class="d-flex justify-content-center gap-2">
+                                        @using (Html.BeginForm("EditarEstudiante", "Docente", FormMethod.Post, new { @class = "d-flex gap-2" }))
+                                        {
+                                            @Html.Hidden("IdEstudiante", est.IdEstudiante)
+                                            <input type="text" name="Nombre" class="form-control form-control-sm" value="@est.Nombre" style="width: 120px;" />
+                                            <input type="text" name="Correo" class="form-control form-control-sm" value="@est.Correo" style="width: 150px;" />
+                                            <input type="text" name="Curso" class="form-control form-control-sm" value="@est.Curso" style="width: 60px;" />
+                                            <button type="submit" class="btn btn-sm btn-outline-primary">💾 Guardar</button>
+                                        }
+
+                                        @using (Html.BeginForm("EliminarEstudiante", "Docente", FormMethod.Post))
+                                        {
+                                            @Html.Hidden("IdEstudiante", est.IdEstudiante)
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ Eliminar</button>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos Premium */
+    .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #4e54c8, #8f94fb);
+        padding: 20px;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f2ff !important;
+        transition: 0.3s;
+    }
+
+    .btn-outline-primary {
+        border-color: #4e54c8;
+        color: #4e54c8;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #4e54c8;
+            color: white;
+        }
+
+    .badge {
+        font-size: 0.85em;
+        padding: 5px 10px;
+    }
+</style>
