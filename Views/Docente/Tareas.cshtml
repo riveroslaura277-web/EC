@@ -1,0 +1,93 @@
+﻿@{
+    Layout = null;
+}
+
+@model IEnumerable<EC.Models.Evidencia>
+
+<link rel="stylesheet" href="~/css/tareas.css" />
+
+<div class="contenedor-tareas">
+
+    <h1>Evidencias Subidas por Estudiantes</h1>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="mensaje-exito">
+            @TempData["Mensaje"]
+        </div>
+    }
+
+    <table class="tabla-evidencias">
+
+        <thead>
+            <tr>
+                <th>Estudiante</th>
+                <th>Archivo</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Nota</th>
+                <th>Observación</th>
+                <th>Guardar</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>@item.NombreEstudiante</td>
+
+                    <td>
+                        <a class="link-archivo"
+                           href="~/uploads/@item.NombreArchivo"
+                           target="_blank">
+                            Ver archivo
+                        </a>
+                    </td>
+
+                    <td>
+                        @item.FechaEntrega.ToString("dd/MM/yyyy")
+                    </td>
+
+                    <td>
+                        <span class="estado @(item.Estado == "Calificado" ? "calificado" : "pendiente")">
+                            @item.Estado
+                        </span>
+                    </td>
+
+                    <td colspan="3">
+                        <form asp-action="GuardarCalificacion"
+                        method="post" style="display:flex; gap:10px; align-items:center;">
+                            <input type="hidden"
+                                   name="id"
+                                   value="@item.Id" />
+
+                            <input type="text"
+                                   name="nota"
+                                   value="@item.Nota"
+                                   placeholder="1.0 - 5.0"
+                                   required />
+
+                            <textarea name="observacion"
+                                      rows="2"
+                                      style="width:250px; resize:none;">@item.Observacion</textarea>
+
+                            <button type="submit"
+                                    class="btn-calificar">
+                                Guardar
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
