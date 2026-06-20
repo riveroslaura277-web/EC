@@ -1,0 +1,104 @@
+﻿@model IEnumerable<SUBIReVIDENCIAS.Models.Asistencia>
+@{
+    ViewData["Title"] = "Asistencia";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header text-white">
+            <h2 class="mb-0">📋 Registro de Asistencia</h2>
+        </div>
+        <div class="card-body">
+            <p class="text-muted mb-4">Gestiona la asistencia diaria de los estudiantes de forma rápida.</p>
+
+            <div class="table-responsive">
+                <table class="table table-hover table-striped align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Estado</th>
+                            <th>Fecha</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var registro in Model)
+                            {
+                                <tr>
+                                    <td><strong>@registro.NombreEstudiante</strong></td>
+                                    <td>
+                                        @if (registro.Estado == "Presente")
+                                        {
+                                            <span class="badge bg-success">✅ Presente</span>
+                                        }
+                                        else if (registro.Estado == "Ausente")
+                                        {
+                                            <span class="badge bg-danger">❌ Ausente</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning text-dark">⚠️ @registro.Estado</span>
+                                        }
+                                    </td>
+                                    <td>@registro.Fecha.ToString("dd/MM/yyyy")</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center gap-2">
+                                            @using (Html.BeginForm("EditarAsistencia", "Docente", FormMethod.Post, new { @class = "d-flex gap-2" }))
+                                            {
+                                                @Html.Hidden("Id", registro.Id)
+                                                @Html.DropDownList("Estado", new SelectList(new[] { "Presente", "Ausente", "Justificado" }, registro.Estado), new { @class = "form-control form-control-sm" })
+                                                <input type="date" name="Fecha" class="form-control form-control-sm" value="@registro.Fecha.ToString("yyyy-MM-dd")" />
+                                                <button type="submit" class="btn btn-sm btn-outline-primary">💾 Guardar</button>
+                                            }
+
+                                            @using (Html.BeginForm("EliminarAsistencia", "Docente", FormMethod.Post))
+                                            {
+                                                @Html.Hidden("Id", registro.Id)
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">🗑️ Eliminar</button>
+                                            }
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos integrados para mantener el diseño Premium */
+    .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        background: linear-gradient(135deg, #4e54c8, #8f94fb);
+        padding: 20px;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f1f2ff !important;
+        transition: 0.3s;
+    }
+
+    .btn-outline-primary {
+        border-color: #4e54c8;
+        color: #4e54c8;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #4e54c8;
+            color: white;
+        }
+
+    .form-control-sm {
+        border-radius: 8px;
+    }
+</style>
