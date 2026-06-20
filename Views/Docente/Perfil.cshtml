@@ -1,0 +1,39 @@
+﻿@model EC.Models.Profesor
+
+<h2>Mi Perfil</h2>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalPerfil">
+    Editar Perfil
+</button>
+
+<div class="modal fade" id="miModalPerfil" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Mi Perfil</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <form asp-action="EditarPerfil" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <img src="@Model.FotoRuta" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #6b8e8a;" />
+                    </div>
+
+                    <input type="text" name="Nombre" value="@Model.Nombre" />
+
+                    <input type="text" name="Nombre" value="@(Model?.Nombre ?? "")" />
+                    <input type="email" name="Correo" value="@(Model?.Correo ?? "")" />
+                    <label>Cambiar Foto</label>
+                    <input type="file" name="foto" class="form-control" />
+
+                    <div style="margin-top: 20px;">
+                        <button type="submit" class="btn btn-success" style="width: 100%;">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

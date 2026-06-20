@@ -1,0 +1,22 @@
+﻿@model IEnumerable<EC.Models.Logro>
+<h2>Logros de Estudiantes</h2>
+
+@if (!Model.Any())
+{
+    <p>No hay logros todavía. 📭</p>
+}
+else
+{
+    <div class="logros-container">
+        @foreach (var logro in Model)
+        {
+            <div class="logro-card">
+                <div class="logro-icon"><i class="fa @logro.Icono"></i></div>
+                <div class="logro-title">@logro.NombreLogro</div>
+                <div class="logro-desc">@logro.Descripcion</div>
+                <div class="logro-date">📅 @logro.FechaObtencion.ToShortDateString()</div>
+                <div class="logro-student">👤 @logro.Estudiante?.Nombre</div>
+            </div>
+        }
+    </div>
+}
