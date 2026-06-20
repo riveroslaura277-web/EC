@@ -1,0 +1,399 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient( 180deg, #23395d, #2f5d62, #4d7c78 );
+}
+
+/* SIDEBAR */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* dos columnas */
+    gap: 40px; /* separación amplia */
+    padding: 40px;
+}
+
+.card-panel {
+    background: #ffffff; /* 👈 fondo blanco */
+    color: #333;
+    border-radius: 20px;
+    padding: 50px; /* 👈 más padding para que se vean grandes */
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* sombra elegante */
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 1.4rem;
+}
+
+    .card-panel i {
+        font-size: 3.5rem; /* 👈 iconos grandes */
+        margin-bottom: 20px;
+        color: #009688; /* color destacado para iconos */
+    }
+
+    .card-panel h3 {
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+
+    .card-panel a {
+        display: inline-block;
+        background: #009688; /* botón verde/teal */
+        color: #fff;
+        padding: 14px 30px; /* 👈 botón grande */
+        border-radius: 10px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+        .card-panel a:hover {
+            background: #004d40;
+        }
+
+    .card-panel:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+
+.sidebar {
+    width: 200px;
+    background: linear-gradient(180deg,#23395d,#406e8e);
+    color: white;
+    padding: 25px 0;
+    position: fixed;
+    height: 100%;
+}
+
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 35px;
+        font-size: 19px;
+    }
+
+    .sidebar a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 15px 25px;
+        font-size: 19px;
+        transition: .3s;
+    }
+
+        .sidebar a i {
+            margin-right: 10px;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.15);
+            border-left: 5px solid white;
+        }
+
+/* CONTENIDO */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 25px;
+}
+
+/* ENCABEZADO */
+
+.topbar {
+    background: linear-gradient(90deg,#23395d,#406e8e);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+    .topbar h1 {
+        font-size: 19px;
+    }
+
+.perfil-top {
+    font-size: 19px;
+}
+
+/* TARJETAS */
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(400px,1fr));
+    gap: 22px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: .3s;
+    border-top: 5px solid #84a59d;
+}
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+    }
+
+    .card h3 {
+        color: #23395d;
+        margin-bottom: 15px;
+        font-size: 19px;
+    }
+
+    .card p {
+        color: #555;
+        margin-bottom: 20px;
+        font-size: 19px;
+    }
+
+/* BOTONES */
+
+.btn {
+    display: inline-block;
+    background: #84A59D;
+    background-color: #5b8c85;
+    color: black;
+    text-decoration: none;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: .3s;
+    font-size: 19px;
+}
+
+    .btn:hover {
+        background: #406E8E;
+        box-shadow: 0 0 20px rgba(132,165,157,0.8);
+        transform: translateY(-2px);
+    }
+
+/* TEXTAREA */
+
+textarea {
+    width: 100%;
+    height: 90px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    resize: none;
+    margin-bottom: 15px;
+    font-size: 19px;
+}
+
+    textarea:focus {
+        outline: none;
+        border-color: #406e8e;
+    }
+
+/* SELECT */
+
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1px;
+}
+
+    select:focus {
+        outline: none;
+        border-color: #406e8e;
+    }
+
+/* RESPONSIVE */
+
+@media(max-width:900px) {
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar h1 {
+        font-size: 28px;
+    }
+}
+.tabla-estudiantes {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+    .tabla-estudiantes th {
+        background: #4CAF50;
+        color: white;
+        padding: 12px;
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    .tabla-estudiantes td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+    }
+
+    .tabla-estudiantes tr:hover {
+        background-color: #f1f1f1;
+    }
+
+.btn-guardar {
+    background: #2196F3;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    .btn-guardar:hover {
+        background: #0b7dda;
+    }
+.btn-editar {
+    background: #2196F3;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    .btn-editar:hover {
+        background: #0b7dda;
+    }
+
+.btn-eliminar {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+    .btn-eliminar:hover {
+        background: #c62828;
+    }
+<style >
+/* Estilo para la tarjeta */
+.card {
+    border: none;
+    border-radius: 15px;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    background: linear-gradient(135deg, #4e54c8, #8f94fb); /* Un degradado moderno */
+}
+
+/* Mejora de los inputs */
+.form-control:focus {
+    border-color: #8f94fb;
+    box-shadow: 0 0 5px rgba(143, 148, 251, 0.5);
+}
+
+/* Efecto al pasar el mouse por las filas */
+.table-hover tbody tr:hover {
+    background-color: #f1f2ff !important;
+    transition: 0.3s;
+}
+
+/* Personalización de botones */
+.btn-outline-primary {
+    border-color: #4e54c8;
+    color: #4e54c8;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #4e54c8;
+    }
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas */
+    gap: 40px; /* separación amplia */
+    padding: 40px;
+}
+
+.card-panel {
+    background: #ffffff; /* 👈 fondo blanco */
+    color: #333; /* texto oscuro para contraste */
+    border-radius: 20px;
+    padding: 50px; /* 👈 más padding para que se vean grandes */
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* sombra suave */
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-size: 1.4rem; /* texto más grande */
+}
+
+    .card-panel i {
+        font-size: 3.5rem; /* 👈 iconos grandes */
+        margin-bottom: 20px;
+        color: #009688; /* color destacado para iconos */
+    }
+
+    .card-panel h3 {
+        margin-bottom: 25px;
+        font-size: 1.8rem; /* 👈 título grande */
+        font-weight: bold;
+    }
+
+    .card-panel a {
+        display: inline-block;
+        background: #009688; /* botón verde/teal */
+        color: #fff;
+        padding: 14px 30px; /* 👈 botón grande */
+        border-radius: 10px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+        .card-panel a:hover {
+            background: #004d40; /* tono más oscuro al pasar el mouse */
+        }
+
+    .card-panel:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+.img-perfil {
+    width: 150px;
+    height: 150px;
+    object-fit: cover; /* recorta la imagen para que no se deforme */
+    border-radius: 50%; /* 👈 esto la hace circular */
+    border: 3px solid #009688; /* borde bonito opcional */
+}
+
+
