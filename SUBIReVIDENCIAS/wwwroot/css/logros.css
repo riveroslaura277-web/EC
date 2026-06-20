@@ -1,0 +1,57 @@
+/* Contenedor general */
+.logros-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Tarjeta de logro */
+.logro-card {
+    background: linear-gradient(135deg, #f9f9f9, #e6e6e6);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    width: 220px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+    .logro-card:hover {
+        transform: scale(1.05);
+    }
+
+/* Icono del logro */
+.logro-icon {
+    font-size: 40px;
+    color: #ffcc00;
+    margin-bottom: 10px;
+}
+
+/* Nombre del logro */
+.logro-title {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Descripción */
+.logro-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+/* Fecha */
+.logro-date {
+    font-size: 12px;
+    color: #999;
+}
+
+/* Estudiante */
+.logro-student {
+    font-size: 13px;
+    font-weight: bold;
+    color: #007bff;
+}
