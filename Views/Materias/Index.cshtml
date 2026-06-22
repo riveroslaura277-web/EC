@@ -1,0 +1,216 @@
+﻿@model List<EC.Models.MateriaViewModel>
+    @{
+    Layout = null;
+    int grado = ViewBag.Grado;
+    }
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="~/css/RolRector.css" />
+
+    <div style="padding:24px">
+
+        @if (TempData["Mensaje"] != null)
+    {
+        <div style="background:#E1F5EE;border:1px solid #1D9E75;border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.85rem;color:#085041;font-weight:600">
+            ✓ @TempData["Mensaje"]
+        </div>
+    }
+
+
+
+        <!-- ENCABEZADO -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+
+            <a href="@Url.Action("RolRector","Rector")"
+               style="display:inline-flex;align-items:center;gap:6px;color:#718096;font-size:.8rem;font-weight:600;text-decoration:none;margin-bottom:8px">
+                <i class="ti ti-arrow-left"></i> Volver al Dashboard
+            </a>
+
+            <div>
+                <h2 style="font-size:1.3rem;font-weight:700;color:#1a202c">Materias — Grado @grado</h2>
+                <p style="font-size:.8rem;color:#718096">@Model.Count materias en este grado</p>
+            </div>
+            <button onclick="document.getElementById('modalAgregar').style.display='grid'"
+                    style="display:flex;align-items:center;gap:6px;background:#1D9E75;color:#fff;padding:8px 14px;border-radius:7px;border:none;cursor:pointer;font-size:.8rem;font-weight:600;font-family:inherit">
+                <i class="ti ti-plus"></i> Agregar materia
+            </button>
+        </div>
+
+        <!-- PESTAÑAS DE GRADO -->
+        <div style="display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid #e2e8f0">
+            @for (int g = 1; g <= 5; g++)
+        {
+            <a href="@Url.Action("Index","Materias",new{grado=g})"
+               style="padding:8px 16px;border-radius:6px 6px 0 0;text-decoration:none;font-size:.8rem;font-weight:600;
+                background:@(grado==g?"#1D9E75":"transparent");
+                color:@(grado==g?"#fff":"#718096");
+                border-bottom:@(grado==g?"2px solid #1D9E75":"2px solid transparent")">
+                Grado @g
+            </a>
+        }
+        </div>
+
+        <!-- FILTRO -->
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+            <a href="@Url.Action("Index","Materias",new{grado})"
+               style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;
+              background:@(string.IsNullOrEmpty(ViewBag.Estado as string)?"#1D9E75":"#f0fff4");
+              color:@(string.IsNullOrEmpty(ViewBag.Estado as string)?"#fff":"#0F6E56");
+              border:1px solid #1D9E75">Todas</a>
+            <a href="@Url.Action("Index","Materias",new{grado,estado="Activo"})"
+               style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;
+              background:@(ViewBag.Estado=="Activo"?"#1D9E75":"#f0fff4");
+              color:@(ViewBag.Estado=="Activo"?"#fff":"#0F6E56");
+              border:1px solid #1D9E75">Activas</a>
+            <a href="@Url.Action("Index","Materias",new{grado,estado="Inactivo"})"
+               style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;
+              background:@(ViewBag.Estado=="Inactivo"?"#718096":"#f7fafc");
+              color:@(ViewBag.Estado=="Inactivo"?"#fff":"#718096");
+              border:1px solid #718096">Inactivas</a>
+        </div>
+
+        <!-- TABLA -->
+        <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+            <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+                <thead>
+                    <tr style="background:#f7fafc">
+                        <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Materia</th>
+                        <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Descripción</th>
+                        <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Docente</th>
+                        <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Horas/Sem</th>
+                        <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Estado</th>
+                        <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                {
+                    <tr style="border-bottom:1px solid #edf2f7" onmouseover="this.style.background='#f7fafc'" onmouseout="this.style.background='#fff'">
+                        <td style="padding:10px 14px;font-weight:600;color:#1a202c">@m.Nombre</td>
+                        <td style="padding:10px 14px;color:#718096">@m.Descripcion</td>
+                        <td style="padding:10px 14px;color:#1a202c">@m.Docente</td>
+                        <td style="padding:10px 14px;color:#718096">@m.HorasSemana hrs</td>
+                        <td style="padding:10px 14px">
+                            <span style="padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;
+                           background:@(m.Estado=="Activo"?"#E1F5EE":"#f7fafc");
+                           color:@(m.Estado=="Activo"?"#085041":"#718096");
+                           border:1px solid @(m.Estado=="Activo"?"#1D9E75":"#cbd5e0")">
+                                @m.Estado
+                            </span>
+                        </td>
+                        <td style="padding:10px 14px">
+                            <div style="display:flex;gap:6px">
+                                <button onclick="abrirEditar(@m.Id,'@m.Nombre','@m.Descripcion','@m.Docente',@m.HorasSemana,'@m.Estado',@m.Grado)"
+                                        style="padding:4px 10px;background:#EBF4FF;color:#2b6cb0;border:1px solid #bee3f8;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                    <i class="ti ti-edit"></i> Editar
+                                </button>
+                                <form method="post" action="@Url.Action("Eliminar","Materias")" style="display:inline"
+                                      onsubmit="return confirm('¿Eliminar la materia @m.Nombre?')">
+                                    <input type="hidden" name="id" value="@m.Id" />
+                                    <input type="hidden" name="grado" value="@m.Grado" />
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" style="padding:4px 10px;background:#FFF5F5;color:#c53030;border:1px solid #feb2b2;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                        <i class="ti ti-trash"></i> Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                    @if (!Model.Any())
+                {
+                    <tr><td colspan="6" style="padding:30px;text-align:center;color:#a0aec0">No hay materias en este grado con el filtro seleccionado.</td></tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- MODAL AGREGAR -->
+    <div id="modalAgregar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+        <div style="background:#fff;border-radius:12px;padding:28px;width:440px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+            <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:#1a202c">Agregar Materia</h3>
+            <form method="post" action="@Url.Action("Agregar","Materias")">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="Grado" value="@grado" />
+                <div style="display:flex;flex-direction:column;gap:10px">
+                    <input name="Nombre" placeholder="Nombre de la materia" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                    <input name="Descripcion" placeholder="Descripción" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                    <select name="Docente" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%">
+                        <option value="">-- Selecciona un docente --</option>
+                    @foreach (var d in (ViewBag.Docentes as List<EC.Models.Docente>) ?? new List<EC.Models.Docente>())
+                    {
+                        <option value="@d.Nombres @d.Apellidos">@d.Nombres @d.Apellidos — @d.Especialidad (@d.Estado)</option>
+                    }
+                    </select>
+                    <input name="HorasSemana" placeholder="Horas por semana" type="number" min="1" max="10" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                    <select name="Estado" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                    <div style="display:flex;gap:8px;margin-top:6px">
+                        <button type="button" onclick="document.getElementById('modalAgregar').style.display='none'"
+                                style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                                style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL EDITAR -->
+    <div id="modalEditar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+        <div style="background:#fff;border-radius:12px;padding:28px;width:440px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+            <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:#1a202c">Editar Materia</h3>
+            <form method="post" action="@Url.Action("Editar","Materias")">
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="eId" name="Id" />
+                <input type="hidden" id="eGrado" name="Grado" value="@grado" />
+                <div style="display:flex;flex-direction:column;gap:10px">
+                    <input id="eNombre" name="Nombre" placeholder="Nombre" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                    <input id="eDescripcion" name="Descripcion" placeholder="Descripción" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                    <select id="eDocente" name="Docente" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%">
+                        <option value="">-- Selecciona un docente --</option>
+                    @foreach (var d in (ViewBag.Docentes as List<EC.Models.Docente>) ?? new List<EC.Models.Docente>())
+                    {
+                        <option value="@d.Nombres @d.Apellidos">@d.Nombres @d.Apellidos — @d.Especialidad (@d.Estado)</option>
+                    }
+                    </select>
+                    <input id="eHoras" name="HorasSemana" placeholder="Horas por semana" type="number" min="1" max="10" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                    <select id="eEstado" name="Estado" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                    <div style="display:flex;gap:8px;margin-top:6px">
+                        <button type="button" onclick="document.getElementById('modalEditar').style.display='none'"
+                                style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">
+                            Cancelar
+                        </button>
+                        <button type="submit"
+                                style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">
+                            Guardar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function abrirEditar(id, nombre, descripcion, docente, horas, estado, grado) {
+            document.getElementById('eId').value = id;
+            document.getElementById('eNombre').value = nombre;
+            document.getElementById('eDescripcion').value = descripcion;
+            document.getElementById('eDocente').value = docente;
+            document.getElementById('eHoras').value = horas;
+            document.getElementById('eEstado').value = estado;
+            document.getElementById('eGrado').value = grado;
+            document.getElementById('modalEditar').style.display = 'grid';
+        }
+    </script>

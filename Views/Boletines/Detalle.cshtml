@@ -1,0 +1,92 @@
+﻿@model EC.Models.BoletinesViewModel
+@{
+    Layout = null;
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/RolRector.css" />
+
+<div style="padding:24px;max-width:800px">
+
+    <a href="@Url.Action("Index","Boletines",new{grado=Model.Grado})"
+       style="display:inline-flex;align-items:center;gap:6px;color:#718096;text-decoration:none;font-size:.85rem;margin-bottom:16px">
+        <i class="ti ti-arrow-left"></i> Volver al listado
+    </a>
+
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:28px">
+
+        <!-- ENCABEZADO -->
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #1D9E75;padding-bottom:16px;margin-bottom:20px">
+            <div>
+                <div style="font-size:.7rem;font-weight:700;color:#1D9E75;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">EduClick — Boletín Académico</div>
+                <div style="font-size:1.3rem;font-weight:700;color:#1a202c">@Model.NombreEstudiante</div>
+                <div style="font-size:.85rem;color:#718096">Código: @Model.CodigoEstudiante — Curso: @Model.Curso</div>
+            </div>
+            <div style="text-align:right">
+                <div style="font-size:.7rem;color:#a0aec0;text-transform:uppercase;letter-spacing:.05em">Promedio general</div>
+                <div style="font-size:2rem;font-weight:800;color:@(Model.PromedioGeneral>=6?"#1D9E75":Model.PromedioGeneral>=5?"#D85A30":"#c53030")">
+                    @Model.PromedioGeneral.ToString("0.0")
+                </div>
+                <span style="padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;
+                     background:@(Model.Estado=="Aprobado"?"#E1F5EE":Model.Estado=="Recuperación"?"#FFF3E0":"#FFF5F5");
+                     color:@(Model.Estado=="Aprobado"?"#085041":Model.Estado=="Recuperación"?"#c05621":"#c53030");
+                     border:1px solid @(Model.Estado=="Aprobado"?"#1D9E75":Model.Estado=="Recuperación"?"#D85A30":"#feb2b2")">
+                    @Model.Estado
+                </span>
+            </div>
+        </div>
+
+        <!-- TABLA DE MATERIAS -->
+        <table style="width:100%;border-collapse:collapse;font-size:.85rem;margin-bottom:20px">
+            <thead>
+                <tr style="background:#f7fafc">
+                    <th style="padding:10px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Materia</th>
+                    <th style="padding:10px 12px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Docente</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">P1</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">P2</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">P3</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">P4</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Promedio</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Asistencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model.Materias)
+                {
+                <tr style="border-bottom:1px solid #edf2f7">
+                    <td style="padding:9px 12px;font-weight:600;color:#1a202c">@m.Materia</td>
+                    <td style="padding:9px 12px;color:#718096">@m.Docente</td>
+                    <td style="padding:9px 12px;text-align:center;color:#4a5568">@m.Periodo1.ToString("0.0")</td>
+                    <td style="padding:9px 12px;text-align:center;color:#4a5568">@m.Periodo2.ToString("0.0")</td>
+                    <td style="padding:9px 12px;text-align:center;color:#4a5568">@m.Periodo3.ToString("0.0")</td>
+                    <td style="padding:9px 12px;text-align:center;color:#4a5568">@m.Periodo4.ToString("0.0")</td>
+                    <td style="padding:9px 12px;text-align:center">
+                        <span style="font-weight:700;color:@(m.Promedio>=6?"#085041":m.Promedio>=5?"#c05621":"#c53030")">
+                            @m.Promedio.ToString("0.0")
+                        </span>
+                    </td>
+                    <td style="padding:9px 12px;text-align:center;color:#718096">@m.Asistencias/@(m.Asistencias + m.Faltas)</td>
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr style="background:#f7fafc">
+                    <td colspan="6" style="padding:10px 12px;text-align:right;font-weight:700;color:#1a202c">Promedio General:</td>
+                    <td colspan="2" style="padding:10px 12px;text-align:center;font-weight:800;font-size:1rem;color:@(Model.PromedioGeneral>=6?"#085041":Model.PromedioGeneral>=5?"#c05621":"#c53030")">
+                        @Model.PromedioGeneral.ToString("0.0")
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <!-- BOTONES -->
+        <div style="display:flex;gap:10px;justify-content:flex-end">
+            <button onclick="window.print()"
+                    style="padding:9px 16px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:700">
+                <i class="ti ti-printer"></i> Imprimir boletín
+            </button>
+        </div>
+
+    </div>
+</div>

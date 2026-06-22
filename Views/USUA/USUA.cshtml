@@ -1,0 +1,159 @@
+﻿@model List<EC.Models.Usuarios>
+@{
+    Layout = null;
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/RolRector.css" />
+
+<div style="padding:24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div>
+            <a href="@Url.Action("RolRector","Rector")"
+               style="display:inline-flex;align-items:center;gap:6px;color:#718096;font-size:.8rem;font-weight:600;text-decoration:none;margin-bottom:8px">
+                <i class="ti ti-arrow-left"></i> Volver al Dashboard
+            </a>
+            <h2 style="font-size:1.3rem;font-weight:700;color:#1a202c">Usuarios</h2>
+            <p style="font-size:.8rem;color:#718096">
+                @Model.Count usuarios —
+                <span style="color:#D85A30;font-weight:600">@ViewBag.Pendientes pendientes de aprobación</span>
+            </p>
+        </div>
+        <div style="display:flex;gap:8px">
+            <a href="@Url.Action("DescargarExcel","USUA",new{estado=ViewBag.Estado})"
+               style="display:flex;align-items:center;gap:6px;background:#1D9E75;color:#fff;padding:8px 14px;border-radius:7px;text-decoration:none;font-size:.8rem;font-weight:600">
+                <i class="ti ti-file-spreadsheet"></i> Descargar Excel
+            </a>
+            <button onclick="document.getElementById('modalAgregar').style.display='grid'"
+                    style="display:flex;align-items:center;gap:6px;background:#1f6feb;color:#fff;padding:8px 14px;border-radius:7px;border:none;cursor:pointer;font-size:.8rem;font-weight:600;font-family:inherit">
+                <i class="ti ti-plus"></i> Agregar
+            </button>
+        </div>
+    </div>
+
+    <!-- FILTROS -->
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+        <a href="@Url.Action("Index","USUA")" style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;background:@(string.IsNullOrEmpty(ViewBag.Estado as string)?"#1a202c":"#f7fafc");color:@(string.IsNullOrEmpty(ViewBag.Estado as string)?"#fff":"#718096");border:1px solid #e2e8f0">Todos</a>
+        <a href="@Url.Action("Index","USUA",new{estado="Activo"})" style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;background:@(ViewBag.Estado=="Activo"?"#1D9E75":"#f0fff4");color:@(ViewBag.Estado=="Activo"?"#fff":"#0F6E56");border:1px solid #1D9E75">Activos</a>
+        <a href="@Url.Action("Index","USUA",new{estado="Pendiente"})" style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;background:@(ViewBag.Estado=="Pendiente"?"#D85A30":"#FFF3E0");color:@(ViewBag.Estado=="Pendiente"?"#fff":"#c05621");border:1px solid #D85A30">Pendientes</a>
+        <a href="@Url.Action("Index","USUA",new{estado="Bloqueado"})" style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;background:@(ViewBag.Estado=="Bloqueado"?"#c53030":"#FFF5F5");color:@(ViewBag.Estado=="Bloqueado"?"#fff":"#c53030");border:1px solid #feb2b2">Bloqueados</a>
+    </div>
+
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+            <thead>
+                <tr style="background:#f7fafc">
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">ID</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Nombres</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Apellidos</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Correo</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Rol</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Estado</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Registro</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model)
+                {
+                    <tr style="border-bottom:1px solid #edf2f7" onmouseover="this.style.background='#f7fafc'" onmouseout="this.style.background='#fff'">
+                        <td style="padding:10px 14px;color:#a0aec0;font-family:monospace">#@u.Id</td>
+                        <td style="padding:10px 14px;font-weight:500;color:#1a202c">@u.Nombres</td>
+                        <td style="padding:10px 14px;color:#1a202c">@u.Apellidos</td>
+                        <td style="padding:10px 14px;color:#718096">@u.Correo</td>
+                        <td style="padding:10px 14px">
+                            <span style="background:#EBF4FF;color:#2b6cb0;padding:2px 8px;border-radius:20px;font-size:.7rem;font-weight:600">@u.Rol</span>
+                        </td>
+                        <td style="padding:10px 14px">
+                            @{
+                                var bgE = u.Estado == "Activo" ? "#E1F5EE" : u.Estado == "Pendiente" ? "#FFF3E0" : "#FFF5F5";
+                                var clrE = u.Estado == "Activo" ? "#085041" : u.Estado == "Pendiente" ? "#c05621" : "#c53030";
+                                var borE = u.Estado == "Activo" ? "#1D9E75" : u.Estado == "Pendiente" ? "#D85A30" : "#feb2b2";
+                            }
+                            <span style="padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;background:@bgE;color:@clrE;border:1px solid @borE">@u.Estado</span>
+                        </td>
+                        <td style="padding:10px 14px;color:#a0aec0;font-size:.75rem">@u.FechaRegistro.ToString("dd/MM/yyyy")</td>
+                        <td style="padding:10px 14px">
+                            <div style="display:flex;gap:4px;flex-wrap:wrap">
+                                @if (u.Estado == "Pendiente")
+                                {
+                                    <form method="post" action="@Url.Action("CambiarEstado","USUA")" style="display:inline">
+                                        <input type="hidden" name="id" value="@u.Id" />
+                                        <input type="hidden" name="estado" value="Activo" />
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" style="padding:4px 10px;background:#E1F5EE;color:#085041;border:1px solid #1D9E75;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                            ✓ Aprobar
+                                        </button>
+                                    </form>
+                                    <form method="post" action="@Url.Action("CambiarEstado","USUA")" style="display:inline">
+                                        <input type="hidden" name="id" value="@u.Id" />
+                                        <input type="hidden" name="estado" value="Bloqueado" />
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" style="padding:4px 10px;background:#FFF5F5;color:#c53030;border:1px solid #feb2b2;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                            ✗ Rechazar
+                                        </button>
+                                    </form>
+                                }
+                                @if (u.Estado == "Activo")
+                                {
+                                    <form method="post" action="@Url.Action("CambiarEstado","USUA")" style="display:inline">
+                                        <input type="hidden" name="id" value="@u.Id" />
+                                        <input type="hidden" name="estado" value="Bloqueado" />
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" style="padding:4px 10px;background:#FFF5F5;color:#c53030;border:1px solid #feb2b2;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                            Bloquear
+                                        </button>
+                                    </form>
+                                }
+                                @if (u.Estado == "Bloqueado")
+                                {
+                                    <form method="post" action="@Url.Action("CambiarEstado","USUA")" style="display:inline">
+                                        <input type="hidden" name="id" value="@u.Id" />
+                                        <input type="hidden" name="estado" value="Activo" />
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" style="padding:4px 10px;background:#E1F5EE;color:#085041;border:1px solid #1D9E75;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                            Desbloquear
+                                        </button>
+                                    </form>
+                                }
+                                <form method="post" action="@Url.Action("Eliminar","USUA")" style="display:inline" onsubmit="return confirm('¿Eliminar a @u.Nombres @u.Apellidos?')">
+                                    <input type="hidden" name="id" value="@u.Id" />
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" style="padding:4px 10px;background:#f7fafc;color:#a0aec0;border:1px solid #e2e8f0;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                        <i class="ti ti-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div id="modalAgregar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+    <div style="background:#fff;border-radius:12px;padding:28px;width:440px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px">Agregar Usuario</h3>
+        <form method="post" action="@Url.Action("Agregar","USUA")">
+            @Html.AntiForgeryToken()
+            <div style="display:flex;flex-direction:column;gap:10px">
+                <input name="Nombres" placeholder="Nombres" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input name="Apellidos" placeholder="Apellidos" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input name="Correo" placeholder="Correo" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <select name="Rol" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%">
+                    <option value="Docente">Docente</option>
+                    <option value="Secretaria">Secretaria</option>
+                    <option value="Rector">Rector</option>
+                </select>
+                <p style="font-size:.75rem;color:#718096;background:#f7fafc;padding:8px;border-radius:6px">El usuario quedará en estado <strong>Pendiente</strong> hasta que lo apruebe.</p>
+                <div style="display:flex;gap:8px;margin-top:6px">
+                    <button type="button" onclick="document.getElementById('modalAgregar').style.display='none'" style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">Cancelar</button>
+                    <button type="submit" style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

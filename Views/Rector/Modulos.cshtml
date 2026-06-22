@@ -1,0 +1,181 @@
+﻿@model List<EC.Models.ModuloViewModel>
+@{
+    Layout = null;
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/RolRector.css" />
+
+<div style="padding:24px">
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div style="background:#E1F5EE;border:1px solid #1D9E75;border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.85rem;color:#085041;font-weight:600">
+            ✓ @TempData["Mensaje"]
+        </div>
+    }
+
+    
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+
+        <a href="@Url.Action("RolRector","Rector")"
+           style="display:inline-flex;align-items:center;gap:6px;color:#718096;font-size:.8rem;font-weight:600;text-decoration:none;margin-bottom:8px">
+            <i class="ti ti-arrow-left"></i> Volver al Dashboard
+        </a>
+        <div>
+            <h2 style="font-size:1.3rem;font-weight:700;color:#1a202c">Módulos del sistema</h2>
+            <p style="font-size:.8rem;color:#718096">Activa o desactiva módulos y gestiona quién tiene acceso</p>
+        </div>
+        <div style="display:flex;gap:8px">
+            <span style="padding:6px 14px;background:#E1F5EE;color:#085041;border-radius:20px;font-size:.78rem;font-weight:600">
+                @Model.Count(m => m.Estado == "Activo") activos
+            </span>
+            <span style="padding:6px 14px;background:#f7fafc;color:#718096;border:1px solid #e2e8f0;border-radius:20px;font-size:.78rem;font-weight:600">
+                @Model.Count(m => m.Estado == "Inactivo") inactivos
+            </span>
+        </div>
+    </div>
+
+    <!-- TABLA -->
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+            <thead>
+                <tr style="background:#f7fafc">
+                    <th style="padding:10px 16px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Módulo</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Descripción</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Roles con acceso</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Estado</th>
+                    <th style="padding:10px 16px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var m in Model)
+                {
+                    <tr style="border-bottom:1px solid #edf2f7" onmouseover="this.style.background='#f7fafc'" onmouseout="this.style.background='#fff'">
+                        <td style="padding:10px 16px">
+                            <div style="display:flex;align-items:center;gap:10px">
+                                <div style="width:34px;height:34px;border-radius:7px;background:@(m.Estado=="Activo"?"#E1F5EE":"#f7fafc");display:grid;place-items:center;font-size:16px;color:@(m.Estado=="Activo"?"#1D9E75":"#a0aec0")">
+                                    <i class="ti @m.Icono"></i>
+                                </div>
+                                <span style="font-weight:600;color:#1a202c">@m.Nombre</span>
+                            </div>
+                        </td>
+                        <td style="padding:10px 16px;color:#718096">@m.Descripcion</td>
+                        <td style="padding:10px 16px">
+                            <div style="display:flex;flex-wrap:wrap;gap:4px">
+                                @foreach (var rol in m.RolesConAcceso)
+                                {
+                                    <span style="padding:2px 8px;background:#EBF4FF;color:#2b6cb0;border-radius:20px;font-size:.68rem;font-weight:600">@rol</span>
+                                }
+                            </div>
+                        </td>
+                        <td style="padding:10px 16px">
+                            <span style="padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;
+                           background:@(m.Estado=="Activo"?"#E1F5EE":"#f7fafc");
+                           color:@(m.Estado=="Activo"?"#085041":"#718096");
+                           border:1px solid @(m.Estado=="Activo"?"#1D9E75":"#cbd5e0")">
+                                @m.Estado
+                            </span>
+                        </td>
+                        <td style="padding:10px 16px">
+                            <div style="display:flex;gap:6px">
+                                <button onclick="abrirEditar(@m.Id,'@m.Nombre','@m.Descripcion','@string.Join(",",m.RolesConAcceso)','@m.Estado')"
+                                        style="padding:4px 10px;background:#EBF4FF;color:#2b6cb0;border:1px solid #bee3f8;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                    <i class="ti ti-edit"></i> Editar
+                                </button>
+                                <form method="post" action="@Url.Action("CambiarEstadoModulo","Rector")" style="display:inline">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@m.Id" />
+                                    <input type="hidden" name="estado" value="@(m.Estado=="Activo"?"Inactivo":"Activo")" />
+                                    <button type="submit"
+                                            style="padding:4px 10px;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit;
+                                 background:@(m.Estado=="Activo"?"#FFF5F5":"#E1F5EE");
+                                 color:@(m.Estado=="Activo"?"#c53030":"#085041");
+                                 border:1px solid @(m.Estado=="Activo"?"#feb2b2":"#1D9E75")">
+                                        @(m.Estado == "Activo" ? "Desactivar" : "Activar")
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div id="modalEditar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+    <div style="background:#fff;border-radius:12px;padding:28px;width:460px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:#1a202c">
+            Editar módulo — <span id="modalNombre"></span>
+        </h3>
+        <form method="post" action="@Url.Action("EditarModulo","Rector")">
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="eId" name="Id" />
+            <input type="hidden" id="eNombre" name="Nombre" />
+            <div style="display:flex;flex-direction:column;gap:12px">
+
+                <div>
+                    <label style="font-size:.78rem;font-weight:600;color:#4a5568;display:block;margin-bottom:4px">Descripción</label>
+                    <input id="eDesc" name="Descripcion"
+                           style="width:100%;padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none" />
+                </div>
+
+                <div>
+                    <label style="font-size:.78rem;font-weight:600;color:#4a5568;display:block;margin-bottom:6px">Roles con acceso</label>
+                    <div style="display:flex;flex-direction:column;gap:8px;background:#f7fafc;padding:12px;border-radius:8px">
+                        @foreach (var rol in new[] { "Rector", "Docente", "Secretaria", "Estudiante", "Acudiente", "Administrador" })
+                        {
+                            <label style="display:flex;align-items:center;gap:8px;font-size:.83rem;cursor:pointer">
+                                <input type="checkbox" name="RolesConAcceso" value="@rol" class="rol-check"
+                                       style="width:15px;height:15px;accent-color:#1D9E75" />
+                                @rol
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <div>
+                    <label style="font-size:.78rem;font-weight:600;color:#4a5568;display:block;margin-bottom:4px">Estado</label>
+                    <select id="eEstado" name="Estado"
+                            style="width:100%;padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+
+                <div style="display:flex;gap:8px;margin-top:4px">
+                    <button type="button" onclick="document.getElementById('modalEditar').style.display='none'"
+                            style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                            style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">
+                        Guardar cambios
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function abrirEditar(id, nombre, desc, roles, estado) {
+        document.getElementById('eId').value     = id;
+        document.getElementById('eNombre').value = nombre;
+        document.getElementById('eDesc').value   = desc;
+        document.getElementById('modalNombre').textContent = nombre;
+        document.getElementById('eEstado').value = estado;
+
+        // Marcar checkboxes según roles actuales
+        const rolesActivos = roles.split(',');
+        document.querySelectorAll('.rol-check').forEach(cb => {
+            cb.checked = rolesActivos.includes(cb.value);
+        });
+
+        document.getElementById('modalEditar').style.display = 'grid';
+    }
+</script>

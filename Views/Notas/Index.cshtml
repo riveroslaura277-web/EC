@@ -1,0 +1,131 @@
+﻿@model List<EC.Models.NOTARectorViewModel>
+@{
+    Layout = null;
+    int grado = ViewBag.Grado;
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/RolRector.css" />
+
+<div style="padding:24px">
+
+    <!-- ENCABEZADO -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+
+        <a href="@Url.Action("RolRector","Rector")"
+           style="display:inline-flex;align-items:center;gap:6px;color:#718096;font-size:.8rem;font-weight:600;text-decoration:none;margin-bottom:8px">
+            <i class="ti ti-arrow-left"></i> Volver al Dashboard
+        </a>
+
+        <div>
+            <h2 style="font-size:1.3rem;font-weight:700;color:#1a202c">Notas — Grado @grado</h2>
+            <p style="font-size:.8rem;color:#718096">@Model.Count registros — Vista de solo lectura</p>
+        </div>
+    </div>
+
+    <!-- PESTAÑAS DE GRADO -->
+    <div style="display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid #e2e8f0">
+        @for (int g = 1; g <= 5; g++)
+        {
+            <a href="@Url.Action("Index","Notas",new{grado=g})"
+               style="padding:8px 16px;border-radius:6px 6px 0 0;text-decoration:none;font-size:.8rem;font-weight:600;
+                background:@(grado==g?"#1D9E75":"transparent");
+                color:@(grado==g?"#fff":"#718096");
+                border-bottom:@(grado==g?"2px solid #1D9E75":"2px solid transparent")">
+                Grado @g
+            </a>
+        }
+    </div>
+
+    <!-- FILTROS -->
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+        <a href="@Url.Action("Index","Notas",new{grado})"
+           style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;
+              background:@(string.IsNullOrEmpty(ViewBag.Curso as string)?"#1a202c":"#f7fafc");
+              color:@(string.IsNullOrEmpty(ViewBag.Curso as string)?"#fff":"#718096");
+              border:1px solid #e2e8f0">Todos los cursos</a>
+        @foreach (var c in (ViewBag.Cursos as List<string>) ?? new List<string>())
+        {
+            <a href="@Url.Action("Index","Notas",new{grado,curso=c})"
+               style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;
+                background:@(ViewBag.Curso==c?"#1D9E75":"#f0fff4");
+                color:@(ViewBag.Curso==c?"#fff":"#0F6E56");
+                border:1px solid #1D9E75">@c</a>
+        }
+
+        <span style="width:1px;background:#e2e8f0;margin:0 4px"></span>
+
+        <a href="@Url.Action("Index","Notas",new{grado,curso=ViewBag.Curso,estado="Aprobado"})"
+           style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;
+              background:@(ViewBag.Estado=="Aprobado"?"#1D9E75":"#E1F5EE");
+              color:@(ViewBag.Estado=="Aprobado"?"#fff":"#085041");
+              border:1px solid #1D9E75">Aprobados</a>
+        <a href="@Url.Action("Index","Notas",new{grado,curso=ViewBag.Curso,estado="Recuperación"})"
+           style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;
+              background:@(ViewBag.Estado=="Recuperación"?"#D85A30":"#FFF3E0");
+              color:@(ViewBag.Estado=="Recuperación"?"#fff":"#c05621");
+              border:1px solid #D85A30">Recuperación</a>
+        <a href="@Url.Action("Index","Notas",new{grado,curso=ViewBag.Curso,estado="Reprobado"})"
+           style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;
+              background:@(ViewBag.Estado=="Reprobado"?"#c53030":"#FFF5F5");
+              color:@(ViewBag.Estado=="Reprobado"?"#fff":"#c53030");
+              border:1px solid #feb2b2">Reprobados</a>
+    </div>
+
+    <!-- TABLA -->
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+        <table style="width:100%;border-collapse:collapse;font-size:.8rem">
+            <thead>
+                <tr style="background:#f7fafc">
+                    <th style="padding:10px 12px;text-align:left;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Código</th>
+                    <th style="padding:10px 12px;text-align:left;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Estudiante</th>
+                    <th style="padding:10px 12px;text-align:left;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Curso</th>
+                    <th style="padding:10px 12px;text-align:left;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Materia</th>
+                    <th style="padding:10px 12px;text-align:left;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Docente</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">P1</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">P2</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">P3</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">P4</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Promedio</th>
+                    <th style="padding:10px 12px;text-align:center;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Asist.</th>
+                    <th style="padding:10px 12px;text-align:left;font-size:.68rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var n in Model)
+                {
+                    <tr style="border-bottom:1px solid #edf2f7" onmouseover="this.style.background='#f7fafc'" onmouseout="this.style.background='#fff'">
+                        <td style="padding:8px 12px;color:#a0aec0;font-family:monospace">@n.CodigoEstudiante</td>
+                        <td style="padding:8px 12px;font-weight:600;color:#1a202c">@n.NombreEstudiante</td>
+                        <td style="padding:8px 12px;color:#718096">@n.Curso</td>
+                        <td style="padding:8px 12px;color:#1a202c">@n.Materia</td>
+                        <td style="padding:8px 12px;color:#718096">@n.Docente</td>
+                        <td style="padding:8px 12px;text-align:center;color:#4a5568">@n.Periodo1.ToString("0.0")</td>
+                        <td style="padding:8px 12px;text-align:center;color:#4a5568">@n.Periodo2.ToString("0.0")</td>
+                        <td style="padding:8px 12px;text-align:center;color:#4a5568">@n.Periodo3.ToString("0.0")</td>
+                        <td style="padding:8px 12px;text-align:center;color:#4a5568">@n.Periodo4.ToString("0.0")</td>
+                        <td style="padding:8px 12px;text-align:center">
+                            <span style="font-weight:700;color:@(n.Promedio>=6?"#085041":n.Promedio>=5?"#c05621":"#c53030")">
+                                @n.Promedio.ToString("0.0")
+                            </span>
+                        </td>
+                        <td style="padding:8px 12px;text-align:center;color:#718096">@n.Asistencias/@(n.Asistencias + n.Faltas)</td>
+                        <td style="padding:8px 12px">
+                            <span style="padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:600;
+                           background:@(n.Estado=="Aprobado"?"#E1F5EE":n.Estado=="Recuperación"?"#FFF3E0":"#FFF5F5");
+                           color:@(n.Estado=="Aprobado"?"#085041":n.Estado=="Recuperación"?"#c05621":"#c53030");
+                           border:1px solid @(n.Estado=="Aprobado"?"#1D9E75":n.Estado=="Recuperación"?"#D85A30":"#feb2b2")">
+                                @n.Estado
+                            </span>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="12" style="padding:30px;text-align:center;color:#a0aec0">No hay registros con el filtro seleccionado.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
