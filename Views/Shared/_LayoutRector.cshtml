@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - EduClick</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/RolRector.css" asp-append-version="true" />
+</head>
+<body>
+    <header class="header bg-dark text-white p-2">
+        <div class="d-flex justify-content-between">
+            <span class="logo">EduClick</span>
+            <span>Bienvenido @User.Identity?.Name (@User.FindFirst("role")?.Value) - @DateTime.Now.ToString("hh:mm tt")</span>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <aside class="col-md-3 col-lg-2 bg-dark sidebar">
+                @RenderSection("Sidebar", required: false)
+            </aside>
+
+            <main id="panel-dinamico" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

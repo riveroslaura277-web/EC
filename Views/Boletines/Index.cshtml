@@ -1,0 +1,89 @@
+﻿@model List<EC.Models.BoletinesViewModel>
+@{
+    Layout = null;
+    int grado = ViewBag.Grado;
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/RolRector.css" />
+
+<div style="padding:24px">
+
+    <a href="@Url.Action("RolRector","Rector")"
+       style="display:inline-flex;align-items:center;gap:6px;color:#718096;font-size:.8rem;font-weight:600;text-decoration:none;margin-bottom:8px">
+        <i class="ti ti-arrow-left"></i> Volver al Dashboard
+    </a>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div>
+            <h2 style="font-size:1.3rem;font-weight:700;color:#1a202c">Boletines — Grado @grado</h2>
+            <p style="font-size:.8rem;color:#718096">@Model.Count estudiantes</p>
+        </div>
+    </div>
+
+    <!-- PESTAÑAS DE GRADO -->
+    <div style="display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid #e2e8f0">
+        @for (int g = 1; g <= 5; g++)
+        {
+            <a href="@Url.Action("Index","Boletines",new{grado=g})"
+               style="padding:8px 16px;border-radius:6px 6px 0 0;text-decoration:none;font-size:.8rem;font-weight:600;
+                background:@(grado==g?"#1D9E75":"transparent");
+                color:@(grado==g?"#fff":"#718096");
+                border-bottom:@(grado==g?"2px solid #1D9E75":"2px solid transparent")">
+                Grado @g
+            </a>
+        }
+    </div>
+
+    <!-- TABLA -->
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+            <thead>
+                <tr style="background:#f7fafc">
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Código</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Estudiante</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Curso</th>
+                    <th style="padding:10px 14px;text-align:center;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Materias</th>
+                    <th style="padding:10px 14px;text-align:center;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Promedio</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Estado</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var b in Model.OrderBy(b => b.NombreEstudiante))
+                {
+                    <tr style="border-bottom:1px solid #edf2f7" onmouseover="this.style.background='#f7fafc'" onmouseout="this.style.background='#fff'">
+                        <td style="padding:10px 14px;color:#a0aec0;font-family:monospace">@b.CodigoEstudiante</td>
+                        <td style="padding:10px 14px;font-weight:600;color:#1a202c">@b.NombreEstudiante</td>
+                        <td style="padding:10px 14px;color:#718096">@b.Curso</td>
+                        <td style="padding:10px 14px;text-align:center;color:#718096">@b.Materias.Count</td>
+                        <td style="padding:10px 14px;text-align:center">
+                            <span style="font-weight:700;color:@(b.PromedioGeneral>=6?"#085041":b.PromedioGeneral>=5?"#c05621":"#c53030")">
+                                @b.PromedioGeneral.ToString("0.0")
+                            </span>
+                        </td>
+                        <td style="padding:10px 14px">
+                            <span style="padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;
+                           background:@(b.Estado=="Aprobado"?"#E1F5EE":b.Estado=="Recuperación"?"#FFF3E0":"#FFF5F5");
+                           color:@(b.Estado=="Aprobado"?"#085041":b.Estado=="Recuperación"?"#c05621":"#c53030");
+                           border:1px solid @(b.Estado=="Aprobado"?"#1D9E75":b.Estado=="Recuperación"?"#D85A30":"#feb2b2")">
+                                @b.Estado
+                            </span>
+                        </td>
+                        <td style="padding:10px 14px">
+                            <a href="@Url.Action("Detalle","Boletines",new{codigo=b.CodigoEstudiante})"
+                               style="padding:4px 10px;background:#EBF4FF;color:#2b6cb0;border:1px solid #bee3f8;border-radius:5px;text-decoration:none;font-size:.72rem;font-weight:600">
+                                <i class="ti ti-eye"></i> Ver boletín
+                            </a>
+                        </td>
+                    </tr>
+                }
+                @if (!Model.Any())
+                {
+                    <tr><td colspan="7" style="padding:30px;text-align:center;color:#a0aec0">No hay estudiantes con notas en este grado.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

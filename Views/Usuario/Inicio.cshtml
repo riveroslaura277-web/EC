@@ -1,0 +1,80 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Iniciar Sesión";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - EduClick</title>
+    <link rel="stylesheet" href="/css/Inicio.css" asp-append-version="true" />
+</head>
+<body>
+
+    <video class="video-sesion" autoplay muted loop>
+        <source src="/imagenes/video_sesion.mp4" type="video/mp4" />
+        Tu navegador no soporta video.
+    </video>
+    <a asp-action="Index" asp-controller="Home" class="btn-volver"> Volver al Inicio</a>
+
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2>INICIO DE SESIÓN</h2>
+            <p>Rol: <strong>@ViewBag.RolSeleccionado</strong></p>
+
+            @if (TempData["Error"] != null)
+            {
+                <div style="background:#FFF5F5;color:#c53030;padding:10px;border-radius:8px;margin-bottom:12px;font-size:.85rem;text-align:center">
+                    @TempData["Error"]
+                </div>
+            }
+
+            <form asp-action="Inicio" asp-controller="Usuario" method="post">
+                <input type="hidden" name="rol" value="@ViewBag.RolSeleccionado" />
+
+                <div class="campo">
+                    <span class="icono">📧</span>
+                    <input type="email" id="email" name="Email" placeholder="Correo electrónico" required />
+                </div>
+
+                <div class="campo">
+                    <span class="icono">🔒</span>
+                    <input type="password" id="password" name="Password" placeholder="Contraseña" required />
+                </div>
+
+                <div class="remember">
+                    <input type="checkbox" id="remember" name="remember" value="true" />
+                    <label for="remember">Recordarme</label>
+                </div>
+                
+                <button type="submit" class="btn-login">Iniciar sesión</button>
+            
+            </form>
+
+            <!-- Botón Google -->
+            <a asp-controller="Usuario" asp-action="IniciarConGoogle" asp-route-rol="@ViewBag.RolSeleccionado" class="btn-google">
+                <img src="~/IMG_yesid/imgGoogle.png" alt="Google" />
+                Iniciar sesión con Google
+            </a>
+
+            <!-- Opciones extra -->
+            <div class="extra-options">
+                <a href="https://accounts.google.com/signin/recovery"
+                   target="_blank"
+                   style="font-size: 0.8rem; opacity: 0.8;">
+                    <i class="fa-solid fa-key"></i>
+                    ¿Olvidaste tu contraseña?
+                </a>
+                <span> | </span>
+                <a asp-controller="Registro"
+                   asp-action="Index"
+                   class="btn login">
+                    <i class="fa-solid fa-user"></i>
+                    Crear Cuenta Nueva
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
