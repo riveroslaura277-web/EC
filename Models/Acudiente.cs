@@ -7,7 +7,9 @@
         public string Nombres { get; set; } = string.Empty;
         public string Apellidos { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
-        public string Telefono { get; set; } = string.Empty;
+        public string  Telefono { get; set; } = string.Empty;
+        public string Correo { get; set; } = string.Empty;
+        public List<string> Hijos { get; set; } = new List<string>();
         public string NombreEstudiante { get; set; } = string.Empty;
         public string Estado { get; set; } = string.Empty;
     }

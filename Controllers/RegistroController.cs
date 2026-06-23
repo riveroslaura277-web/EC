@@ -1,80 +1,159 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
+﻿using System;
+using System.Text;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using EC.Data;
+using EC.Models;
 
-namespace EC.Controllers
+
+namespace WebApplication1.Controllers
 {
     public class RegistroController : Controller
     {
-        private readonly string _conexion =
-            "Server=LAPTOP-2IVQ34EB\\SQLEXPRESS;Database=Educlick;Trusted_Connection=True;TrustServerCertificate=True;";
+        private readonly ApplicationDbContext _context;
 
-        // VISTA PRINCIPAL
+        public RegistroController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
+        // GET
         public IActionResult Index()
         {
             return View();
         }
 
-        // REGISTRAR USUARIO
+        // REGISTRAR
         [HttpPost]
-        public IActionResult Registrar(
-            string Nombres,
-            string Apellidos,
-            string Correo,
-            string Contrasena,
-            string ConfirmarContrasena)
+        public IActionResult Registrar(string Nombres, string Apellidos, string Correo, string Contrasena, string ConfirmarContrasena, int IdRol)
         {
-            // VALIDAR CONTRASEÑAS
+            // 1. Validar campos
+            if (string.IsNullOrWhiteSpace(Correo) || string.IsNullOrWhiteSpace(Contrasena))
+            {
+                ViewBag.Error = "Debes llenar todos los campos";
+                return View("Index");
+            }
+
+            // 2. Confirmar contraseña
             if (Contrasena != ConfirmarContrasena)
             {
-                TempData["Mensaje"] = "❌ Las contraseñas no coinciden.";
-                TempData["Tipo"] = "error";
-
-                return RedirectToAction("Index");
+                ViewBag.Error = "Las contraseñas no coinciden";
+                return View("Index");
             }
+
+            // 3. Verificar duplicado
+            var existe = _context.Usuarios.Any(x => x.Correo == Correo);
+            if (existe)
+            {
+                ViewBag.Error = "Este correo ya está registrado";
+                return View("Index");
+            }
+
+            // 4. Hash de contraseña
+            string hash = HashearContrasena(Contrasena);
+
+            // 5. Crear usuario
+            var usuario = new Usuarios
+            {
+                Nombres = Nombres,
+                Apellidos = Apellidos,
+                Correo = Correo,
+                Contrasena = hash,
+                IdRol = IdRol,
+                FechaRegistro = DateTime.Now
+            };
+
+            _context.Usuarios.Add(usuario);
+            _context.SaveChanges();
+
+            TempData["Mensaje"] = "Registro exitoso";
+            return RedirectToAction("Login", "Usuario");
+        }
+        [HttpPost]
+        public IActionResult EditarInline(int IdUsuario, string Nombres, string Apellidos, string Correo, int IdRol)
+        {
+            var usuario = _context.Usuarios.Find(IdUsuario);
+
+            if (usuario == null)
+            {
+                return Json(new { success = false, message = "Usuario no encontrado" });
+            }
+
+            // Actualizar campos
+            usuario.Nombres = Nombres;
+            usuario.Apellidos = Apellidos;
+            usuario.Correo = Correo;
+            usuario.IdRol = IdRol;
 
             try
             {
-                using (SqlConnection con = new SqlConnection(_conexion))
-                {
-                    con.Open();
-
-                    string query = @"INSERT INTO Usuarios
-                                    (Nombres, Apellidos, Correo, Contrasena, FechaRegistro)
-                                    VALUES
-                                    (@Nombres, @Apellidos, @Correo, @Contrasena, GETDATE())";
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@Nombres", Nombres);
-                        cmd.Parameters.AddWithValue("@Apellidos", Apellidos);
-                        cmd.Parameters.AddWithValue("@Correo", Correo);
-                        cmd.Parameters.AddWithValue("@Contrasena", Contrasena);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-
-                // MENSAJE ÉXITO
-                TempData["Mensaje"] = "✅ Registro exitoso.";
-                TempData["Tipo"] = "success";
-
-                return RedirectToAction("Index");
+                _context.Update(usuario);
+                _context.SaveChanges();
+                return Json(new { success = true });
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                // CORREO DUPLICADO
-                if (ex.Number == 2627)
-                {
-                    TempData["Mensaje"] = "⚠️ Este correo ya está registrado.";
-                    TempData["Tipo"] = "error";
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
 
-                    return RedirectToAction("Index");
-                }
 
-                TempData["Mensaje"] = "❌ Ocurrió un error al registrar.";
-                TempData["Tipo"] = "error";
+        // LISTAR
+        public async Task<IActionResult> Listar()
+        {
+            var usuarios = await _context.Usuarios.ToListAsync();
+            return View(usuarios);
+        }
 
-                return RedirectToAction("Index");
+        // ELIMINAR UNO
+        [HttpPost]
+        public IActionResult EliminarSeleccionada(int id)
+        {
+            try
+            {
+                var usuario = _context.Usuarios.Find(id);
+
+                if (usuario == null)
+                    return Json(new { success = false, message = "Usuario no encontrado" });
+
+                _context.Usuarios.Remove(usuario);
+                _context.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+
+
+        // ELIMINAR VARIOS
+        [HttpPost]
+        public IActionResult EliminarSeleccionada(int[] ids)
+        {
+            var usuarios = _context.Usuarios
+                                   .Where(u => ids.Contains(u.IdUsuario))
+                                   .ToList();
+
+            if (usuarios.Count == 0)
+                return NotFound();
+
+            _context.Usuarios.RemoveRange(usuarios);
+            _context.SaveChanges();
+
+            return RedirectToAction("Listar");
+        }
+
+        // HASH CONSISTENTE
+        private static string HashearContrasena(string contrasena)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(contrasena);
+                byte[] hash = sha256.ComputeHash(bytes);
+                return Convert.ToBase64String(hash);
             }
         }
     }

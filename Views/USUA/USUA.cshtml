@@ -58,7 +58,7 @@
                 @foreach (var u in Model)
                 {
                     <tr style="border-bottom:1px solid #edf2f7" onmouseover="this.style.background='#f7fafc'" onmouseout="this.style.background='#fff'">
-                        <td style="padding:10px 14px;color:#a0aec0;font-family:monospace">#@u.Id</td>
+                        <td style="padding:10px 14px;color:#a0aec0;font-family:monospace">#@u.IdUsuario</td>
                         <td style="padding:10px 14px;font-weight:500;color:#1a202c">@u.Nombres</td>
                         <td style="padding:10px 14px;color:#1a202c">@u.Apellidos</td>
                         <td style="padding:10px 14px;color:#718096">@u.Correo</td>
@@ -79,7 +79,7 @@
                                 @if (u.Estado == "Pendiente")
                                 {
                                     <form method="post" action="@Url.Action("CambiarEstado","USUA")" style="display:inline">
-                                        <input type="hidden" name="id" value="@u.Id" />
+                                        <input type="hidden" name="id" value="@u.IdUsuario" />
                                         <input type="hidden" name="estado" value="Activo" />
                                         @Html.AntiForgeryToken()
                                         <button type="submit" style="padding:4px 10px;background:#E1F5EE;color:#085041;border:1px solid #1D9E75;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
@@ -87,7 +87,7 @@
                                         </button>
                                     </form>
                                     <form method="post" action="@Url.Action("CambiarEstado","USUA")" style="display:inline">
-                                        <input type="hidden" name="id" value="@u.Id" />
+                                        <input type="hidden" name="id" value="@u.IdUsuario" />
                                         <input type="hidden" name="estado" value="Bloqueado" />
                                         @Html.AntiForgeryToken()
                                         <button type="submit" style="padding:4px 10px;background:#FFF5F5;color:#c53030;border:1px solid #feb2b2;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
@@ -98,7 +98,7 @@
                                 @if (u.Estado == "Activo")
                                 {
                                     <form method="post" action="@Url.Action("CambiarEstado","USUA")" style="display:inline">
-                                        <input type="hidden" name="id" value="@u.Id" />
+                                        <input type="hidden" name="id" value="@u.IdUsuario" />
                                         <input type="hidden" name="estado" value="Bloqueado" />
                                         @Html.AntiForgeryToken()
                                         <button type="submit" style="padding:4px 10px;background:#FFF5F5;color:#c53030;border:1px solid #feb2b2;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
@@ -109,7 +109,7 @@
                                 @if (u.Estado == "Bloqueado")
                                 {
                                     <form method="post" action="@Url.Action("CambiarEstado","USUA")" style="display:inline">
-                                        <input type="hidden" name="id" value="@u.Id" />
+                                        <input type="hidden" name="id" value="@u.IdUsuario" />
                                         <input type="hidden" name="estado" value="Activo" />
                                         @Html.AntiForgeryToken()
                                         <button type="submit" style="padding:4px 10px;background:#E1F5EE;color:#085041;border:1px solid #1D9E75;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
@@ -118,7 +118,7 @@
                                     </form>
                                 }
                                 <form method="post" action="@Url.Action("Eliminar","USUA")" style="display:inline" onsubmit="return confirm('¿Eliminar a @u.Nombres @u.Apellidos?')">
-                                    <input type="hidden" name="id" value="@u.Id" />
+                                    <input type="hidden" name="id" value="@u.IdUsuario" />
                                     @Html.AntiForgeryToken()
                                     <button type="submit" style="padding:4px 10px;background:#f7fafc;color:#a0aec0;border:1px solid #e2e8f0;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
                                         <i class="ti ti-trash"></i>

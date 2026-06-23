@@ -25,7 +25,7 @@ namespace EC.Controllers
         [HttpPost]
         public IActionResult Agregar(Usuarios usr)
         {
-            usr.Id = _datos.Any() ? _datos.Max(u => u.Id) + 1 : 1;
+            usr.IdUsuario = _datos.Any() ? _datos.Max(u => u.IdUsuario) + 1 : 1;
             usr.FechaRegistro = DateTime.Now;
             usr.Estado = "Pendiente";
             _datos.Add(usr);
@@ -35,7 +35,7 @@ namespace EC.Controllers
         [HttpPost]
         public IActionResult CambiarEstado(int id, string estado)
         {
-            var item = _datos.FirstOrDefault(u => u.Id == id);
+            var item = _datos.FirstOrDefault(u => u.IdUsuario == id);
             if (item != null) item.Estado = estado;
             return RedirectToAction("Index");
         }
@@ -43,7 +43,7 @@ namespace EC.Controllers
         [HttpPost]
         public IActionResult Eliminar(int id)
         {
-            var item = _datos.FirstOrDefault(u => u.Id == id);
+            var item = _datos.FirstOrDefault(u => u.IdUsuario == id);
             if (item != null) _datos.Remove(item);
             return RedirectToAction("Index");
         }
@@ -71,7 +71,7 @@ namespace EC.Controllers
             for (int r = 0; r < lista.Count; r++)
             {
                 var u = lista[r];
-                ws.Cell(r + 2, 1).Value = u.Id;
+                ws.Cell(r + 2, 1).Value = u.IdUsuario;
                 ws.Cell(r + 2, 2).Value = u.Nombres;
                 ws.Cell(r + 2, 3).Value = u.Apellidos;
                 ws.Cell(r + 2, 4).Value = u.Correo;
