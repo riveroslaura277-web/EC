@@ -1,0 +1,43 @@
+﻿@model IEnumerable<EC.Models.Estudiantes>
+
+@{
+    ViewData["Title"] = "Gestión de Estudiantes";
+}
+
+<h1>👨‍🎓 Gestión de Estudiantes</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">
+        ➕ Nuevo Estudiante
+    </a>
+</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Edad</th>
+            <th>Grado</th>
+            <th>Usuario ID</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdEstudiante</td>
+                <td>@item.Edad</td>
+                <td>@item.Curso</td>
+                <td>@item.IdUsuario</td>
+                <td>@item.Correo</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdEstudiante">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdEstudiante">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

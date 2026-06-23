@@ -1,0 +1,130 @@
+﻿body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: url('/imagenes/fondo_roles.jpg') center;
+}
+
+/* Fondo desenfocado */
+.video-sesion {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: blur(6px) brightness(0.8); /* desenfoque y oscurecimiento suave */
+}
+
+/* Centrado del formulario */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Caja del formulario */
+.login-box {
+    background: rgba(255, 255, 255, 0.25); /* transparencia */
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 45px;
+    width: 420px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+/* Título y texto */
+h2 {
+    color: #FFFF00;
+    -webkit-text-stroke: 1px #000000; /* contorno negro */
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    font-family:cursive;
+}
+
+p {
+    color:white;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+/* Campos del formulario */
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 18px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    background: linear-gradient(90deg, #fff8e1, #ffe082);
+    box-shadow: 0 0 8px rgba(255, 193, 7, 0.4);
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 12px rgba(255, 193, 7, 0.8);
+}
+
+/* Botones */
+.btn-login, .btn-volver {
+    display: inline-block;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #FFD600, #FF9100);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.5);
+}
+
+.btn-volver {
+    background: linear-gradient(135deg, #FF9100, #FFD600);
+    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.5);
+}
+
+.btn-login:hover, .btn-volver:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 152, 0, 0.7);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .login-box {
+        width: 90%;
+        padding: 35px;
+    }
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    background: #fff;
+    color: #333;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+    .btn-google img {
+        width: 20px;
+        height: 20px;
+    }

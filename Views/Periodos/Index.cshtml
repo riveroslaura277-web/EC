@@ -1,0 +1,174 @@
+﻿@model List<EC.Models.PeriodoViewModel>
+@{
+    Layout = null;
+    var cultura = new System.Globalization.CultureInfo("es-CO");
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/RolRector.css" />
+
+<div style="padding:24px">
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div style="background:#E1F5EE;border:1px solid #1D9E75;border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.85rem;color:#085041;font-weight:600">
+            ✓ @TempData["Mensaje"]
+        </div>
+    }
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+
+        <a href="@Url.Action("RolRector","Rector")"
+           style="display:inline-flex;align-items:center;gap:6px;color:#718096;font-size:.8rem;font-weight:600;text-decoration:none;margin-bottom:8px">
+            <i class="ti ti-arrow-left"></i> Volver al Dashboard
+        </a>
+        <div>
+            <h2 style="font-size:1.3rem;font-weight:700;color:#1a202c">Períodos académicos</h2>
+            <p style="font-size:.8rem;color:#718096">Gestiona los períodos del año escolar @(Model.Any() ? Model.First().AnioEscolar : "")</p>
+        </div>
+        <button onclick="document.getElementById('modalAgregar').style.display='grid'"
+                style="display:flex;align-items:center;gap:6px;background:#1D9E75;color:#fff;padding:8px 14px;border-radius:7px;border:none;cursor:pointer;font-size:.8rem;font-weight:600;font-family:inherit">
+            <i class="ti ti-plus"></i> Agregar período
+        </button>
+    </div>
+
+    <!-- TARJETAS -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">
+        @foreach (var p in Model.OrderBy(p => p.FechaInicio))
+        {
+            var bg = p.Estado == "Activo" ? "#E1F5EE" : p.Estado == "Cerrado" ? "#f7fafc" : "#EBF4FF";
+            var clr = p.Estado == "Activo" ? "#085041" : p.Estado == "Cerrado" ? "#718096" : "#2b6cb0";
+            var bor = p.Estado == "Activo" ? "#1D9E75" : p.Estado == "Cerrado" ? "#cbd5e0" : "#bee3f8";
+
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:18px;border-top:3px solid @bor">
+
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+                    <div style="font-size:1rem;font-weight:700;color:#1a202c">@p.Nombre</div>
+                    <span style="padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;background:@bg;color:@clr;border:1px solid @bor">@p.Estado</span>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;font-size:.8rem;color:#718096">
+                    <div><i class="ti ti-calendar-event"></i> Inicio: <strong style="color:#1a202c">@p.FechaInicio.ToString("d 'de' MMMM", cultura)</strong></div>
+                    <div><i class="ti ti-calendar-due"></i> Fin: <strong style="color:#1a202c">@p.FechaFin.ToString("d 'de' MMMM", cultura)</strong></div>
+                    <div><i class="ti ti-clock"></i> Duración: <strong style="color:#1a202c">@((p.FechaFin - p.FechaInicio).Days) días</strong></div>
+                </div>
+
+                <div style="display:flex;gap:6px;flex-wrap:wrap">
+                    <button onclick="abrirEditar(@p.Id,'@p.Nombre','@p.FechaInicio.ToString("yyyy-MM-dd")','@p.FechaFin.ToString("yyyy-MM-dd")','@p.AnioEscolar')"
+                            style="flex:1;padding:6px 10px;background:#EBF4FF;color:#2b6cb0;border:1px solid #bee3f8;border-radius:6px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                        <i class="ti ti-edit"></i> Editar
+                    </button>
+
+                    @if (p.Estado != "Activo")
+                    {
+                        <form method="post" action="@Url.Action("CambiarEstado","Periodos")" style="display:inline;flex:1">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@p.Id" />
+                            <input type="hidden" name="estado" value="Activo" />
+                            <button type="submit" style="width:100%;padding:6px 10px;background:#E1F5EE;color:#085041;border:1px solid #1D9E75;border-radius:6px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                Activar
+                            </button>
+                        </form>
+                    }
+                    @if (p.Estado == "Activo")
+                    {
+                        <form method="post" action="@Url.Action("CambiarEstado","Periodos")" style="display:inline;flex:1">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@p.Id" />
+                            <input type="hidden" name="estado" value="Cerrado" />
+                            <button type="submit" style="width:100%;padding:6px 10px;background:#f7fafc;color:#718096;border:1px solid #e2e8f0;border-radius:6px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                Cerrar
+                            </button>
+                        </form>
+                    }
+
+                    <form method="post" action="@Url.Action("Eliminar","Periodos")" style="display:inline"
+                          onsubmit="return confirm('¿Eliminar @p.Nombre?')">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@p.Id" />
+                        <button type="submit" style="padding:6px 10px;background:#FFF5F5;color:#c53030;border:1px solid #feb2b2;border-radius:6px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                            <i class="ti ti-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div id="modalAgregar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+    <div style="background:#fff;border-radius:12px;padding:28px;width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:#1a202c">Agregar Período</h3>
+        <form method="post" action="@Url.Action("Agregar","Periodos")">
+            @Html.AntiForgeryToken()
+            <div style="display:flex;flex-direction:column;gap:10px">
+                <input name="Nombre" placeholder="Ej: Período 1" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <div>
+                    <label style="font-size:.75rem;color:#718096;display:block;margin-bottom:3px">Fecha inicio</label>
+                    <input name="FechaInicio" type="date" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                </div>
+                <div>
+                    <label style="font-size:.75rem;color:#718096;display:block;margin-bottom:3px">Fecha fin</label>
+                    <input name="FechaFin" type="date" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                </div>
+                <input name="AnioEscolar" placeholder="Año escolar (ej: 2024)" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <div style="display:flex;gap:8px;margin-top:6px">
+                    <button type="button" onclick="document.getElementById('modalAgregar').style.display='none'"
+                            style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                            style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div id="modalEditar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+    <div style="background:#fff;border-radius:12px;padding:28px;width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:#1a202c">Editar Período</h3>
+        <form method="post" action="@Url.Action("Editar","Periodos")">
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="eId" name="Id" />
+            <div style="display:flex;flex-direction:column;gap:10px">
+                <input id="eNombre" name="Nombre" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <div>
+                    <label style="font-size:.75rem;color:#718096;display:block;margin-bottom:3px">Fecha inicio</label>
+                    <input id="eInicio" name="FechaInicio" type="date" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                </div>
+                <div>
+                    <label style="font-size:.75rem;color:#718096;display:block;margin-bottom:3px">Fecha fin</label>
+                    <input id="eFin" name="FechaFin" type="date" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                </div>
+                <input id="eAnio" name="AnioEscolar" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <div style="display:flex;gap:8px;margin-top:6px">
+                    <button type="button" onclick="document.getElementById('modalEditar').style.display='none'"
+                            style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                            style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function abrirEditar(id, nombre, inicio, fin, anio) {
+        document.getElementById('eId').value     = id;
+        document.getElementById('eNombre').value = nombre;
+        document.getElementById('eInicio').value = inicio;
+        document.getElementById('eFin').value     = fin;
+        document.getElementById('eAnio').value   = anio;
+        document.getElementById('modalEditar').style.display = 'grid';
+    }
+</script>

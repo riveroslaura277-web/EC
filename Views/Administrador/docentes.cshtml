@@ -1,0 +1,38 @@
+﻿<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
+
+@model List<EC.Models.Usuarios>
+
+<div class="contenidoss">
+
+    <div class="card-tabla">
+
+        <h2>Docentes</h2>
+
+        <p>Total: @Model.Count</p>
+
+        <table class="tabla-usuarios">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombres</th>
+                    <th>Apellidos</th>
+                    <th>Correo</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.IdUsuario</td>
+                        <td>@item.Nombres</td>
+                        <td>@item.Apellidos</td>
+                        <td>@item.Correo</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

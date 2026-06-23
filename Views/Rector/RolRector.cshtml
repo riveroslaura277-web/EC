@@ -1,0 +1,229 @@
+﻿@{
+    ViewData["Title"] = "Dashboard - Rector";
+    Layout = null;
+}
+<link rel="stylesheet" href="~/css/RolRector.css" asp-append-version="true" />
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/Rector.css" />
+
+<div class="dash">
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+        <div class="sb-logo">
+            <div class="ico"><i class="ti ti-school"></i></div>
+            <span>EduClick</span>
+        </div>
+        @{
+            string nombre = ViewBag.NombreUsuario ?? "Usuario";
+            string iniciales = nombre.Length >= 2
+            ? nombre.Substring(0, 1).ToUpper() + nombre.Split(' ').Last().Substring(0, 1).ToUpper()
+            : nombre.Substring(0, 1).ToUpper();
+        }
+        <div class="sb-profile">
+            <div class="sb-avatar">@iniciales</div>
+            <div>
+                <div class="sb-name">@nombre</div>
+                <div class="sb-role">Rector</div>
+            </div>
+        </div>
+
+        <div class="sb-section">
+            <div class="sb-label">Principal</div>
+            <a href="@Url.Action("Dashboard","Rector")" class="nav-btn active"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+            <a href="@Url.Action("Perfil","Rector")" class="nav-btn"><i class="ti ti-user"></i> Perfil</a>
+        </div>
+
+        <div class="sb-section">
+            <div class="sb-label">Gestión</div>
+            <a href="@Url.Action("Index","USUA")" class="nav-btn"><i class="ti ti-users"></i> Usuarios <span class="nav-badge">3</span></a>
+            <a href="@Url.Action("Roles","Rector")" class="nav-btn"><i class="ti ti-key"></i> Roles</a>
+            <a href="@Url.Action("Modulos","Rector")" class="nav-btn"><i class="ti ti-puzzle"></i> Módulos</a>
+        </div>
+
+        <div class="sb-section">
+            <div class="sb-label">Académico</div>
+            <a href="@Url.Action("Index","ESTU")" class="nav-btn"><i class="ti ti-backpack"></i> Estudiantes</a>
+            <a href="@Url.Action("Index","Cursos")" class="nav-btn"><i class="ti ti-books"></i> Cursos</a>
+            <a href="@Url.Action("Index","Materias")" class="nav-btn"><i class="ti ti-book"></i> Materias</a>
+            <a href="@Url.Action("Index","Notas")" class="nav-btn"><i class="ti ti-pencil"></i> Notas</a>
+            <a href="@Url.Action("Index","Periodos")" class="nav-btn"><i class="ti ti-calendar"></i> Periodos</a>
+            <a href="@Url.Action("Index","Boletines")" class="nav-btn"><i class="ti ti-file-description"></i> Boletines</a>
+        </div>
+
+        <button onclick="document.getElementById('modalLogout').style.display='grid'" class="logout-btn" style="width:100%;text-align:left;border:none;background:transparent;cursor:pointer;font-family:inherit">
+            <i class="ti ti-logout"></i> Cerrar sesión
+        </button>
+    </nav>
+
+    <!-- MAIN -->
+    <div class="main">
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="topbar-title">Dashboard</div>
+            <div class="topbar-right">
+                <div style="text-align:right">
+                    <div class="clock-time" id="ct">--:--:--</div>
+                    <div class="clock-date" id="cd">Cargando...</div>
+                </div>
+                <button class="tb-btn" title="Notificaciones"><i class="ti ti-bell"></i></button>
+                <button class="tb-btn" title="Configuración"><i class="ti ti-settings"></i></button>
+            </div>
+        </header>       
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            @if (TempData["Mensaje"] != null)
+            {
+                <div style="background:#E1F5EE;border:1px solid #1D9E75;border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.85rem;color:#085041;font-weight:600">
+                    ✓ @TempData["Mensaje"]
+                </div>
+            }
+
+            <!-- STAT CARDS --> 
+            <div class="stats-grid">
+                <a href="@Url.Action("Index","ESTU")" class="stat-card">
+                    <div class="stat-top"><div class="stat-icon g"><i class="ti ti-backpack"></i></div><div class="stat-label">Estudiantes</div></div>
+                    <div class="stat-value">@ViewBag.TotalEstudiantes</div>
+                    <div class="stat-change">↑ @ViewBag.NuevosEstudiantes este mes</div>
+                </a>
+                <a href="@Url.Action("Index","DOCE")" class="stat-card">
+                    <div class="stat-top"><div class="stat-icon b"><i class="ti ti-chalkboard"></i></div><div class="stat-label">Docentes</div></div>
+                    <div class="stat-value">@ViewBag.TotalDocentes</div>
+                    <div class="stat-change">↑ @ViewBag.NuevosDocentes este mes</div>
+                </a>
+                <a href="@Url.Action("Index","ACU")" class="stat-card">
+                    <div class="stat-top"><div class="stat-icon o"><i class="ti ti-users-group"></i></div><div class="stat-label">Acudientes</div></div>
+                    <div class="stat-value">@ViewBag.TotalAcudientes</div>
+                    <div class="stat-change">Activos</div>
+                </a>
+                <a href="@Url.Action("Index","USUA")" class="stat-card">
+                    <div class="stat-top"><div class="stat-icon p"><i class="ti ti-lock"></i></div><div class="stat-label">Usuarios</div></div>
+                    <div class="stat-value">@ViewBag.TotalUsuarios</div>
+                    <div class="stat-change pend">@ViewBag.UsuariosPendientes pendientes</div>
+                </a>
+            </div>
+
+            <!-- GRÁFICAS -->
+            <div class="row2">
+                <div class="panel">
+                    <div class="ph">
+                        <span class="pt">Rendimiento académico</span>
+                        <button class="pa" onclick="toggleChart()">Cambiar vista</button>
+                    </div>
+                    <div class="chart-wrap"><canvas id="cRend"></canvas></div>
+                </div>
+                <div class="panel">
+                    <div class="ph">
+                        <span class="pt">Distribución de notas</span>
+                        <a href="@Url.Action("Index","Notas")" class="pa">Ver detalle</a>
+                    </div>
+                    <div class="chart-wrap"><canvas id="cNotas"></canvas></div>
+                </div>
+            </div>
+
+            <!-- TABLA + NOTICIAS -->
+            <div class="row3">
+                <div class="panel">
+                    <div class="ph">
+                        <span class="pt">Cursos por período</span>
+                        <a href="@Url.Action("Index","Cursos")" class="pa">Ver todos</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr><th>Curso</th><th>Docente</th><th>Promedio</th><th>Estado</th></tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var curso in ViewBag.Cursos)
+                            {
+                                <tr>
+                                    <td>@curso.Nombre</td>
+                                    <td>@curso.Docente</td>
+                                    <td>@curso.Promedio.ToString("0.0")</td>
+                                    <td>
+                                        <span class="badge @(curso.Estado == "Activo" ? "bg" : curso.Estado == "Alerta" ? "bo" : "bb")">
+                                            @curso.Estado
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                    <!-- NOTICIAS -->
+                    <div class="panel">
+                        <div class="ph">
+                            <span class="pt">Noticias del colegio</span>    
+                            <a href="@Url.Action("Crear","Noticias")" class="pa">+ Nueva</a>
+                        </div>
+                        @foreach (var noticia in ViewBag.Noticias)
+                        {
+                            <div class="noticia">
+                                <div class="ndot"></div>
+                                <div>
+                                    <div class="ntxt">@noticia.Titulo</div>
+                                    <div class="nfecha">@noticia.Fecha.ToString("d 'de' MMMM", new System.Globalization.CultureInfo("es-CO"))</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- EVENTO -->
+                    <div class="panel">
+                        <div class="ph"><span class="pt">Próximo evento</span></div>
+                        @if (ViewBag.ProximoEvento != null)
+                        {
+                            <div class="evento">
+                                <div class="etit">@ViewBag.ProximoEvento.Titulo</div>
+                                <div class="edesc">@ViewBag.ProximoEvento.Descripcion</div>
+                                <span class="etag">@ViewBag.ProximoEvento.Fecha.ToString("d 'de' MMMM", new System.Globalization.CultureInfo("es-CO"))</span>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /content -->
+    </div><!-- /main -->
+    <!-- MODAL CERRAR SESIÓN -->
+    <div id="modalLogout" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+        <div style="background:#fff;border-radius:14px;padding:32px;width:380px;box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center">
+
+            <div style="width:60px;height:60px;border-radius:50%;background:#FFF5F5;display:grid;place-items:center;margin:0 auto 16px;font-size:28px;color:#c53030">
+                <i class="ti ti-logout"></i>
+            </div>
+
+            <h3 style="font-size:1.05rem;font-weight:700;color:#1a202c;margin-bottom:8px">
+                ¿Cerrar sesión?
+            </h3>
+            <p style="font-size:.85rem;color:#718096;margin-bottom:24px">
+                Tu sesión actual se cerrará y tendrás que iniciar sesión de nuevo con Google para acceder.
+            </p>
+
+            <div style="display:flex;gap:10px">
+                <button onclick="document.getElementById('modalLogout').style.display='none'"
+                        style="flex:1;padding:10px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:#4a5568">
+                    Cancelar
+                </button>
+                <a href="@Url.Action("Logout","Account")"
+                   style="flex:1;padding:10px;background:#c53030;color:#fff;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:700;text-decoration:none;display:flex;align-items:center;justify-content:center">
+                    Sí, salir
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div><!-- /dash -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="~/js/rector-dashboard.js"></script>
+<script>
+    const rendLabels   = @Html.Raw(ViewBag.RendLabelsJson);
+    const rendActual   = @Html.Raw(ViewBag.RendActualJson);
+    const rendAnterior = @Html.Raw(ViewBag.RendAnteriorJson);
+    const notasLabels  = @Html.Raw(ViewBag.NotasLabelsJson);
+    const notasData    = @Html.Raw(ViewBag.NotasDataJson);
+    initCharts(rendLabels, rendActual, rendAnterior, notasLabels, notasData);
+</script>

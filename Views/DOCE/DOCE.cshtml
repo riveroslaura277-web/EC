@@ -1,0 +1,147 @@
+﻿@model List<EC.Models.Docente>
+@{
+    Layout = null;
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/RolRector.css" />
+
+<div style="padding:24px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <div>
+            <a href="@Url.Action("RolRector","Rector")"
+               style="display:inline-flex;align-items:center;gap:6px;color:#718096;font-size:.8rem;font-weight:600;text-decoration:none;margin-bottom:8px">
+                <i class="ti ti-arrow-left"></i> Volver al Dashboard
+            </a>
+            <h2 style="font-size:1.3rem;font-weight:700;color:#1a202c">Docentes</h2>
+            <p style="font-size:.8rem;color:#718096">@Model.Count docentes en el listado</p>
+        </div>
+        <div style="display:flex;gap:8px">
+            <a href="@Url.Action("DescargarExcel","DOCE",new{estado=ViewBag.Estado})"
+               style="display:flex;align-items:center;gap:6px;background:#1D9E75;color:#fff;padding:8px 14px;border-radius:7px;text-decoration:none;font-size:.8rem;font-weight:600">
+                <i class="ti ti-file-spreadsheet"></i> Descargar Excel
+            </a>
+            <button onclick="document.getElementById('modalAgregar').style.display='grid'"
+                    style="display:flex;align-items:center;gap:6px;background:#1f6feb;color:#fff;padding:8px 14px;border-radius:7px;border:none;cursor:pointer;font-size:.8rem;font-weight:600;font-family:inherit">
+                <i class="ti ti-plus"></i> Agregar
+            </button>
+        </div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:14px">
+        <a href="@Url.Action("Index","DOCE")" style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;background:@(string.IsNullOrEmpty(ViewBag.Estado as string)?"#1D9E75":"#f0fff4");color:@(string.IsNullOrEmpty(ViewBag.Estado as string)?"#fff":"#0F6E56");border:1px solid #1D9E75">Todos</a>
+        <a href="@Url.Action("Index","DOCE",new{estado="Activo"})" style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;background:@(ViewBag.Estado=="Activo"?"#1D9E75":"#f0fff4");color:@(ViewBag.Estado=="Activo"?"#fff":"#0F6E56");border:1px solid #1D9E75">Activos</a>
+        <a href="@Url.Action("Index","DOCE",new{estado="Inactivo"})" style="padding:5px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-decoration:none;background:@(ViewBag.Estado=="Inactivo"?"#718096":"#f7fafc");color:@(ViewBag.Estado=="Inactivo"?"#fff":"#718096");border:1px solid #718096">Inactivos</a>
+    </div>
+
+    <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+        <table style="width:100%;border-collapse:collapse;font-size:.82rem">
+            <thead>
+                <tr style="background:#f7fafc">
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Nombres</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Apellidos</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Correo</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Teléfono</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Especialidad</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Estado</th>
+                    <th style="padding:10px 14px;text-align:left;font-size:.7rem;text-transform:uppercase;color:#a0aec0;border-bottom:1px solid #e2e8f0">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    <tr style="border-bottom:1px solid #edf2f7" onmouseover="this.style.background='#f7fafc'" onmouseout="this.style.background='#fff'">
+                        <td style="padding:10px 14px;font-weight:500;color:#1a202c">@d.Nombres</td>
+                        <td style="padding:10px 14px;color:#1a202c">@d.Apellidos</td>
+                        <td style="padding:10px 14px;color:#718096">@d.Correo</td>
+                        <td style="padding:10px 14px;color:#718096">@d.Telefono</td>
+                        <td style="padding:10px 14px"><span style="background:#EBF4FF;color:#2b6cb0;padding:2px 8px;border-radius:20px;font-size:.7rem;font-weight:600">@d.Especialidad</span></td>
+                        <td style="padding:10px 14px">
+                            <span style="padding:3px 10px;border-radius:20px;font-size:.7rem;font-weight:600;background:@(d.Estado=="Activo"?"#E1F5EE":"#f7fafc");color:@(d.Estado=="Activo"?"#085041":"#718096");border:1px solid @(d.Estado=="Activo"?"#1D9E75":"#cbd5e0")">@d.Estado</span>
+                        </td>
+                        <td style="padding:10px 14px">
+                            <div style="display:flex;gap:6px">
+                                <button onclick="abrirEditar(@d.Id,'@d.Nombres','@d.Apellidos','@d.Correo','@d.Telefono','@d.Especialidad','@d.Estado')"
+                                        style="padding:4px 10px;background:#EBF4FF;color:#2b6cb0;border:1px solid #bee3f8;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                    <i class="ti ti-edit"></i> Editar
+                                </button>
+                                <form method="post" action="@Url.Action("Eliminar","DOCE")" style="display:inline" onsubmit="return confirm('¿Eliminar a @d.Nombres @d.Apellidos?')">
+                                    <input type="hidden" name="id" value="@d.Id" />
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" style="padding:4px 10px;background:#FFF5F5;color:#c53030;border:1px solid #feb2b2;border-radius:5px;cursor:pointer;font-size:.72rem;font-weight:600;font-family:inherit">
+                                        <i class="ti ti-trash"></i> Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- MODAL AGREGAR -->
+<div id="modalAgregar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+    <div style="background:#fff;border-radius:12px;padding:28px;width:440px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px">Agregar Docente</h3>
+        <form method="post" action="@Url.Action("Agregar","DOCE")">
+            @Html.AntiForgeryToken()
+            <div style="display:flex;flex-direction:column;gap:10px">
+                <input name="Nombres" placeholder="Nombres" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input name="Apellidos" placeholder="Apellidos" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input name="Correo" placeholder="Correo" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input name="Telefono" placeholder="Teléfono" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input name="Especialidad" placeholder="Especialidad" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <select name="Estado" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%">
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+                <div style="display:flex;gap:8px;margin-top:6px">
+                    <button type="button" onclick="document.getElementById('modalAgregar').style.display='none'" style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">Cancelar</button>
+                    <button type="submit" style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div id="modalEditar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+    <div style="background:#fff;border-radius:12px;padding:28px;width:440px;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px">Editar Docente</h3>
+        <form method="post" action="@Url.Action("Editar","DOCE")">
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="eId" name="Id" />
+            <div style="display:flex;flex-direction:column;gap:10px">
+                <input id="eNombres" name="Nombres" placeholder="Nombres" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input id="eApellidos" name="Apellidos" placeholder="Apellidos" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input id="eCorreo" name="Correo" placeholder="Correo" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input id="eTelefono" name="Telefono" placeholder="Teléfono" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <input id="eEspecialidad" name="Especialidad" placeholder="Especialidad" required style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%" />
+                <select id="eEstado" name="Estado" style="padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none;width:100%">
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+                <div style="display:flex;gap:8px;margin-top:6px">
+                    <button type="button" onclick="document.getElementById('modalEditar').style.display='none'" style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">Cancelar</button>
+                    <button type="submit" style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function abrirEditar(id,nombres,apellidos,correo,telefono,especialidad,estado){
+      document.getElementById('eId').value=id;
+      document.getElementById('eNombres').value=nombres;
+      document.getElementById('eApellidos').value=apellidos;
+      document.getElementById('eCorreo').value=correo;
+      document.getElementById('eTelefono').value=telefono;
+      document.getElementById('eEspecialidad').value=especialidad;
+      document.getElementById('eEstado').value=estado;
+      document.getElementById('modalEditar').style.display='grid';
+    }
+</script>

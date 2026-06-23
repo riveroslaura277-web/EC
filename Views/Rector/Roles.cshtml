@@ -1,0 +1,197 @@
+﻿@model List<EC.Models.RolViewModel>
+@{
+    Layout = null;
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
+<link rel="stylesheet" href="~/css/RolRector.css" />
+
+<div style="padding:24px">
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div style="background:#E1F5EE;border:1px solid #1D9E75;border-radius:8px;padding:10px 16px;margin-bottom:16px;font-size:.85rem;color:#085041;font-weight:600">
+            ✓ @TempData["Mensaje"]
+        </div>
+    }
+
+    
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+        <a href="@Url.Action("RolRector","Rector")"
+           style="display:inline-flex;align-items:center;gap:6px;color:#718096;font-size:.8rem;font-weight:600;text-decoration:none;margin-bottom:8px">
+            <i class="ti ti-arrow-left"></i> Volver al Dashboard
+        </a>
+        <div>
+            <h2 style="font-size:1.3rem;font-weight:700;color:#1a202c">Roles del sistema</h2>
+            <p style="font-size:.8rem;color:#718096">Define qué puede hacer cada tipo de usuario</p>
+        </div>
+    </div>
+
+    <!-- TARJETAS DE ROLES -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px">
+        @foreach (var rol in Model)
+        {
+            <div style="background:#fff;border:1px solid #e2e8f0;border-radius:10px;padding:20px">
+
+                <!-- Encabezado del rol -->
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+                    <div style="display:flex;align-items:center;gap:10px">
+                        <div style="width:38px;height:38px;border-radius:8px;background:#E1F5EE;display:grid;place-items:center;font-size:18px">
+                            @switch (rol.Nombre)
+                            {
+                                case "Rector":
+                                    <text>🎓</text>
+                                    break;
+                                case "Docente":
+                                    <text>👨‍🏫</text>
+                                    break;
+                                case "Secretaria":
+                                    <text>📋</text>
+                                    break;
+                                case "Estudiante":
+                                    <text>🎒</text>
+                                    break;
+                                case "Acudiente":
+                                    <text>👨‍👩‍👦</text>
+                                    break;
+                                case "Administrador":
+                                    <text>⚙️</text>
+                                    break;
+                                default:
+                                    <text>👤</text>
+                                    break;
+                            }
+                        </div>
+                        <div>
+                            <div style="font-size:.95rem;font-weight:700;color:#1a202c">@rol.Nombre</div>
+                            <div style="font-size:.72rem;color:#718096">@rol.Descripcion</div>
+                        </div>
+                    </div>
+                    <span style="padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:600;
+                       background:@(rol.Estado=="Activo"?"#E1F5EE":"#f7fafc");
+                       color:@(rol.Estado=="Activo"?"#085041":"#718096");
+                       border:1px solid @(rol.Estado=="Activo"?"#1D9E75":"#cbd5e0")">
+                        @rol.Estado
+                    </span>
+                </div>
+
+                <!-- Permisos -->
+                <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px;padding:12px;background:#f7fafc;border-radius:8px">
+                    <div style="font-size:.7rem;font-weight:700;color:#4a5568;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Permisos</div>
+                    @{
+                        void Permiso(string nombre, bool activo)
+                        {
+                            <div style="display:flex;align-items:center;gap:8px;font-size:.78rem;color:@(activo?"#1a202c":"#a0aec0")">
+                                <span style="width:18px;height:18px;border-radius:4px;display:grid;place-items:center;font-size:11px;
+                                 background:@(activo?"#1D9E75":"#e2e8f0");color:@(activo?"#fff":"#a0aec0")">
+                                    @(activo ? "✓" : "✗")
+                                </span>
+                                @nombre
+                            </div>
+                        }
+                    }
+                    @{
+                        Permiso("Ver Dashboard", rol.VerDashboard);
+                    }
+                    @{
+                        Permiso("Gestión de Usuarios", rol.GestionUsuarios);
+                    }
+                    @{
+                        Permiso("Gestión Académica", rol.GestionAcademico);
+                    }
+                    @{
+                        Permiso("Ver Reportes", rol.VerReportes);
+                    }
+                    @{
+                        Permiso("Editar Notas", rol.EditarNotas);
+                    }
+                </div>
+
+                <!-- Botón editar -->
+                <button onclick="abrirEditar(@rol.Id,'@rol.Nombre','@rol.Descripcion',@rol.VerDashboard.ToString().ToLower(),@rol.GestionUsuarios.ToString().ToLower(),@rol.GestionAcademico.ToString().ToLower(),@rol.VerReportes.ToString().ToLower(),@rol.EditarNotas.ToString().ToLower(),'@rol.Estado')"
+                        style="width:100%;padding:8px;background:#EBF4FF;color:#2b6cb0;border:1px solid #bee3f8;border-radius:7px;cursor:pointer;font-size:.78rem;font-weight:600;font-family:inherit">
+                    <i class="ti ti-edit"></i> Editar permisos
+                </button>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- MODAL EDITAR -->
+<div id="modalEditar" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);place-items:center;z-index:1000">
+    <div style="background:#fff;border-radius:12px;padding:28px;width:460px;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:90vh;overflow-y:auto">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:16px;color:#1a202c">Editar permisos — <span id="modalNombre"></span></h3>
+        <form method="post" action="@Url.Action("EditarRol","Rector")">
+            @Html.AntiForgeryToken()
+            <input type="hidden" id="eId" name="Id" />
+            <input type="hidden" id="eNombre" name="Nombre" />
+
+            <div style="margin-bottom:12px">
+                <label style="font-size:.78rem;font-weight:600;color:#4a5568;display:block;margin-bottom:4px">Descripción</label>
+                <input id="eDesc" name="Descripcion" style="width:100%;padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none" />
+            </div>
+
+            <div style="background:#f7fafc;border-radius:8px;padding:14px;margin-bottom:12px;display:flex;flex-direction:column;gap:10px">
+                <div style="font-size:.7rem;font-weight:700;color:#4a5568;text-transform:uppercase;letter-spacing:.05em">Permisos</div>
+
+                <label style="display:flex;align-items:center;gap:10px;font-size:.85rem;cursor:pointer">
+                    <input type="checkbox" id="eDash" name="VerDashboard" value="true" style="width:16px;height:16px;accent-color:#1D9E75" />
+                    Ver Dashboard
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;font-size:.85rem;cursor:pointer">
+                    <input type="checkbox" id="eUsers" name="GestionUsuarios" value="true" style="width:16px;height:16px;accent-color:#1D9E75" />
+                    Gestión de Usuarios
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;font-size:.85rem;cursor:pointer">
+                    <input type="checkbox" id="eAcad" name="GestionAcademico" value="true" style="width:16px;height:16px;accent-color:#1D9E75" />
+                    Gestión Académica
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;font-size:.85rem;cursor:pointer">
+                    <input type="checkbox" id="eReport" name="VerReportes" value="true" style="width:16px;height:16px;accent-color:#1D9E75" />
+                    Ver Reportes
+                </label>
+                <label style="display:flex;align-items:center;gap:10px;font-size:.85rem;cursor:pointer">
+                    <input type="checkbox" id="eNotas" name="EditarNotas" value="true" style="width:16px;height:16px;accent-color:#1D9E75" />
+                    Editar Notas
+                </label>
+            </div>
+
+            <div style="margin-bottom:16px">
+                <label style="font-size:.78rem;font-weight:600;color:#4a5568;display:block;margin-bottom:4px">Estado</label>
+                <select id="eEstado" name="Estado" style="width:100%;padding:8px 12px;border:1px solid #e2e8f0;border-radius:7px;font-family:inherit;font-size:.85rem;outline:none">
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+            </div>
+
+            <div style="display:flex;gap:8px">
+                <button type="button" onclick="document.getElementById('modalEditar').style.display='none'"
+                        style="flex:1;padding:9px;background:#f7fafc;border:1px solid #e2e8f0;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:600">
+                    Cancelar
+                </button>
+                <button type="submit"
+                        style="flex:1;padding:9px;background:#1D9E75;color:#fff;border:none;border-radius:7px;cursor:pointer;font-family:inherit;font-weight:700">
+                    Guardar cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function abrirEditar(id,nombre,desc,dash,users,acad,report,notas,estado){
+      document.getElementById('eId').value       = id;
+      document.getElementById('eNombre').value   = nombre;
+      document.getElementById('eDesc').value     = desc;
+      document.getElementById('modalNombre').textContent = nombre;
+      document.getElementById('eDash').checked   = dash;
+      document.getElementById('eUsers').checked  = users;
+      document.getElementById('eAcad').checked   = acad;
+      document.getElementById('eReport').checked = report;
+      document.getElementById('eNotas').checked  = notas;
+      document.getElementById('eEstado').value   = estado;
+      document.getElementById('modalEditar').style.display = 'grid';
+    }
+</script>
