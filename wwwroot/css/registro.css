@@ -1,0 +1,124 @@
+﻿/* 1. Fondo: El video cubre todo */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.video-fondo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: blur(5px) brightness(0.8);
+}
+
+/* 2. El Formulario: El efecto vidrio compacto */
+.registro {
+    width: 350px;
+    padding: 30px;
+    background: rgba(255, 215, 0, 0.2);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    color: white;
+}
+
+    /* 3. Inputs */
+    .registro input, .registro select {
+        width: 100%;
+        padding: 12px;
+        margin: 8px 0;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        box-sizing: border-box;
+    }
+
+        .registro input::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+/* 4. Botones */
+.contenedor-botones {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-crear {
+    flex: 1;
+    background: linear-gradient(90deg, #FF69B4, #FFD700);
+    color: black;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+    .btn-crear:hover {
+        transform: scale(1.05);
+    }
+
+/* 5. Mensaje emergente */
+.mensaje-popup {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 18px;
+    margin: 10px auto;
+    width: 85%;
+    text-align: center;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    position: relative;
+    animation: aparecer 0.3s ease;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+    .mensaje-popup.success {
+        border: 2px solid LimeGreen;
+        color: LimeGreen;
+    }
+
+    .mensaje-popup.error {
+        border: 2px solid Red;
+        color: Red;
+    }
+
+    .mensaje-popup .cerrar {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        color: gray;
+    }
+
+@keyframes aparecer {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

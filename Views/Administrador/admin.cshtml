@@ -1,0 +1,56 @@
+﻿@{
+  
+    ViewData["Title"] = "admin";
+}
+
+<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
+
+<div class="contenidoss">
+
+    <h1>👨‍💼 Panel Administrador</h1>
+
+    <div class="cards1">
+
+        <div class="card">
+            <h2>
+                <a asp-controller="Registro" asp-action="Listar">
+                    👨‍👩‍👧 Total De Usuarios Registrados
+                </a>
+            </h2>
+        </div>
+
+        <div class="card">
+            <h2>
+                <a asp-controller="Administrador" asp-action="Rectores">
+                    🏫 Rectores
+                </a>
+            </h2>
+        </div>
+
+        <div class="card">
+            <h2>
+                <a asp-controller="Administrador" asp-action="Docentes">
+                    👨‍🏫 Docentes
+                </a>
+            </h2>
+        </div>
+
+        <div class="card">
+            <h2>
+                <a asp-controller="Administrador" asp-action="Estudiantes">
+                    🎓 Estudiantes
+                </a>
+            </h2>
+        </div>
+
+        <div class="card">
+            <h2>
+                <a asp-controller="Administrador" asp-action="Acudientes">
+                    👨‍👩‍👧‍👦 Acudientes
+                </a>
+            </h2>
+        </div>
+
+    </div>
+
+</div>

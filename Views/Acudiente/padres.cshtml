@@ -1,0 +1,38 @@
+﻿@model EC.Models.Acudiente
+@{
+    
+  
+}
+
+<link rel="stylesheet" href="~/css/acudiente.css" asp-append-version="true" />
+
+<div class="sidebar">
+    <h2>EduClick</h2>
+
+    <a href="#">Inicio</a>
+    <a href="#">Notas</a>
+    <a href="#">Asistencia</a>
+    <a href="#">Mensajes</a>
+    <a asp-controller="Acudiente" asp-action="Perfil">Perfil</a>
+</div>
+
+<div class="contenido">
+    <h1>Bienvenido Acudiente ✨</h1>
+</div>
+   
+<div class="cards">
+    <div class="card" onclick="location.href='@Url.Action("Notas","Acudiente")'">
+        Notas
+        </div>
+    <div class="card" onclick="location.href='@Url.Action("Asistencia","Acudiente")'">
+        Asistencia
+    </div>
+
+    <div class="card" onclick="location.href='@Url.Action("Estudiante","Acudiente")'">
+        Información del estudiante
+    </div>
+
+    <div class="card" onclick="location.href='@Url.Action("Rendimiento","Acudiente")'">
+        Rendimiento académico
+    </div>
+</div>

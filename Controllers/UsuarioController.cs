@@ -38,7 +38,7 @@ namespace EC.Controllers
 
             HttpContext.Session.SetString("UsuarioEmail", usuario.Correo);
             HttpContext.Session.SetString("UsuarioRol", usuario.Rol);
-            HttpContext.Session.SetInt32("UsuarioId", usuario.Id);
+            HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
 
             return rol switch
             {
@@ -96,7 +96,7 @@ namespace EC.Controllers
 
                 HttpContext.Session.SetString("UsuarioEmail", email ?? "");
                 HttpContext.Session.SetString("UsuarioRol", rolSeleccionado);
-                HttpContext.Session.SetInt32("UsuarioId", usuario.Id);
+                HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
             }
             else
             {

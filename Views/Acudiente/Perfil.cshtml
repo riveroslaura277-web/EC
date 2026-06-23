@@ -1,0 +1,23 @@
+﻿@model EC.Models.Acudiente
+
+<h2>Vista Perfil cargada ✅</h2>
+<p>Nombres: @Model.Nombres</p>
+<p>Correo: @Model.Correo</p>
+<!-- Tarjeta estilo TikTok -->
+<div class="perfil-card" style="background-color:black; color:white; text-align:center; padding:30px; border-radius:12px; width:400px; margin:20px auto;">
+    <img src="~/images/perfil.jpg" alt="Foto de perfil"
+         style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:15px;">
+
+    <h2>@Model.Nombres</h2>
+    <p>@Model.Correo</p>
+
+
+
+    <div style="margin-top:20px;">
+        <a asp-controller="Acudiente" asp-action="Perfil" class="btn btn-light" style="margin-right:10px;">Editar perfil</a>
+        <button class="btn btn-secondary">Promocionar publicación</button>
+    </div>
+
+    <p style="margin-top:10px;">💋</p>
+</div>
+</div>
