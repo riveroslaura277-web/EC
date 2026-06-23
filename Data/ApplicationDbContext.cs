@@ -27,5 +27,6 @@ namespace EC.Data
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }
