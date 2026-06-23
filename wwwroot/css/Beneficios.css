@@ -10,9 +10,10 @@
 
 body {
     font-family: 'Segoe UI',sans-serif;
-    background: #f6f9fc;
-    color: #222;
-    overflow-x: hidden;
+    background: linear-gradient(135deg, #FFF176, #FFD54F, #FF6F00);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .contenedor {
@@ -109,13 +110,16 @@ nav {
     line-height: 1.02;
     font-weight: 800;
     margin-bottom: 20px;
+    color:black; /* blanco para que resalte */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.4); /* sombra para contraste */
 }
 
 .hero-texto p {
     font-size: 22px;
     line-height: 1.7;
     max-width: 620px;
-    color: #333;
+    color: black;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 }
 
 .hero-imagen {
@@ -139,7 +143,10 @@ nav {
     grid-template-columns: repeat(2,minmax(520px,1fr));
     justify-content: center;
     gap: 25px;
+
 }
+
+
 
 /* =======================================
    TARJETAS
@@ -261,7 +268,8 @@ nav {
 .footer-box {
     width: 89%;
     margin: 25px auto 50px;
-    background: white;
+    background:transparent;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
     border: 2px solid #dcefdc;
     border-radius: 22px;
     display: flex;
@@ -284,12 +292,16 @@ nav {
 .footer-center {
     flex: 1;
     text-align: center;
+    color:transparent;
+ 
 }
 
     .footer-center h2 {
         font-size: 24px;
         line-height: 1.45;
         font-weight: 700;
+        color: #ffffff;
+        text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
     }
 
     .footer-center .verde {
