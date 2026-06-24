@@ -108,7 +108,7 @@ namespace WebApplication1.Controllers
 
         // ELIMINAR UNO
         [HttpPost]
-        public IActionResult EliminarSeleccionada(int id)
+        public IActionResult EliminarSeleccionado(int id)
         {
             try
             {
@@ -128,22 +128,28 @@ namespace WebApplication1.Controllers
             }
         }
 
-
         // ELIMINAR VARIOS
         [HttpPost]
-        public IActionResult EliminarSeleccionada(int[] ids)
+        public IActionResult EliminarSeleccionados(int[] ids)
         {
-            var usuarios = _context.Usuarios
-                                   .Where(u => ids.Contains(u.IdUsuario))
-                                   .ToList();
+            try
+            {
+                var usuarios = _context.Usuarios
+                                       .Where(u => ids.Contains(u.IdUsuario))
+                                       .ToList();
 
-            if (usuarios.Count == 0)
-                return NotFound();
+                if (usuarios.Count == 0)
+                    return Json(new { success = false, message = "No se encontraron usuarios" });
 
-            _context.Usuarios.RemoveRange(usuarios);
-            _context.SaveChanges();
+                _context.Usuarios.RemoveRange(usuarios);
+                _context.SaveChanges();
 
-            return RedirectToAction("Listar");
+                return Json(new { success = true });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
 
         // HASH CONSISTENTE
