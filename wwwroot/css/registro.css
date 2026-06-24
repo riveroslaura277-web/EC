@@ -1,40 +1,47 @@
-﻿/* 1. Fondo: El video cubre todo */
+﻿/* 1. Fondo general */
 body {
     margin: 0;
     padding: 0;
     height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', sans-serif;
+    background: url('../IMG_yesid/imagen_registro.png') no-repeat center center fixed;
+    background-size: cover; /* la imagen cubre toda la pantalla */
 }
 
-.video-fondo {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* 2. Contenedor dividido en dos mitades */
+.contenedor {
+    display: flex;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    filter: blur(5px) brightness(0.8);
+    height: 100vh;
+    justify-content: space-between; /* formulario hacia la izquierda */
+    align-items: center;
 }
 
-/* 2. El Formulario: El efecto vidrio compacto */
+/* Mitad izquierda: formulario */
+.formulario {
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center; /* centra verticalmente */
+    flex: 0 0 40%;
+    padding-left: 40px;
+}
+
+/* Caja del formulario con efecto vidrio */
 .registro {
-    width: 350px;
-    padding: 30px;
-    background: rgba(255, 215, 0, 0.2);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 420px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     text-align: center;
     color: white;
 }
 
-    /* 3. Inputs */
+    /* Inputs */
     .registro input, .registro select {
         width: 100%;
         padding: 12px;
@@ -50,7 +57,7 @@ body {
             color: rgba(255, 255, 255, 0.8);
         }
 
-/* 4. Botones */
+/* Botones */
 .contenedor-botones {
     display: flex;
     justify-content: space-between;
@@ -76,7 +83,16 @@ body {
         transform: scale(1.05);
     }
 
-/* 5. Mensaje emergente */
+/* Mitad derecha: imagen institucional */
+.imagen {
+    flex: 0 0 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Mensaje emergente */
 .mensaje-popup {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
