@@ -7,12 +7,32 @@
 
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min" />
 </head>
+
 <body>
 
-    @RenderBody()
+    <header class="navbar">
+        <div class="logo">
+            <i class="fas fa-graduation-cap"></i>
+            EduClick
+        </div>
+
+        <nav>
+            <a asp-controller="Home" asp-action="Index">Inicio</a>
+            <a asp-controller="ESTU" asp-action="Index">Estudiantes</a>
+            <a asp-controller="ACU" asp-action="Index">Acudientes</a>
+            <a asp-controller="RECTOR" asp-action="Index">Rector</a>
+        </nav>
+    </header>
+
+    <main class="page-container fade-in">
+        @RenderBody()
+    </main>
+
+    <script src="~/js/site.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>
