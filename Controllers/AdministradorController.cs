@@ -18,12 +18,6 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public IActionResult Index()
-        {
-            ViewBag.MensajesNoLeidos = _context.Mensajes.Count(m => !m.Leido);
-            return View();
-        }
-
         public async Task<IActionResult> Estudiantes()
         {
             var estudiantes = await _context.Usuarios

@@ -1,18 +1,14 @@
-﻿body {
+﻿/* 🌈 1. Fondo con video o color */
+body {
     margin: 0;
     padding: 0;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(180deg, #fff8dc, #fff3b0);
+    background: linear-gradient(180deg, #fff8dc, #fff3b0); /* fondo visible */
 }
-.imagen {
-    flex: 1; /* mitad derecha */
-    background-image: url('../imagenes/logo.png'); /* ajusta la ruta */
-    background-size: contain; /* ajusta la imagen dentro */
-    background-repeat: no-repeat;
-    background-position: center; /* centrada */
-}
-
 
 /* 2. Contenedor dividido en dos mitades */
 .contenedor {
@@ -28,7 +24,7 @@
     display: flex;
     justify-content: center; /* centra horizontalmente */
     align-items: center; /* centra verticalmente */
-    flex: 1;
+    flex: 0 0 40%;
     padding-left: 40px;
 }
 
