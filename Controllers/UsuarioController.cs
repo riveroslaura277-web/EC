@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Linq;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EC.Controllers
 {
@@ -26,10 +27,13 @@ namespace EC.Controllers
         [HttpPost]
         public IActionResult Inicio(string Email, string Password, string rol)
         {
-            var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.Correo == Email && u.Rol == rol);
+            // Hashear la contraseña igual que en registro
+            string hash = HashearContrasena(Password);
 
-            if (usuario == null || usuario.Contrasena != Password)
+            var usuario = _context.Usuarios
+                .FirstOrDefault(u => u.Correo == Email && u.Contrasena == hash);
+
+            if (usuario == null)
             {
                 TempData["Error"] = "Correo o contraseña incorrectos.";
                 ViewBag.RolSeleccionado = rol;
@@ -37,7 +41,7 @@ namespace EC.Controllers
             }
 
             HttpContext.Session.SetString("UsuarioEmail", usuario.Correo);
-            HttpContext.Session.SetString("UsuarioRol", usuario.Rol);
+            HttpContext.Session.SetString("UsuarioRol", rol);
             HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
 
             return rol switch
@@ -51,67 +55,49 @@ namespace EC.Controllers
             };
         }
 
+        private static string HashearContrasena(string contrasena)
+        {
+            using var sha256 = System.Security.Cryptography.SHA256.Create();
+            byte[] bytes = System.Text.Encoding.UTF8.GetBytes(contrasena);
+            byte[] hash = sha256.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+
+
         [HttpGet]
         public IActionResult IniciarConGoogle(string rol)
         {
             var properties = new AuthenticationProperties
             {
-                RedirectUri = Url.Action("CallbackGoogle", "Usuario"),
-                Items = { { "rol", rol } }
+                RedirectUri = Url.Action("GoogleCallback", new { rol })
             };
             return Challenge(properties, GoogleDefaults.AuthenticationScheme);
         }
 
-        public async Task<IActionResult> CallbackGoogle()
+        public async Task<IActionResult> GoogleCallback(string rol)
         {
-            var result = await HttpContext.AuthenticateAsync(
-                GoogleDefaults.AuthenticationScheme);
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             if (!result.Succeeded)
-                return RedirectToAction("Index", "Home");
+            {
+                TempData["Error"] = "Error al iniciar sesión con Google.";
+                return RedirectToAction("Inicio");
+            }
 
             var email = result.Principal?.FindFirst(ClaimTypes.Email)?.Value;
-            string rolSeleccionado = "";
-            result.Properties?.Items.TryGetValue("rol", out rolSeleccionado);
-            rolSeleccionado ??= "";
 
-            // Verificar si la BD está disponible
-            bool bdDisponible = false;
-            try
+            // Guardar sesión
+            HttpContext.Session.SetString("UsuarioEmail", email ?? "");
+            HttpContext.Session.SetString("UsuarioRol", rol);
+
+            // Redirigir según el rol
+            return rol switch
             {
-                bdDisponible = await _context.Database.CanConnectAsync();
-            }
-            catch { }
-
-            if (bdDisponible)
-            {
-                var usuario = _context.Usuarios
-                    .FirstOrDefault(u => u.Correo == email && u.Rol == rolSeleccionado);
-
-                if (usuario == null)
-                {
-                    TempData["Error"] = $"El correo {email ?? "desconocido"} no está registrado como {rolSeleccionado} en EduClick.";
-                    return RedirectToAction("Index", "Home");
-                }
-
-                HttpContext.Session.SetString("UsuarioEmail", email ?? "");
-                HttpContext.Session.SetString("UsuarioRol", rolSeleccionado);
-                HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
-            }
-            else
-            {
-                // BD no disponible - guarda sesión sin validar
-                HttpContext.Session.SetString("UsuarioEmail", email ?? "");
-                HttpContext.Session.SetString("UsuarioRol", rolSeleccionado);
-            }
-
-            return rolSeleccionado switch
-            {
-                "Administrador" => RedirectToAction("LoginAdministrador", "Usuario"),
+                "Administrador" => RedirectToAction("admin", "Administrador"),
                 "Rector" => RedirectToAction("RolRector", "Rector"),
-                "Docente" => RedirectToAction("docente", "Docente"),
+                "Docente" => RedirectToAction("PanelDocente", "Docente"),
                 "Estudiante" => RedirectToAction("Index", "Alumnos"),
-                "Acudiente" => RedirectToAction("LoginAcudiente", "Usuario"),
+                "Acudiente" => RedirectToAction("padres", "Acudiente"),
                 _ => RedirectToAction("Index", "Home")
             };
         }

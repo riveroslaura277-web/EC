@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using EC.Models;
 namespace WebApplication1.Controllers
 {
-    [Authorize(Roles = "Acudiente")]
     public class AcudienteController : Controller
     {
-        public IActionResult Padres()
+        public IActionResult padres()
         {
             return View();
         }

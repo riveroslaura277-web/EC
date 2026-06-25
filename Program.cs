@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using EC.Data;
 using EC.Models;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
+// ── Base de datos ──
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// ── Sesiones ──
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -23,14 +24,17 @@ builder.Services.AddControllersWithViews();
 // ── Autenticación Google ──
 builder.Services.AddAuthentication(options =>
 {
+    // esquema por defecto: cookies
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    // proveedor de login: Google
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
 .AddCookie()
 .AddGoogle(options =>
 {
     options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
     options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-    options.CallbackPath = "/signin-google";
+    options.CallbackPath = "/signin-google"; // ruta de retorno
 });
 
 var app = builder.Build();
@@ -45,10 +49,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-app.UseSession();
-app.UseAuthentication();
-app.UseAuthorization();
 
+app.UseSession();
+app.UseAuthentication();   // primero autenticación
+app.UseAuthorization();    // luego autorización
+
+// ── Rutas ──
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
