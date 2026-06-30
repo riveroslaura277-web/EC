@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Linq;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EC.Controllers
 {
@@ -24,7 +25,7 @@ namespace EC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Inicio(string Email, string Password, string rol)
+        public async Task<IActionResult> Inicio(string Email, string Password, string rol)
         {
             var usuario = _context.Usuarios
                 .FirstOrDefault(u => u.Correo == Email && u.Rol == rol);
@@ -36,17 +37,27 @@ namespace EC.Controllers
                 return View();
             }
 
-            HttpContext.Session.SetString("UsuarioEmail", usuario.Correo);
-            HttpContext.Session.SetString("UsuarioRol", usuario.Rol);
-            HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
+            // Crear claims
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, usuario.Correo),
+        new Claim(ClaimTypes.Role, usuario.Rol)
+    };
 
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            // Autenticar con cookies
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+
+            // Redirección según rol
             return rol switch
             {
                 "Administrador" => RedirectToAction("LoginAdministrador", "Usuario"),
                 "Rector" => RedirectToAction("RolRector", "Rector"),
                 "Docente" => RedirectToAction("docente", "Docente"),
                 "Estudiante" => RedirectToAction("Index", "Alumnos"),
-                "Acudiente" => RedirectToAction("LoginAcudiente", "Usuario"),
+                "Acudiente" => RedirectToAction("Padres", "Acudiente"),
                 _ => RedirectToAction("Index", "Home")
             };
         }
