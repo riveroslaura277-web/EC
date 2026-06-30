@@ -35,6 +35,8 @@ namespace EC.Controllers
         {
             // ✅ Autenticar contra Google
             var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
+
+
             if (!result.Succeeded)
                 return RedirectToAction("Login");
 
