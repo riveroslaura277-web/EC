@@ -95,5 +95,11 @@ namespace EC.Controllers
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 "Acudientes.xlsx");
         }
+        public IActionResult VerClaims()
+        {
+            var claims = User.Claims.Select(c => $"{c.Type}: {c.Value}");
+            return Content(string.Join("\n", claims));
+        }
+
     }
 }

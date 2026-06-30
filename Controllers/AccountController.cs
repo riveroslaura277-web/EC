@@ -22,7 +22,8 @@ namespace EC.Controllers
             return View();
         }
 
-        // Inicia el flujo de autenticación con Google
+        // Inicia el flujo de autenticación con Googlecls
+        
         public IActionResult LoginWithGoogle()
         {
             var redirectUrl = Url.Action("GoogleCallback", "Account");

@@ -5,7 +5,6 @@ using EC.Data;
 using EC.Models;
 using EC.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -15,7 +14,7 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;  
+    options.Cookie.IsEssential = true;
 });
 
 // ── MVC ──
@@ -24,18 +23,16 @@ builder.Services.AddControllersWithViews();
 // ── Email Service ──
 builder.Services.AddScoped<EmailService>();
 
-// ── Autenticación Google ──
+// ── Autenticación ──
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
-
 .AddCookie(options =>
 {
-    options.AccessDeniedPath = "/Account/AccesoDenegado";
+    options.LoginPath = "/Usuario/Inicio";            // tu login
+    options.AccessDeniedPath = "/Account/AccessDenied"; // tu vista de acceso denegado
 })
-
 .AddGoogle(options =>
 {
     options.ClientId = builder.Configuration["Authentication:Google:ClientId"];
