@@ -42,11 +42,11 @@ namespace EC.Controllers
 
             return rol switch
             {
-                "Administrador" => RedirectToAction("LoginAdministrador", "Usuario"),
+                "Administrador" => RedirectToAction("admin", "Administrador"),
                 "Rector" => RedirectToAction("RolRector", "Rector"),
-                "Docente" => RedirectToAction("docente", "Docente"),
+                "Docente" => RedirectToAction("Paneldocente", "Docente"),
                 "Estudiante" => RedirectToAction("Index", "Alumnos"),
-                "Acudiente" => RedirectToAction("LoginAcudiente", "Usuario"),
+                "Acudiente" => RedirectToAction("padres", "Acudiente"),
                 _ => RedirectToAction("Index", "Home")
             };
         }
@@ -107,11 +107,11 @@ namespace EC.Controllers
 
             return rolSeleccionado switch
             {
-                "Administrador" => RedirectToAction("LoginAdministrador", "Usuario"),
+                "Administrador" => RedirectToAction("admin", "Administrador"),
                 "Rector" => RedirectToAction("RolRector", "Rector"),
-                "Docente" => RedirectToAction("docente", "Docente"),
+                "Docente" => RedirectToAction("Paneldocente", "Docente"),
                 "Estudiante" => RedirectToAction("Index", "Alumnos"),
-                "Acudiente" => RedirectToAction("LoginAcudiente", "Usuario"),
+                "Acudiente" => RedirectToAction("padres", "Acudiente"),
                 _ => RedirectToAction("Index", "Home")
             };
         }

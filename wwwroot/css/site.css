@@ -11,6 +11,7 @@ body {
     background-repeat: no-repeat; /* evita que se repita */
     background-position: center; /* centrado */
     background-attachment: fixed; /* se mantiene al hacer scroll */
+    image-rendering: -webkit-optimize-contrast;
     color: #fff;
 }
 
