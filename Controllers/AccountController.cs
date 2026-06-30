@@ -33,7 +33,7 @@ namespace EC.Controllers
         // Google redirige aquí después de autenticar
         public async Task<IActionResult> GoogleCallback()
         {
-            // ✅ Aquí debe ser GoogleDefaults, no Cookie
+            // ✅ Autenticar contra Google
             var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
             if (!result.Succeeded)
                 return RedirectToAction("Login");
