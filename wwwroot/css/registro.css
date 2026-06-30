@@ -1,4 +1,4 @@
-﻿/* 1. Fondo: El video cubre todo */
+﻿/* 🌈 1. Fondo con video o color */
 body {
     margin: 0;
     padding: 0;
@@ -6,90 +6,101 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(180deg, #fff8dc, #fff3b0); /* fondo visible */
 }
 
-.video-fondo {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* 2. Contenedor dividido en dos mitades */
+.contenedor {
+    display: flex;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    filter: blur(5px) brightness(0.8);
+    height: 100vh;
+    justify-content: space-between; /* formulario hacia la izquierda */
+    align-items: center;
 }
 
-/* 2. El Formulario: El efecto vidrio compacto */
+/* Mitad izquierda: formulario */
+.formulario {
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center; /* centra verticalmente */
+    flex: 0 0 40%;
+    padding-left: 40px;
+}
+
+/* 💎 2. Formulario con efecto vidrio */
 .registro {
-    width: 350px;
-    padding: 30px;
-    background: rgba(255, 215, 0, 0.2);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    width: 360px;
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     text-align: center;
-    color: white;
+    color: #333;
 }
 
-    /* 3. Inputs */
-    .registro input, .registro select {
+    /* ✏️ 3. Inputs */
+    .registro input,
+    .registro select {
         width: 100%;
         padding: 12px;
-        margin: 8px 0;
+        margin: 10px 0;
         border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        background: rgba(255, 255, 255, 0.1);
-        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: rgba(255, 255, 255, 0.6);
+        color: #333;
         box-sizing: border-box;
+        outline: none;
     }
 
         .registro input::placeholder {
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(80, 80, 80, 0.8);
         }
 
-/* 4. Botones */
+/* 🎨 4. Botones */
 .contenedor-botones {
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .btn-crear {
     flex: 1;
-    background: linear-gradient(90deg, #FF69B4, #FFD700);
-    color: black;
+    background: linear-gradient(90deg, #FFD700, #FF69B4);
+    color: #000;
     padding: 12px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: bold;
     text-decoration: none;
     text-align: center;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
     .btn-crear:hover {
         transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
     }
 
-/* 5. Mensaje emergente */
+/* ✅ 5. Mensaje emergente */
 .mensaje-popup {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: 12px;
     padding: 18px;
     margin: 10px auto;
     width: 85%;
     text-align: center;
-    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
     position: relative;
     animation: aparecer 0.3s ease;
     font-size: 16px;
     font-weight: bold;
-    color: #333;
 }
 
     .mensaje-popup.success {
@@ -104,8 +115,8 @@ body {
 
     .mensaje-popup .cerrar {
         position: absolute;
-        top: 5px;
-        right: 10px;
+        top: 6px;
+        right: 12px;
         cursor: pointer;
         font-size: 18px;
         color: gray;
@@ -113,7 +124,7 @@ body {
 
 @keyframes aparecer {
     from {
-        transform: scale(0.7);
+        transform: scale(0.8);
         opacity: 0;
     }
 

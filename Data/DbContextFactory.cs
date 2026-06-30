@@ -9,11 +9,13 @@ namespace EC.Data
         public ApplicationDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServer("Server=LAPTOP-2IVQ34EB\\SQLEXPRESS;Database=BD_EC;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=true");
+
+            // ✅ Aquí va la cadena de conexión completa
+            optionsBuilder.UseSqlServer(
+                "Server=LAPTOP-NPRGSLU9\\SQLEXPRESS;Database=web_EC;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True"
+            );
 
             return new ApplicationDbContext(optionsBuilder.Options);
-
         }
-       
     }
 }
