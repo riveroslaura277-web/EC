@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
 using EC.Data;
 using EC.Models;
+using EC.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,18 +15,27 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    options.Cookie.IsEssential = true;  
 });
 
 // ── MVC ──
 builder.Services.AddControllersWithViews();
 
+// ── Email Service ──
+builder.Services.AddScoped<EmailService>();
+
 // ── Autenticación Google ──
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
 })
-.AddCookie()
+
+.AddCookie(options =>
+{
+    options.AccessDeniedPath = "/Account/AccesoDenegado";
+})
+
 .AddGoogle(options =>
 {
     options.ClientId = builder.Configuration["Authentication:Google:ClientId"];

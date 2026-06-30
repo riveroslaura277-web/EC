@@ -1,0 +1,47 @@
+﻿@model EC.Models.Mensaje
+
+@{
+    ViewData["Title"] = "Ver Mensaje";
+}
+
+<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
+
+<div class="contenidoss">
+
+    <div class="header-admin">
+        <h1>📨 Mensaje de @Model.NombreCompleto</h1>
+        <a asp-controller="Administrador" asp-action="Mensajes" class="btn-volver">
+            ← Volver a mensajes
+        </a>
+    </div>
+
+    <div class="detalle-mensaje">
+
+        <div class="campo">
+            <span class="etiqueta">👤 Nombre:</span>
+            <span>@Model.NombreCompleto</span>
+        </div>
+
+        <div class="campo">
+            <span class="etiqueta">📧 Correo:</span>
+            <span>@Model.Correo</span>
+        </div>
+
+        <div class="campo">
+            <span class="etiqueta">📌 Asunto:</span>
+            <span>@Model.Asunto</span>
+        </div>
+
+        <div class="campo">
+            <span class="etiqueta">🗓 Fecha:</span>
+            <span>@Model.FechaEnvio.ToString("dd/MM/yyyy HH:mm")</span>
+        </div>
+
+        <div class="campo mensaje-contenido">
+            <span class="etiqueta">💬 Mensaje:</span>
+            <p>@Model.Contenido</p>
+        </div>
+
+    </div>
+
+</div>

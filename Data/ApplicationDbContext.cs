@@ -23,6 +23,7 @@ namespace EC.Data
         public DbSet<Acudiente> Acudientes2 { get; set; }
         public DbSet<Rector> Rectores { get; set; }
         public DbSet<Estudiante> Estudiante { get; set; }
+        public DbSet<Mensaje> Mensajes { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

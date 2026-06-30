@@ -1,10 +1,21 @@
-
+using EC.Data;
+using EC.Models;
+using EC.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EC.Controladores
 {
     public class Contactanos : Controller
     {
+        private readonly ApplicationDbContext _context;
+        private readonly EmailService _emailService;
+
+        public Contactanos(ApplicationDbContext context, EmailService emailService)
+        {
+            _context = context;
+            _emailService = emailService;
+        }
+
         // GET: Contactanos
         public ActionResult Index()
         {
@@ -78,6 +89,27 @@ namespace EC.Controladores
             {
                 return View();
             }
+        }
+
+        // POST: Contactanos/Enviar  ?? método nuevo al final
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Enviar(Mensaje modelo)
+        {
+            if (!ModelState.IsValid)
+                return View("Index", modelo);
+
+            modelo.FechaEnvio = DateTime.Now;
+            modelo.Leido = false;
+
+            _context.Mensajes.Add(modelo);
+            await _context.SaveChangesAsync();
+
+            try { _emailService.EnviarNotificacionAdmin(modelo); }
+            catch (Exception ex) { Console.WriteLine($"Error email: {ex.Message}"); }
+
+            TempData["Enviado"] = "¡Mensaje enviado con éxito!";
+            return RedirectToAction("Index");
         }
     }
 }

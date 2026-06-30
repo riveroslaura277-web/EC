@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EC.Models.Mensaje>
+
+@{
+    ViewData["Title"] = "Mensajes";
+}
+
+<link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
+
+<div class="contenidoss">
+
+    <div class="header-admin">
+        <h1>📩 Mensajes recibidos</h1>
+        <a asp-controller="Administrador" asp-action="Admin" class="btn-volver">
+            ← Volver al panel
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <p style="text-align:center; margin-top:40px;">No hay mensajes aún 📭</p>
+    }
+    else
+    {
+        <table class="tabla-mensajes">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Asunto</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var msg in Model)
+                {
+                    <tr class="@(msg.Leido ? "" : "fila-nueva")">
+                        <td>@msg.NombreCompleto</td>
+                        <td>@msg.Correo</td>
+                        <td>@msg.Asunto</td>
+                        <td>@msg.FechaEnvio.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@(msg.Leido ? "✅ Leído" : "🔴 Nuevo")</td>
+                        <td>
+                            <a asp-controller="Administrador"
+                               asp-action="VerMensaje"
+                               asp-route-id="@msg.Id"
+                               class="btn-ver">
+                                Ver
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</div>

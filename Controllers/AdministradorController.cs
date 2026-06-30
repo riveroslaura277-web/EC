@@ -6,15 +6,17 @@ namespace WebApplication1.Controllers
 {
     public class AdministradorController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context; 
 
         public AdministradorController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult Admin()
+        public async Task<IActionResult> Admin()
         {
+            var noLeidos = await _context.Mensajes.CountAsync(m => !m.Leido);
+            ViewBag.NoLeidos = noLeidos;
             return View();
         }
 

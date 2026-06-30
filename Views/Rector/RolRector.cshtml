@@ -8,6 +8,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css" />
 <link rel="stylesheet" href="~/css/Rector.css" />
 
+<a asp-action="Index" asp-controller="Home"
+   class="btn-volver"
+   onclick="return confirmarSalida();">Volver al Inicio</a>
+
+<script>
+    function confirmarSalida() {
+        return confirm("¿Estás seguro de que quieres salir?");
+    }
+</script>
+
+
 <div class="dash">
     <!-- SIDEBAR -->
     <nav class="sidebar">

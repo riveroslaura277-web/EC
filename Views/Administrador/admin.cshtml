@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.EntityFrameworkCore
+@inject EC.Data.ApplicationDbContext _db
+
+@{
   
     ViewData["Title"] = "admin";
 }
@@ -6,6 +9,24 @@
 <link rel="stylesheet" href="~/css/admin.css" asp-append-version="true">
 
 <div class="contenidoss">
+
+    <div class="header-admin">
+        <h1>👨‍💼 Panel Administrador</h1>
+
+        <a asp-controller="Administrador" asp-action="Mensajes" class="btn-notificacion">
+            🔔
+            @if (ViewBag.NoLeidos > 0)
+            {
+                <span class="badge-rojo">@ViewBag.NoLeidos</span>
+            }
+        </a>
+    </div>
+
+    <div class="cards1">
+        @* ... el resto igual ... *@
+    </div>
+
+</div>
 
     <h1>👨‍💼 Panel Administrador</h1>
 

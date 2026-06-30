@@ -42,13 +42,7 @@ namespace WebApplication1.Controllers
                 return View("Index");
             }
 
-            // 3. Verificar duplicado
-            var existe = _context.Usuarios.Any(x => x.Correo == Correo);
-            if (existe)
-            {
-                ViewBag.Error = "Este correo ya está registrado";
-                return View("Index");
-            }
+         
 
             // 4. Hash de contraseña
             string hash = HashearContrasena(Contrasena);
