@@ -10,15 +10,22 @@ body {
     background: linear-gradient(180deg, #fff8dc, #fff3b0); /* fondo visible */
 }
 
-.video-fondo {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* 2. Contenedor dividido en dos mitades */
+.contenedor {
+    display: flex;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1;
-    filter: blur(5px) brightness(0.8);
+    height: 100vh;
+    justify-content: space-between; /* formulario hacia la izquierda */
+    align-items: center;
+}
+
+/* Mitad izquierda: formulario */
+.formulario {
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center; /* centra verticalmente */
+    flex: 0 0 40%;
+    padding-left: 40px;
 }
 
 /* 💎 2. Formulario con efecto vidrio */
@@ -30,7 +37,8 @@ body {
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
     text-align: center;
     color: #333;
 }

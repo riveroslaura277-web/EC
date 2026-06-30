@@ -6,8 +6,12 @@
 }
 
 body {
-    background-image: url('/imagenes/fondo.png');
-    min-height: 100vh;
+    background-image: url('/css/imagen_fondo.png');
+    background-size: cover; /* ocupa toda la pantalla */
+    background-repeat: no-repeat; /* evita que se repita */
+    background-position: center; /* centrado */
+    background-attachment: fixed; /* se mantiene al hacer scroll */
+    color: #fff;
 }
 
 body::before {
