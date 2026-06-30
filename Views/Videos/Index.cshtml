@@ -1,177 +1,86 @@
 ﻿@{
     ViewData["Title"] = "Videos Educativos";
-    Layout = null;
+    Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Videos Educativos</title>
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/Videos.css" />
 
-    <link rel="stylesheet" href="~/css/Videos.css" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-<body>
+<div class="contenedor">
 
-    <div class="contenedor">
+    <!-- ENCABEZADO -->
+    <header class="header-videos">
 
-        <!-- ENCABEZADO -->
-        <header class="header-videos">
+        <div class="logo-seccion">
+            <img src="~/VIDEOS/Logo.png" alt="Logo">
+        </div>
 
-            <div class="logo-seccion">
-                <img src="~/VIDEOS/Logo.png" alt="Logo">
-            </div>
+        <div class="saludo">
+            <h2>¡Hola, Sofía! 👋</h2>
+            <p>Hoy es un gran día para aprender cosas nuevas. 🌱</p>
+        </div>
 
-            <div class="saludo">
-                <h2>¡Hola, Sofía! 👋</h2>
-                <p>Hoy es un gran día para aprender cosas nuevas. 🌱</p>
-            </div>
+        <div class="acciones">
 
-            <div class="acciones">
-
-                <div class="puntos">
-                    <img src="~/VIDEOS/Puntos.png" alt="Puntos">
-                    <div>
-                        <h3>1200</h3>
-                        <span>Puntos</span>
-                    </div>
-                </div>
-
-                <div class="notificacion">
-                    <i class="fa-regular fa-bell"></i>
-                    <span>3</span>
-                </div>
-
-                <div class="perfil">
-                    <img src="~/VIDEOS/icono avatar.png" alt="Avatar">
-                    <div>
-                        <h4>Sofía</h4>
-                        <p>Estudiante</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </header>
-
-        <!-- TITULO -->
-        <section class="titulo-videos">
-
-            <div class="icono-video">
-                <i class="fa-solid fa-play"></i>
-            </div>
-
-            <div>
-                <h1>Videos Educativos</h1>
-                <p>Aprende viendo, escucha y descubre nuevos temas.</p>
-            </div>
-
-        </section>
-
-        <!-- FILTROS -->
-        <section class="categorias">
-
-            <button class="activo">Todos</button>
-            <button>Matemáticas</button>
-            <button>Ciencia</button>
-            <button>Historia</button>
-            <button>Geografía</button>
-            <button>Lenguaje</button>
-            <button>Arte</button>
-            <button>Tecnología</button>
-            <button>Valores</button>
-
-        </section>
-
-        <!-- TARJETAS -->
-        <section class="grid-videos">
-
-            <div class="card-video">
-                <img src="~/VIDEOS/los numeros.png" alt="">
-                <div class="info-video">
-                    <h3>Los Números y su Mundo</h3>
-                    <span>8:45 min</span>
+            <div class="puntos">
+                <img src="~/VIDEOS/Puntos.png" alt="Puntos">
+                <div>
+                    <h3>1200</h3>
+                    <span>Puntos</span>
                 </div>
             </div>
 
-            <div class="card-video">
-                <img src="~/VIDEOS/Experimentos.png" alt="">
-                <div class="info-video">
-                    <h3>Experimentos Divertidos</h3>
-                    <span>10:20 min</span>
+            <div class="notificacion">
+                <i class="fa-regular fa-bell"></i>
+                <span>3</span>
+            </div>
+
+            <div class="perfil">
+                <img src="~/VIDEOS/icono avatar.png" alt="Avatar">
+                <div>
+                    <h4>Sofía</h4>
+                    <p>Estudiante</p>
                 </div>
             </div>
 
-            <div class="card-video">
-                <img src="~/VIDEOS/civilizaciones.png" alt="">
-                <div class="info-video">
-                    <h3>Civilizaciones Antiguas</h3>
-                    <span>9:15 min</span>
-                </div>
-            </div>
+        </div>
 
-            <div class="card-video">
-                <img src="~/VIDEOS/el planeta.png" alt="">
-                <div class="info-video">
-                    <h3>El Planeta Tierra</h3>
-                    <span>7:30 min</span>
-                </div>
-            </div>
+    </header>
 
-            <div class="card-video">
-                <img src="~/VIDEOS/las letras.png" alt="">
-                <div class="info-video">
-                    <h3>Las Letras y Palabras</h3>
-                    <span>6:40 min</span>
-                </div>
-            </div>
+    <!-- TITULO -->
+    <section class="titulo-videos">
 
-            <div class="card-video">
-                <img src="~/VIDEOS/colores.png" alt="">
-                <div class="info-video">
-                    <h3>Colores y Creatividad</h3>
-                    <span>7:10 min</span>
-                </div>
-            </div>
+        <div class="icono-video">
+            <i class="fa-solid fa-play"></i>
+        </div>
 
-            <div class="card-video">
-                <img src="~/VIDEOS/la tecnologia.png" alt="">
-                <div class="info-video">
-                    <h3>La Tecnología a tu Alrededor</h3>
-                    <span>9:50 min</span>
-                </div>
-            </div>
+        <div>
+            <h1>Videos Educativos</h1>
+            <p>Aprende viendo, escucha y descubre nuevos temas.</p>
+        </div>
 
-            <div class="card-video">
-                <img src="~/VIDEOS/valores.png" alt="">
-                <div class="info-video">
-                    <h3>Valores que nos Hacen Grandes</h3>
-                    <span>6:25 min</span>
-                </div>
-            </div>
+    </section>
 
-            <div class="card-video">
-                <img src="~/VIDEOS/historia.png" alt="">
-                <div class="info-video">
-                    <h3>Historia de mi País</h3>
-                    <span>8:05 min</span>
-                </div>
-            </div>
+    <!-- FILTROS -->
+    <section class="categorias">
 
-            <div class="card-video">
-                <img src="~/VIDEOS/las plantas.png" alt="">
-                <div class="info-video">
-                    <h3>Las Plantas y su Vida</h3>
-                    <span>7:45 min</span>
-                </div>
-            </div>
+        <button class="activo">Todos</button>
+        <button>Matemáticas</button>
+        <button>Ciencia</button>
+        <button>Historia</button>
+        <button>Geografía</button>
+        <button>Lenguaje</button>
+        <button>Arte</button>
+        <button>Tecnología</button>
+        <button>Valores</button>
 
-        </section>
+    </section>
 
-    </div>
+    <!-- TARJETAS -->
+    <section class="grid-videos">
 
-</body>
-</html>
+        <!-- aquí dejas todas tus card-video exactamente como están -->
+
+    </section>
+
+</div>

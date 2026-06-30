@@ -8,10 +8,20 @@
     box-sizing: border-box;
 }
 
+/* ===================================
+   BODY GENERAL
+=================================== */
+
 body {
     font-family: 'Segoe UI', sans-serif;
     background-image: url('../JUEGOS/Fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: #333;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 /* ===================================
@@ -20,7 +30,10 @@ body {
 
 .topbar {
     background: #fff;
-    padding: 15px 30px;
+    max-width: 1400px;
+    margin: 20px auto 0 auto;
+    padding: 18px 35px;
+    border-radius: 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,6 +48,7 @@ body {
 
     .logo img {
         width: 100px;
+        height: auto;
     }
 
     .logo h1 {
@@ -101,7 +115,10 @@ body {
 .banner-mate {
     background: linear-gradient(135deg, #6366F1, #8B5CF6);
     color: white;
+    max-width: 1400px;
+    margin: 20px auto 0 auto;
     padding: 35px;
+    border-radius: 20px;
     display: flex;
     align-items: center;
     gap: 25px;
@@ -109,6 +126,7 @@ body {
 
 .icono-mate img {
     width: 120px;
+    height: auto;
 }
 
 .info-banner h1 {
@@ -134,7 +152,10 @@ body {
 .pagina {
     display: flex;
     gap: 25px;
-    padding: 25px;
+    max-width: 1400px;
+    min-height: 75vh;
+    margin: 20px auto;
+    padding: 0 20px;
 }
 
 /* ===================================
@@ -143,6 +164,7 @@ body {
 
 .sidebar {
     width: 260px;
+    min-height: 700px;
     background: white;
     border-radius: 20px;
     padding: 20px;
@@ -189,6 +211,7 @@ body {
 
     .mascota img {
         width: 120px;
+        height: auto;
         margin-bottom: 10px;
     }
 
@@ -208,6 +231,7 @@ body {
 
 .contenido {
     flex: 1;
+    min-height: 700px;
 }
 
 /* ===================================
@@ -218,6 +242,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 25px;
+    align-items: stretch;
 }
 
 /* ===================================
@@ -226,11 +251,15 @@ body {
 
 .card {
     background: white;
+    min-height: 320px;
     border-radius: 20px;
     padding: 25px;
     text-align: center;
     position: relative;
     transition: .3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     box-shadow: 0 5px 15px rgba(0,0,0,.06);
 }
 
@@ -242,7 +271,7 @@ body {
         width: 130px;
         height: 130px;
         object-fit: contain;
-        margin-bottom: 15px;
+        margin: 0 auto 15px auto;
     }
 
     .card h3 {
@@ -252,7 +281,7 @@ body {
     }
 
 /* ===================================
-   NÚMERO DE ACTIVIDAD
+   NUMERO DE ACTIVIDAD
 =================================== */
 
 .numero {
@@ -271,7 +300,7 @@ body {
 }
 
 /* ===================================
-   BOTÓN
+   BOTON
 =================================== */
 
 .btn-explorar {
@@ -297,21 +326,25 @@ body {
 
     .pagina {
         flex-direction: column;
+        padding: 20px;
     }
 
     .sidebar {
         width: 100%;
+        min-height: auto;
     }
 
     .topbar {
         flex-direction: column;
         gap: 20px;
         text-align: center;
+        margin: 10px;
     }
 
     .banner-mate {
         flex-direction: column;
         text-align: center;
+        margin: 10px;
     }
 }
 
@@ -328,5 +361,9 @@ body {
     .usuario {
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .pagina {
+        margin: 10px auto;
     }
 }

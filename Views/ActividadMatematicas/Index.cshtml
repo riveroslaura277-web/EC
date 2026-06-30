@@ -1,192 +1,194 @@
 ﻿@{
     ViewData["Title"] = "Números y Conteo";
+    Layout = "_Layout";
 }
 
-<link rel="stylesheet" href="~/css/ActividadesMate.css" asp-append-version="true" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/ActividadesMate.css" />
 
-<!-- TOPBAR -->
-<header class="topbar">
+<div class="page-container">
 
-    <div class="logo">
-        <img src="~/IMA MATE/Logo.png" alt="EduClick">
+    <!-- TOPBAR -->
+    <header class="topbar">
 
-        <div>
-            <h1>EduClick</h1>
-            <p>Aprender es la aventura más emocionante</p>
-        </div>
-    </div>
-
-    <div class="saludo">
-        <h2>¡Hola, Sofía! 👋</h2>
-        <p>Hoy es un gran día para aprender cosas nuevas </p>
-    </div>
-
-    <div class="usuario">
-
-        <div class="puntos">
-            ⭐
-            <div>
-                <strong>1200</strong>
-                <span>Puntos</span>
-            </div>
-        </div>
-
-        <div class="notificacion">
-            🔔
-        </div>
-
-        <div class="perfil">
-            <img src="~/Imagenesmate/icono avatar.png" alt="Perfil">
+        <div class="logo">
+            <img src="~/IMA MATE/Logo.png" alt="EduClick">
+            <div/>
 
             <div>
-                <strong>Sofía</strong>
-                <span>Estudiante</span>
+                <h1>EduClick</h1>
+                <p>Aprender es la aventura más emocionante</p>
             </div>
         </div>
 
-    </div>
-
-</header>
-
-<!-- BANNER -->
-<div class="banner-mate">
-
-    <div class="icono-mate">
-        <img src="~/IMA MATE/iconoactividades.png" alt="Números y Conteo">
-    </div>
-
-    <div class="info-banner">
-
-        <div class="ruta">
-            <span>Actividades de Matemáticas</span>
-            <span>></span>
-            <strong>Números y Conteo</strong>
+        <div class="saludo">
+            <h2>¡Hola, Sofía! 👋</h2>
+            <p>Hoy es un gran día para aprender cosas nuevas</p>
         </div>
 
-        <h1>Números y Conteo</h1>
+        <div class="usuario">
 
-        <p>
-            Descubre los números, cuenta objetos y entiende cómo
-            funcionan en tu día a día.
-        </p>
-
-    </div>
-
-</div>
-
-<!-- CONTENIDO -->
-<div class="pagina">
-
-
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="contenido">
-
-        <div class="cards">
-
-            <div class="card">
-                <span class="numero">1</span>
-                <img src="~/IMA MATE/objetos.png" alt="Contar Objetos">
-                <h3>Contar Objetos</h3>
-
-                <a href="@Url.Action("Index","CONTEO")" class="btn-explorar">
-                    Explorar →
-                </a>
+            <div class="puntos">
+                ⭐
+                <div>
+                    <strong>1200</strong>
+                    <span>Puntos</span>
+                </div>
             </div>
 
-            <div class="card">
-                <span class="numero">2</span>
-                <img src="~/IMA MATE/numeros del 1 al 10 .png" alt="">
-                <h3>Números del 1 al 10</h3>
-
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
+            <div class="notificacion">
+                🔔
             </div>
 
-            <div class="card">
-                <span class="numero">3</span>
-                <img src="~/IMA MATE/correspondencia.png" alt="">
-                <h3>Correspondencia Uno a Uno</h3>
+            <div class="perfil">
+                <img src="~/Imagenesmate/icono avatar.png" alt="Perfil">
 
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
-            </div>
-
-            <div class="card">
-                <span class="numero">4</span>
-                <img src="~/IMA MATE/conteo.png" alt="">
-                <h3>Conteo en Orden</h3>
-
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
-            </div>
-
-            <div class="card">
-                <span class="numero">5</span>
-                <img src="~/IMA MATE/reconocer.png" alt="">
-                <h3>Reconocer Cantidades</h3>
-
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
-            </div>
-
-            <div class="card">
-                <span class="numero">6</span>
-                <img src="~/IMA MATE/conteo coleccion .png" alt="">
-                <h3>Conteo de Colecciones</h3>
-
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
-            </div>
-
-            <div class="card">
-                <span class="numero">7</span>
-                <img src="~/IMA MATE/mas y menos .png" alt="">
-                <h3>Más y Menos</h3>
-
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
-            </div>
-
-            <div class="card">
-                <span class="numero">8</span>
-                <img src="~/IMA MATE/igual que .png" alt="">
-                <h3>Igual Que</h3>
-
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
-            </div>
-
-            <div class="card">
-                <span class="numero">9</span>
-                <img src="~/IMA MATE/el marco de diez.png" alt="">
-                <h3>El Marco de Diez</h3>
-
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
-            </div>
-
-            <div class="card">
-                <span class="numero">10</span>
-                <img src="~/IMA MATE/la recta numerica.png" alt="">
-                <h3>La Recta Numérica</h3>
-
-                <a href="#" class="btn-explorar">
-                    Explorar →
-                </a>
+                <div>
+                    <strong>Sofía</strong>
+                    <span>Estudiante</span>
+                </div>
             </div>
 
         </div>
 
-    </main>
+    </header>
 
-</div>
+    <!-- BANNER -->
+    <div class="banner-mate">
+
+        <div class="icono-mate">
+            <img src="~/IMA MATE/iconoactividades.png" alt="Números y Conteo">
+        </div>
+
+        <div class="info-banner">
+
+            <div class="ruta">
+                <span>Actividades de Matemáticas</span>
+                <span>></span>
+                <strong>Números y Conteo</strong>
+            </div>
+
+            <h1>Números y Conteo</h1>
+
+            <p>
+                Descubre los números, cuenta objetos y entiende cómo
+                funcionan en tu día a día.
+            </p>
+
+        </div>
+
+    </div>
+    <!-- CONTENIDO -->
+    <div class="pagina">
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="contenido">
+
+            <div class="cards">
+
+                <div class="card">
+                    <span class="numero">1</span>
+                    <img src="~/IMA MATE/objetos.png" alt="Contar Objetos">
+                    <h3>Contar Objetos</h3>
+
+                    <a href="@Url.Action("Index","CONTEO")" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">2</span>
+                    <img src="~/IMA MATE/numeros del 1 al 10 .png" alt="">
+                    <h3>Números del 1 al 10</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">3</span>
+                    <img src="~/IMA MATE/correspondencia.png" alt="">
+                    <h3>Correspondencia Uno a Uno</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">4</span>
+                    <img src="~/IMA MATE/conteo.png" alt="">
+                    <h3>Conteo en Orden</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">5</span>
+                    <img src="~/IMA MATE/reconocer.png" alt="">
+                    <h3>Reconocer Cantidades</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">6</span>
+                    <img src="~/IMA MATE/conteo coleccion .png" alt="">
+                    <h3>Conteo de Colecciones</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">7</span>
+                    <img src="~/IMA MATE/mas y menos .png" alt="">
+                    <h3>Más y Menos</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">8</span>
+                    <img src="~/IMA MATE/igual que .png" alt="">
+                    <h3>Igual Que</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">9</span>
+                    <img src="~/IMA MATE/el marco de diez.png" alt="">
+                    <h3>El Marco de Diez</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+                <div class="card">
+                    <span class="numero">10</span>
+                    <img src="~/IMA MATE/la recta numerica.png" alt="">
+                    <h3>La Recta Numérica</h3>
+
+                    <a href="#" class="btn-explorar">
+                        Explorar →
+                    </a>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+    </div>

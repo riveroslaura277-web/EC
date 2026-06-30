@@ -1,151 +1,142 @@
-﻿<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juegos Educativos</title>
+﻿@{
+    ViewData["Title"] = "Juegos Educativos";
+    Layout = "_Layout";
+}
 
-    <link rel="stylesheet" href="~/css/Juegos.css">
+<link rel="stylesheet" href="~/css/site.css" />
+<link rel="stylesheet" href="~/css/Juegos.css" />
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- TOPBAR -->
-        <header class="topbar">
+    <!-- TOPBAR -->
+    <header class="topbar">
 
-            <div class="welcome-box">
-                <h1>¡Hola, Sofía! 👋</h1>
-                <p>Hoy es un gran día para aprender jugando 🎮</p>
-            </div>
+        <div class="welcome-box">
+            <h1>¡Hola, Sofía! 👋</h1>
+            <p>Hoy es un gran día para aprender jugando 🎮</p>
+        </div>
 
-            <div class="top-icons">
+        <div class="top-icons">
 
-                <!-- PUNTOS -->
-                <div class="points-card">
-                    <img src=~/JUEGOS/Puntos.png alt="Puntos">
+            <!-- PUNTOS -->
+            <div class="points-card">
+                <img src="~/JUEGOS/Puntos.png" alt="Puntos">
 
-                    <div>
-                        <h3>1200</h3>
-                        <span>Puntos</span>
-                    </div>
+                <div>
+                    <h3>1200</h3>
+                    <span>Puntos</span>
                 </div>
+            </div>
 
-                <!-- CAMPANA -->
-                <div class="notification">
-                    <i class="fa-regular fa-bell"></i>
-                    <span class="badge">3</span>
+            <!-- CAMPANA -->
+            <div class="notification">
+                <i class="fa-regular fa-bell"></i>
+                <span class="badge">3</span>
+            </div>
+
+            <!-- PERFIL -->
+            <div class="profile-box">
+                <img src="~/JUEGOS/icono avatar.png" alt="Avatar">
+
+                <div>
+                    <h4>Sofía</h4>
+                    <span>Estudiante</span>
                 </div>
-
-                <!-- PERFIL -->
-                <div class="profile-box">
-                    <img src="~/JUEGOS/icono avatar.png" alt="Avatar">
-
-                    <div>
-                        <h4>Sofía</h4>
-                        <span>Estudiante</span>
-                    </div>
-                </div>
-
             </div>
 
-        </header>
+        </div>
 
-        <!-- HEADER -->
-        <section class="games-header">
+    </header>
 
-            <div>
-                <h2>🎮 Juegos Divertidos para Aprender</h2>
-                <p>Aprende mientras juegas y te diviertes.</p>
-            </div>
+    <!-- HEADER -->
+    <section class="games-header">
 
-            <button class="filter-btn">
-                Todos los juegos
-                <i class="fa-solid fa-chevron-down"></i>
-            </button>
+        <div>
+            <h2>🎮 Juegos Divertidos para Aprender</h2>
+            <p>Aprende mientras juegas y te diviertes.</p>
+        </div>
 
-        </section>
+        <button class="filter-btn">
+            Todos los juegos
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
 
-        <!-- TARJETAS -->
-        <section class="games-grid">
+    </section>
 
-            <div class="card">
-                <img src="JUEGOS/aventura.png">
-                <h3>Aventura de Palabras</h3>
-                <p>Aprende vocabulario y lectura.</p>
-                <button>Jugar</button>
-            </div>
+    <!-- TARJETAS -->
+    <section class="games-grid">
 
-            <div class="card">
-                <img src="JUEGOS/mision.png">
-                <h3>Misión Matemagia</h3>
-                <p>Resuelve retos matemáticos.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/aventura.png" alt="Aventura de Palabras">
+            <h3>Aventura de Palabras</h3>
+            <p>Aprende vocabulario y lectura.</p>
+            <button>Jugar</button>
+        </div>
 
-            <div class="card">
-                <img src="JUEGOS/exploradores.png">
-                <h3>Exploradores del Saber</h3>
-                <p>Descubre secretos educativos.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/mision.png" alt="Misión Matemagia">
+            <h3>Misión Matemagia</h3>
+            <p>Resuelve retos matemáticos.</p>
+            <button>Jugar</button>
+        </div>
 
-            <div class="card">
-                <img src="JUEGOS/laboratorio.png">
-                <h3>Laboratorio Curioso</h3>
-                <p>Experimentos divertidos.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/exploradores.png" alt="Exploradores del Saber">
+            <h3>Exploradores del Saber</h3>
+            <p>Descubre secretos educativos.</p>
+            <button>Jugar</button>
+        </div>
 
-            <div class="card">
-                <img src="JUEGOS/carrera.png">
-                <h3>Carrera del Conocimiento</h3>
-                <p>Aprende compitiendo.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/laboratorio.png" alt="Laboratorio Curioso">
+            <h3>Laboratorio Curioso</h3>
+            <p>Experimentos divertidos.</p>
+            <button>Jugar</button>
+        </div>
 
-            <div class="card">
-                <img src="JUEGOS/rompecabezas.png">
-                <h3>Rompecabezas de Ideas</h3>
-                <p>Desarrolla lógica y creatividad.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/carrera.png" alt="Carrera del Conocimiento">
+            <h3>Carrera del Conocimiento</h3>
+            <p>Aprende compitiendo.</p>
+            <button>Jugar</button>
+        </div>
 
-            <div class="card">
-                <img src="JUEGOS/detective.png">
-                <h3>Detectives de Historias</h3>
-                <p>Resuelve misterios educativos.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/rompecabezas.png" alt="Rompecabezas de Ideas">
+            <h3>Rompecabezas de Ideas</h3>
+            <p>Desarrolla lógica y creatividad.</p>
+            <button>Jugar</button>
+        </div>
 
-            <div class="card">
-                <img src="JUEGOS/mundo geologico.png">
-                <h3>Mundo Geográfico</h3>
-                <p>Aprende sobre el planeta.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/detective.png" alt="Detectives de Historias">
+            <h3>Detectives de Historias</h3>
+            <p>Resuelve misterios educativos.</p>
+            <button>Jugar</button>
+        </div>
 
-            <div class="card">
-                <img src="JUEGOS/retos.png">
-                <h3>Retos Brainy</h3>
-                <p>Ejercita tu mente.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/mundo geologico.png" alt="Mundo Geográfico">
+            <h3>Mundo Geográfico</h3>
+            <p>Aprende sobre el planeta.</p>
+            <button>Jugar</button>
+        </div>
 
-            <div class="card">
-                <img src="JUEGOS/crea tu mundo .png">
-                <h3>Crea tu Mundo</h3>
-                <p>Diseña y crea escenarios.</p>
-                <button>Jugar</button>
-            </div>
+        <div class="card">
+            <img src="~/JUEGOS/retos.png" alt="Retos Brainy">
+            <h3>Retos Brainy</h3>
+            <p>Ejercita tu mente.</p>
+            <button>Jugar</button>
+        </div>
 
-        </section>
+        <div class="card">
+            <img src="~/JUEGOS/crea tu mundo .png" alt="Crea tu Mundo">
+            <h3>Crea tu Mundo</h3>
+            <p>Diseña y crea escenarios.</p>
+            <button>Jugar</button>
+        </div>
 
-    </div>
+    </section>
 
-</body>
-</html>
+</div>

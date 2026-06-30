@@ -1,139 +1,231 @@
 ﻿@{
     ViewData["Title"] = "EduClick";
+    Layout = "_Layout";
 }
+<link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
 
 <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-<section class="main-container">
+<div class="home-page">
 
-    <header class="navbar">
+    <!--=========================================================
+                            NAVBAR
+    ==========================================================-->
 
-        <!-- LOGO -->
-        <div class="logo">
+<header class="navbar">
 
-            <img src="@Url.Content("~/imagenes/icono.png")"
-                 alt="EduClick Logo" />
+    <!--========================
+            LOGO
+    =========================-->
 
-            <div class="logo-text">
-                <h2>EduClick</h2>
-                <p>Aprender es la aventura más emocionante</p>
-            </div>
+    <div class="logo">
+
+        <img src="~/EVIDENCIAS/Logo.png" alt="EduClick">
+
+        <div class="logo-text">
+
+            <h2></h2>
+
+            <p></p>
 
         </div>
 
-        <!-- MENÚ -->
-        <nav class="menu">
+    </div>
 
-            <a asp-controller="Home" asp-action="Index">
-                <i class="fa-solid fa-house"></i>
-                <span>Inicio</span>
-            </a>
+    <!--========================
+            MENU
+    =========================-->
 
-            <a asp-controller="Beneficios" asp-action="Index">
-                <i class="fa-solid fa-star"></i>
-                <span>Beneficios</span>
-            </a>
+    <nav class="menu">
 
-            <a asp-controller="SobreNosotros" asp-action="Index">
-                <i class="fa-solid fa-book-open"></i>
-                <span>Nosotros</span>
-            </a>
+        <a asp-controller="Home"
+           asp-action="Index"
+           class="active">
 
-            <a asp-controller="Contactanos" asp-action="Index">
-                <i class="fa-solid fa-phone"></i>
-                <span>Contacto</span>
-            </a>
+            <i class="fa-solid fa-house"></i>
 
-        </nav>
+            Inicio
 
-        <!-- BOTONES -->
-        <div class="actions">
+        </a>
 
-            <div class="menu-login">
+        <a asp-controller="Beneficios"
+           asp-action="Index">
 
-                <button class="btn login">
-                    <i class="fa-solid fa-user"></i>
-                    Iniciar sesión
-                    <i class="fa-solid fa-caret-down"></i>
-                </button>
+            <i class="fa-solid fa-star"></i>
 
-                <div class="dropdown">
+            Beneficios
 
-                    <a asp-controller="Usuario"
-                       asp-action="Inicio"
-                       asp-route-rol="Docente">
-                        Docente
-                    </a>
+        </a>
 
-                    <a asp-controller="Alumnos"
-                       asp-action="Index"
-                       asp-route-rol="Estudiante">
-                        Estudiante
-                    </a>
+        <a asp-controller="Nosotros"
+           asp-action="Index">
 
-                    <a asp-controller="Usuario"
-                       asp-action="Inicio"
-                       asp-route-rol="Acudiente">
-                        Acudiente
-                    </a>
+            <i class="fa-solid fa-users"></i>
 
-                    <a asp-controller="Usuario"
-                       asp-action="Inicio"
-                       asp-route-rol="Rector">
-                        Rector
-                    </a>
+            Nosotros
 
-                    <a asp-controller="Usuario"
-                       asp-action="Inicio"
-                       asp-route-rol="Administrador">
-                        Administrador
-                    </a>
+        </a>
 
-                </div>
+        <a asp-controller="Contactanos"
+           asp-action="Index">
 
-            </div>
+            <i class="fa-solid fa-phone"></i>
 
-            <a asp-controller="Registro"
-               asp-action="Index"
-               class="btn login">
+            Contacto
+
+        </a>
+
+    </nav>
+
+    <!--========================
+        BOTONES
+    =========================-->
+
+    <div class="actions">
+
+        <div class="menu-login">
+
+            <button class="btn login">
 
                 <i class="fa-solid fa-user"></i>
-                Registrarse
 
-            </a>
+                Iniciar sesión
 
-        </div>
+                <i class="fa-solid fa-chevron-down"></i>
 
-    </header>
+            </button>
 
-    <!-- HERO -->
-    <section class="hero">
+           
 
-        <div class="hero-content">
+            <div class="dropdown">
 
-            <div class="hero-text">
+                <a asp-controller="Usuario"
+                   asp-action="Inicio"
+                   asp-route-rol="Docente">
 
-                <h1>
-                    Explora, aprende <br>
-                    y <span>diviértete</span>
-                </h1>
+                    Docente
 
-                <p>
-                    Descubre actividades interactivas,
-                    recursos educativos y juegos
-                    para aprender cada día.
-                </p>
+                </a>
 
-                <a href="#" class="start-btn">
-                    ¡Comenzar aventura!
-                    <i class="fa-solid fa-arrow-right"></i>
+                <a asp-controller="Alumnos"
+                   asp-action="Index"
+                   asp-route-rol="Estudiante">
+
+                    Estudiante
+
+                </a>
+
+                <a asp-controller="Usuario"
+                   asp-action="Inicio"
+                   asp-route-rol="Acudiente">
+
+                    Acudiente
+
+                </a>
+
+                <a asp-controller="Usuario"
+                   asp-action="Inicio"
+                   asp-route-rol="Rector">
+
+                    Rector
+
+                </a>
+
+                <a asp-controller="Usuario"
+                   asp-action="Inicio"
+                   asp-route-rol="Administrador">
+
+                    Administrador
+
                 </a>
 
             </div>
 
         </div>
 
-    </section>
+        <a asp-controller="Registro"
+           asp-action="Index"
+           class="btn register">
+
+            <i class="fa-solid fa-user-plus"></i>
+
+            Registrarse
+
+        </a>
+
+    </div>
+
+</header>
+</div>
+<section class="hero">
+
+    <div class="hero-left">   
+
+        <h1>
+
+                <span>
+                    EDU
+
+                    CLICK
+                </span>
+
+            <br>
+
+           Explora  y diviértete
+
+        </h1>
+
+        <p>
+
+            Descubre actividades interactivas,
+            recursos educativos y juegos
+            para aprender todos los días.
+
+        </p>
+
+        <a href="#"
+           class="hero-button">
+
+            🚀 ¡Comenzar aventura!
+
+        </a>
+
+        <div class="hero-stats">
+
+            <div>
+
+                <h3>500+</h3>
+
+                <span>Actividades</span>
+
+            </div>
+
+            <div>
+
+                <h3>120+</h3>
+
+                <span>Juegos</span>
+
+            </div>
+
+            <div>
+
+                <h3>100%</h3>
+
+                <span>Diversión</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <img src="~/HOME/tigrehomme.png"
+             alt="León">
+
+    </div>
 
 </section>

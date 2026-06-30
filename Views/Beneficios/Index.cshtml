@@ -1,165 +1,326 @@
 ﻿@{
     ViewData["Title"] = "Beneficios";
+    Layout = "_Layout";
 }
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Beneficios.css" asp-append-version="true" />
 
-<link rel="stylesheet" href="~/css/Beneficios.css" />
 
-<div class="contenedor">
+<!--=========================================
+                NAVBAR
+==========================================-->
 
-    <!-- NAVBAR -->
-    <header class="navbar">
+<header class="navbar">
 
-        <div class="logo">
-            <h2><span class="verde">Edu</span><span class="azul">Click</span></h2>
-            <p>Aprender es la aventura más emocionante</p>
+    <!--=========================
+            LOGO
+    =========================-->
+
+    <div class="logo">
+
+        <img src="~/EVIDENCIAS/Logo.png"
+             asp-append-version="true"
+             alt="EduClick" />
+
+        <div class="logo-text">
+
+            <h2>
+                Edu<span>Click</span>
+            </h2>
+
         </div>
 
-        <nav>
-            <a asp-controller="Home" asp-action="Index">
-                <i class="fa-solid fa-house"></i>
-                <span>Inicio</span>
-            </a>
+    </div>
 
-            <a asp-controller="Beneficios" asp-action="Index">
-                <i class="fa-solid fa-star"></i>
-                <span>Beneficios</span>
-            </a>
+    <!--=========================
+            MENÚ
+    =========================-->
 
-            <a asp-controller="SobreNosotros" asp-action="Index">
-                <i class="fa-solid fa-book"></i>
-                <span>Nosotros</span>
-            </a>
+    <nav class="menu">
 
-            <a asp-controller="Contacto" asp-action="Index">
-                <i class="fa-solid fa-phone"></i>
-                <span>Contacto</span>
-            </a>
+        <a asp-controller="Home"
+           asp-action="Index">
 
-        </nav>
+            <i class="fa-solid fa-house"></i>
 
-    </header>
+            <span>Inicio</span>
 
+        </a>
 
-    <!-- HERO -->
-    <section class="hero">
+        <a asp-controller="Beneficios"
+           asp-action="Index"
+           class="active">
 
-        <div class="hero-texto">
+            <i class="fa-solid fa-star"></i>
 
-            <h1>
-                Beneficios de <br>
-                <span class="verde">Edu</span><span class="azul">Click</span>
-            </h1>
+            <span>Beneficios</span>
+
+        </a>
+
+        <a asp-controller="Nosotros"
+           asp-action="Index">
+
+            <i class="fa-solid fa-users"></i>
+
+            <span>Nosotros</span>
+
+        </a>
+
+        <a asp-controller="Contactanos"
+           asp-action="Index">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <span>Contacto</span>
+
+        </a>
+
+    </nav>
+
+</header>
+
+<!--=========================================
+            BENEFICIOS
+==========================================-->
+
+<section class="beneficios">
+
+    <!--=========================
+        INFORMACIÓN
+    =========================-->
+
+    <div class="beneficios-info">
+
+        <span class="etiqueta">
+
+            BENEFICIOS ⭐
+
+        </span>
+
+        <h1>
+
+            Beneficios de
+
+            <span>EduClick</span>
+
+        </h1>
+
+        <p>
+
+            Diseñada especialmente para acompañar a los niños
+            de primaria en su aventura de aprender mediante
+            juegos, actividades y contenido interactivo.
+
+        </p>
+
+        <div class="hero-right">
+
+            <img src="~/BENEFICIOS/tigre.png"
+                 alt="tigre">
+
+        </div>
+
+    </div>
+
+    <!--=========================
+            TARJETAS
+    =========================-->
+
+    <div class="beneficios-grid">
+
+        <!-- Tarjeta 1 -->
+
+        <div class="card-beneficio">
+
+            
+
+            <div class="icono">
+                <img src="~/BENEFICIOS/consola.png"
+                     asp-append-version="true"
+                     alt="">
+            </div>
+
+            <h3 class="morado-text">
+                Aprendizaje divertido
+            </h3>
 
             <p>
-                Nuestra plataforma está diseñada para potenciar el aprendizaje
-                de los niños a través de la diversión, la interacción
-                y la tecnología.
+                Juegos, retos y actividades interactivas que convierten
+                el estudio en una experiencia emocionante para los niños.
             </p>
 
         </div>
 
-        <div class="hero-imagen">
-            <img src="~/BENEFICIOS/tigre.png" alt="Tigre">
-        </div>
+        <!-- Tarjeta 2 -->
 
-    </section>
+        <div class="card-beneficio">
 
+            
 
-    <!-- TARJETAS -->
-    <section class="beneficios-grid">
-
-        <div class="card">
-            <img src="~/BENEFICIOS/aprendizaje.png">
-            <div>
-                <h3 class="verde-text">Aprendizaje Interactivo</h3>
-                <p>
-                    Actividades dinámicas que involucran a los niños y hacen
-                    del aprendizaje una experiencia divertida.
-                </p>
+            <div class="icono">
+                <img src="~/BENEFICIOS/desarrollo.png"
+                     asp-append-version="true"
+                     alt="">
             </div>
+
+            <h3 class="verde-text">
+                Desarrollo integral
+            </h3>
+
+            <p>
+                Fortalece habilidades cognitivas,
+                emocionales, creativas y sociales
+                mediante actividades dinámicas.
+            </p>
+
         </div>
 
+        <!-- Tarjeta 3 -->
 
-        <div class="card">
-            <img src="~/BENEFICIOS/juego.png">
-            <div>
-                <h3 class="azul-text">Aprender Jugando</h3>
-                <p>
-                    Juegos educativos que desarrollan habilidades cognitivas
-                    mientras exploran nuevos temas.
-                </p>
+        <div class="card-beneficio">
+
+            
+
+            <div class="icono">
+                <img src="~/BENEFICIOS/motivacion.png"
+                     asp-append-version="true"
+                     alt="">
             </div>
+
+            <h3 class="naranja-text">
+                Motivación constante
+            </h3>
+
+            <p>
+                Sistema de recompensas,
+                insignias y logros que
+                incentivan el aprendizaje
+                todos los días.
+            </p>
+
         </div>
+        <!-- Tarjeta 4 -->
 
+        <div class="card-beneficio">
 
-        <div class="card">
-            <img src="~/BENEFICIOS/desarrollo.png">
-            <div>
-                <h3 class="amarillo-text">Sistema de Recompensas</h3>
-                <p>
-                    Los niños ganan puntos y logros que fortalecen
-                    su confianza cada día.
-                </p>
+            
+
+            <div class="icono">
+                <img src="~/BENEFICIOS/entorno.png"
+                     asp-append-version="true"
+                     alt="Entorno Seguro">
             </div>
+
+            <h3 class="azul-text">
+                Entorno seguro
+            </h3>
+
+            <p>
+                Plataforma 100% segura y libre de contenido
+                inapropiado para niños, garantizando una
+                experiencia educativa confiable.
+            </p>
+
         </div>
 
+        <!-- Tarjeta 5 -->
 
-        <div class="card">
-            <img src="~/BENEFICIOS/seguimiento.png">
-            <div>
-                <h3 class="morado-text">Seguimiento del Progreso</h3>
-                <p>
-                    Reportes que permiten a padres y docentes acompañar
-                    el desarrollo académico.
-                </p>
+        <div class="card-beneficio">
+
+            
+
+            <div class="icono">
+                <img src="~/BENEFICIOS/seguimiento .png"
+                     asp-append-version="true"
+                     alt="Seguimiento">
             </div>
+
+            <h3 class="rosado-text">
+                Seguimiento del progreso
+            </h3>
+
+            <p>
+                Reportes para padres y docentes que
+                permiten visualizar el avance del
+                estudiante en tiempo real.
+            </p>
+
         </div>
 
+        <!-- Tarjeta 6 -->
 
-        <div class="card">
-            <img src="~/BENEFICIOS/entorno .png">
-            <div>
-                <h3 class="rosa-text">Entorno Seguro</h3>
-                <p>
-                    Plataforma confiable y segura diseñada especialmente
-                    para el bienestar de los niños.
-                </p>
+        <div class="card-beneficio">
+
+            
+
+            <div class="icono">
+                <img src="~/BENEFICIOS/acccesibilidad.png"
+                     asp-append-version="true"
+                     alt="Accesibilidad">
             </div>
+
+            <h3 class="violeta-text">
+                Accesible en cualquier lugar
+            </h3>
+
+            <p>
+                Disponible desde computadoras,
+                tabletas y celulares para aprender
+                cuando y donde quieras.
+            </p>
+
         </div>
 
+    </div>
 
-        <div class="card">
-            <img src="~/BENEFICIOS/desarrollo.png">
-            <div>
-                <h3 class="cyan-text">Desarrollo Integral</h3>
-                <p>
-                    Fomenta habilidades cognitivas, emocionales y sociales
-                    para un crecimiento completo.
-                </p>
+</section>
+<!-- ===========================================
+        BANNER FINAL
+============================================ -->
+
+<section class="banner-beneficios">
+
+    <div class="banner-contenido">
+
+        <div class="banner-texto">
+
+            <div class="banner-icono">
+                🧪
             </div>
+
+            <div>
+
+                <h2>
+                    ¡Cada día es una nueva aventura!
+                </h2>
+
+                <p>
+                    Con <strong>EduClick</strong>,
+                    aprender es <span>emocionante</span>,
+                    fácil y lleno de descubrimientos.
+                </p>
+
+            </div>
+
         </div>
 
-    </section>
 
+        <div class="banner-personaje">
 
-    <!-- FOOTER -->
-    <section class="footer-box">
+            <img src="~/BENEFICIOS/tigreB.png"
+                 alt="tigre">
 
-        <div class="footer-left">
-            <img src="~/BENEFICIOS/tigre 2.png">
         </div>
 
-        <div class="footer-center">
-            <h2>
-                En <span class="verde">Edu</span><span class="azul">Click</span>,
-                cada beneficio es una oportunidad para crecer.
-            </h2>
+
+        <div class="banner-boton">
+
+            <a href="#" class="btn-comenzar">
+                Comenzar ahora 🚀
+            </a>
+
         </div>
 
-    </section>
+    </div>
 
-</div>
-
-<!-- ICONOS -->
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</section>

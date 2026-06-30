@@ -1,5 +1,7 @@
-﻿body {
-}
+﻿/* =======================================
+   RESET GENERAL
+======================================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -7,26 +9,40 @@
     font-family: "Segoe UI", sans-serif;
 }
 
+/* =======================================
+   BODY GENERAL
+======================================= */
+
 body {
     background: linear-gradient( 180deg, #dff5ff 0%, #f8fdff 40%, #d8f7c6 100% );
+    min-height: 100vh;
+    width: 100%;
     padding: 20px;
+    overflow-x: hidden;
 }
 
+/* =======================================
+   CONTENEDOR GENERAL
+======================================= */
+
 .calendario-page {
-    max-width: 1600px;
+    max-width: 1400px;
+    min-height: 100vh;
     margin: auto;
 }
 
-/* HEADER */
+/* =======================================
+   HEADER
+======================================= */
 
 .header-card {
     background: white;
     border-radius: 30px;
     padding: 25px 35px;
+    margin-bottom: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 25px;
     box-shadow: 0 5px 15px rgba(0,0,0,.06);
 }
 
@@ -61,20 +77,26 @@ body {
     font-weight: 600;
 }
 
-/* CONTENIDO */
+/* =======================================
+   CONTENIDO PRINCIPAL
+======================================= */
 
 .contenido {
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 25px;
+    min-height: 75vh;
 }
 
-/* CALENDARIO */
+/* =======================================
+   CALENDARIO
+======================================= */
 
 .calendar-container {
     background: white;
     border-radius: 30px;
     padding: 25px;
+    min-height: 850px;
     box-shadow: 0 5px 15px rgba(0,0,0,.05);
 }
 
@@ -103,7 +125,9 @@ body {
     font-size: 22px;
 }
 
-/* GRID */
+/* =======================================
+   GRID CALENDARIO
+======================================= */
 
 .calendar-grid {
     display: grid;
@@ -166,17 +190,21 @@ body {
     color: #ff8a00;
 }
 
-/* SIDEBAR */
+/* =======================================
+   SIDEBAR
+======================================= */
 
 .sidebar {
     display: flex;
     flex-direction: column;
+    min-height: 850px;
 }
 
 .card-eventos {
     background: white;
     border-radius: 30px;
     padding: 25px;
+    min-height: 500px;
     box-shadow: 0 5px 15px rgba(0,0,0,.05);
 }
 
@@ -199,13 +227,16 @@ body {
         font-size: 14px;
     }
 
-/* FOOTER */
+/* =======================================
+   FOOTER
+======================================= */
 
 .footer-banner {
     margin-top: 25px;
     background: #f8f6ff;
     border-radius: 25px;
     padding: 25px;
+    min-height: 180px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -227,7 +258,9 @@ body {
     font-size: 18px;
 }
 
-/* RESPONSIVE */
+/* =======================================
+   RESPONSIVE
+======================================= */
 
 @media(max-width:1200px) {
 
@@ -237,10 +270,43 @@ body {
 
     .sidebar {
         order: -1;
+        min-height: auto;
+    }
+
+    .calendar-container {
+        min-height: auto;
     }
 
     .header-card {
         flex-direction: column;
         gap: 20px;
+        text-align: center;
+    }
+}
+
+@media(max-width:768px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .header-left h1 {
+        font-size: 36px;
+    }
+
+    .calendar-header h2 {
+        font-size: 30px;
+    }
+
+    .footer-banner {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+        min-height: auto;
+    }
+
+    .robot,
+    .kids {
+        font-size: 60px;
     }
 }

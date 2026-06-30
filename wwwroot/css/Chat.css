@@ -1,14 +1,14 @@
 ﻿/* =========================================
    VARIABLES Y FUENTES GLOBALES
-   ========================================= */
+========================================= */
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
 :root {
     --fondo-app: #F4F9FD;
-    --color-principal: #4A90E2; /* Azul EduClick */
-    --color-secundario: #50E3C2; /* Turquesa */
-    --color-acento: #FFAB00; /* Naranja/Dorado */
-    --color-bot: #E8F1F8; /* Azul muy clarito para el bot */
+    --color-principal: #4A90E2;
+    --color-secundario: #50E3C2;
+    --color-acento: #FFAB00;
+    --color-bot: #E8F1F8;
     --color-texto: #333333;
     --color-texto-suave: #666666;
     --blanco: #FFFFFF;
@@ -18,35 +18,47 @@
     --transicion-rapida: all 0.3s ease;
 }
 
+/* =========================================
+   RESET GENERAL
+========================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* =========================================
+   BODY GENERAL
+========================================= */
+
 body {
     font-family: 'Nunito', sans-serif;
     background-color: var(--fondo-app);
     color: var(--color-texto);
-    height: 100vh;
-    overflow: hidden; /* Evita que toda la página haga scroll */
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
 }
 
 /* =========================================
-   LAYOUT PRINCIPAL (DASHBOARD)
-   ========================================= */
+   DASHBOARD PRINCIPAL
+========================================= */
+
 .dashboard {
     display: flex;
-    height: 100%;
-    max-width: 1600px;
+    max-width: 1400px;
+    min-height: 100vh;
     margin: 0 auto;
 }
 
 /* =========================================
-   SIDEBAR (Menú Lateral Izquierdo)
-   ========================================= */
+   SIDEBAR IZQUIERDO
+========================================= */
+
 .sidebar {
     width: 250px;
+    min-height: 100vh;
     background-color: var(--blanco);
     padding: 20px 15px;
     display: flex;
@@ -62,6 +74,7 @@ body {
 
         .sidebar .logo img {
             width: 60px;
+            height: auto;
             transition: var(--transicion-rapida);
         }
 
@@ -94,7 +107,8 @@ body {
                 text-align: center;
             }
 
-            .sidebar nav a:hover, .sidebar nav a.active {
+            .sidebar nav a:hover,
+            .sidebar nav a.active {
                 background-color: #EBF3FA;
                 color: var(--color-principal);
                 transform: translateX(5px);
@@ -105,8 +119,9 @@ body {
             }
 
 /* =========================================
-   ÁREA PRINCIPAL CENTRAL (Main & Topbar)
-   ========================================= */
+   MAIN CENTRAL
+========================================= */
+
 .main {
     flex: 1;
     display: flex;
@@ -114,6 +129,10 @@ body {
     padding: 20px 30px;
     background-color: var(--fondo-app);
 }
+
+/* =========================================
+   TOPBAR
+========================================= */
 
 .topbar {
     display: flex;
@@ -231,16 +250,18 @@ body {
     }
 
 /* =========================================
-   TARJETA DEL CHAT (Interfaz EduBot)
-   ========================================= */
+   CHAT CARD
+========================================= */
+
 .chat-card {
     background-color: var(--blanco);
     border-radius: var(--borde-radio-lg);
     box-shadow: var(--sombra-suave);
     flex: 1;
+    min-height: 700px;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Mantiene todo dentro de los bordes redondeados */
+    overflow: hidden;
 }
 
 .chat-header {
@@ -285,7 +306,10 @@ body {
     border-radius: 20px;
 }
 
-/* Cuerpo del Chat (Scrolleable) */
+/* =========================================
+   BODY CHAT
+========================================= */
+
 .chat-body {
     flex: 1;
     padding: 25px;
@@ -295,13 +319,8 @@ body {
     gap: 20px;
 }
 
-    /* Personalización del Scrollbar para niños */
     .chat-body::-webkit-scrollbar {
         width: 8px;
-    }
-
-    .chat-body::-webkit-scrollbar-track {
-        background: transparent;
     }
 
     .chat-body::-webkit-scrollbar-thumb {
@@ -313,7 +332,10 @@ body {
             background: var(--color-principal);
         }
 
-/* Mensajes Generales */
+/* =========================================
+   MENSAJES
+========================================= */
+
 .mensaje {
     display: flex;
     align-items: flex-end;
@@ -336,77 +358,29 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
 }
 
-/* Mensaje Bot */
 .mensaje.bot {
     align-self: flex-start;
 }
 
     .mensaje.bot .burbuja {
         background-color: var(--color-bot);
-        color: var(--color-texto);
-        border-bottom-left-radius: 0; /* Efecto de cola de globo */
+        border-bottom-left-radius: 0;
     }
 
-    .mensaje.bot strong {
-        color: var(--color-principal);
-        display: block;
-        margin-bottom: 5px;
-    }
-
-/* Mensaje Usuario */
 .mensaje.usuario {
     align-self: flex-end;
-    flex-direction: row;
-    justify-content: flex-end;
 }
 
     .mensaje.usuario .burbuja.user {
         background-color: var(--color-principal);
-        color: var(--blanco);
+        color: white;
         border-bottom-right-radius: 0;
     }
 
-/* Contenido Multimedia del Bot (Ej: Sistema Solar) */
-.respuesta {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
+/* =========================================
+   PREGUNTAS
+========================================= */
 
-.contenido-solar {
-    background-color: var(--blanco);
-    border: 2px solid #EBF3FA;
-    border-radius: var(--borde-radio-md);
-    padding: 15px;
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    box-shadow: var(--sombra-suave);
-}
-
-    .contenido-solar img {
-        width: 100px;
-        height: 100px;
-        border-radius: 10px;
-    }
-
-    .contenido-solar .info h4 {
-        color: var(--color-principal);
-        margin-bottom: 5px;
-        font-size: 1.1rem;
-    }
-
-    .contenido-solar .info ul {
-        list-style-position: inside;
-        color: var(--color-texto-suave);
-        font-size: 0.9rem;
-    }
-
-    .contenido-solar .info li {
-        margin-bottom: 3px;
-    }
-
-/* Preguntas Sugeridas */
 .preguntas {
     padding: 0 25px;
     display: flex;
@@ -423,7 +397,6 @@ body {
         border-radius: 20px;
         font-family: inherit;
         font-weight: 700;
-        font-size: 0.9rem;
         cursor: pointer;
         transition: var(--transicion-rapida);
     }
@@ -431,10 +404,12 @@ body {
         .preguntas button:hover {
             background-color: var(--color-secundario);
             color: var(--blanco);
-            transform: translateY(-2px);
         }
 
-/* Zona de Input */
+/* =========================================
+   INPUT CHAT
+========================================= */
+
 .input-chat {
     padding: 20px 25px;
     background-color: var(--blanco);
@@ -452,14 +427,8 @@ body {
         border-radius: 50px;
         font-family: inherit;
         font-size: 1rem;
-        color: var(--color-texto);
         outline: none;
-        transition: box-shadow 0.3s ease;
     }
-
-        .input-chat input:focus {
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
-        }
 
     .input-chat button {
         background-color: var(--color-principal);
@@ -468,32 +437,27 @@ body {
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        font-size: 1.2rem;
         cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         transition: var(--transicion-rapida);
-        box-shadow: 0 4px 10px rgba(74, 144, 226, 0.3);
     }
 
         .input-chat button:hover {
-            transform: scale(1.1) rotate(10deg);
-            background-color: #357ABD;
+            transform: scale(1.1);
         }
 
 /* =========================================
-   PANEL DERECHO (Acciones y Temas)
-   ========================================= */
+   PANEL DERECHO
+========================================= */
+
 .right-panel {
     width: 280px;
+    min-height: 100vh;
     background-color: var(--blanco);
     padding: 25px 20px;
     display: flex;
     flex-direction: column;
     gap: 30px;
     box-shadow: -4px 0 15px rgba(0,0,0,0.03);
-    z-index: 10;
 }
 
 .panel h3 {
@@ -501,34 +465,27 @@ body {
     font-weight: 800;
     color: var(--color-principal);
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+}
+
+.panel button,
+.panel li {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: var(--borde-radio-md);
+    cursor: pointer;
+    transition: var(--transicion-rapida);
+    font-weight: 700;
 }
 
 .panel button {
-    width: 100%;
     background-color: var(--fondo-app);
     border: none;
-    padding: 12px 15px;
-    border-radius: var(--borde-radio-md);
     text-align: left;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-texto-suave);
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: var(--transicion-rapida);
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
     .panel button:hover {
         background-color: var(--color-principal);
-        color: var(--blanco);
-        transform: translateX(-5px);
+        color: white;
     }
 
 .panel ul {
@@ -540,17 +497,47 @@ body {
 
 .panel li {
     background-color: #FFF9E6;
-    padding: 12px 15px;
-    border-radius: var(--borde-radio-md);
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: var(--color-texto);
-    cursor: pointer;
-    transition: var(--transicion-rapida);
-    border: 1px solid transparent;
 }
 
     .panel li:hover {
-        border-color: var(--color-acento);
         transform: scale(1.02);
     }
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1200px) {
+
+    .dashboard {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .sidebar,
+    .right-panel {
+        width: 100%;
+        min-height: auto;
+    }
+
+    body {
+        overflow-y: auto;
+    }
+}
+
+@media(max-width:768px) {
+
+    .topbar {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .main {
+        padding: 15px;
+    }
+
+    .chat-card {
+        min-height: 500px;
+    }
+}

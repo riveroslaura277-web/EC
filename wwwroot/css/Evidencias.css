@@ -1,41 +1,66 @@
-﻿* {
+﻿/* =========================================
+   RESET GENERAL
+========================================= */
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Nunito', sans-serif;
 }
 
+/* =========================================
+   BODY GENERAL
+========================================= */
+
 body {
     background: #eef2f7;
     color: #23395d;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* =========================================
+   CONTENEDOR PRINCIPAL
+========================================= */
+
 .evidencias-container {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 20px;
+    max-width: 1400px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 30px;
 }
 
-/* TARJETA PRINCIPAL */
+/* =========================================
+   TARJETA PRINCIPAL
+========================================= */
+
 .main-card {
     background: white;
     border-radius: 20px;
     padding: 35px;
+    min-height: 700px;
     box-shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 
-/* MENSAJE ÉXITO */
+/* =========================================
+   MENSAJE ÉXITO
+========================================= */
+
 .alerta-exito {
     background: #ecfdf5;
     color: #065f46;
     padding: 15px;
     border-radius: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border-left: 5px solid #10b981;
 }
 
-/* AREA DE SUBIDA */
+/* =========================================
+   AREA DE SUBIDA
+========================================= */
+
 .upload-area {
     display: flex;
     flex-direction: column;
@@ -43,7 +68,7 @@ body {
     justify-content: center;
     border: 3px dashed #84a59d;
     border-radius: 20px;
-    padding: 40px;
+    padding: 45px;
     margin-bottom: 30px;
     cursor: pointer;
     transition: .3s;
@@ -105,12 +130,16 @@ body {
     color: #64748b;
 }
 
-/* TARJETAS DE EVIDENCIAS */
+/* =========================================
+   TARJETAS DE EVIDENCIAS
+========================================= */
+
 .evidencia-card {
     background: white;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 10px;
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 15px;
+    min-height: 120px;
     box-shadow: 0 5px 15px rgba(0,0,0,.08);
     border-left: 6px solid #5b8c85;
     transition: .3s;
@@ -125,7 +154,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     font-size: 18px;
     font-weight: 700;
 }
@@ -139,7 +168,10 @@ body {
     color: #475569;
 }
 
-/* ESTADOS */
+/* =========================================
+   ESTADOS
+========================================= */
+
 .estado {
     padding: 5px 12px;
     border-radius: 20px;
@@ -158,7 +190,10 @@ body {
         color: #92400e;
     }
 
-/* MENSAJE CONFIRMACION */
+/* =========================================
+   MENSAJE CONFIRMACION
+========================================= */
+
 .mensaje-ok {
     margin-top: 15px;
     background: #ecfdf5;
@@ -167,11 +202,14 @@ body {
     border-radius: 10px;
 }
 
-/* INFORMACION FINAL */
+/* =========================================
+   INFORMACION FINAL
+========================================= */
+
 .bottom-info {
-    margin-top: 25px;
+    margin-top: 30px;
     background: #f8fafc;
-    padding: 15px;
+    padding: 18px;
     border-radius: 12px;
     color: #475569;
     display: flex;
@@ -184,25 +222,14 @@ body {
         font-size: 20px;
     }
 
-/* RESPONSIVE */
-@media(max-width:768px) {
-    .main-card {
-        padding: 20px;
-    }
+/* =========================================
+   BOTÓN SUBIR EVIDENCIA
+========================================= */
 
-    .upload-area {
-        padding: 25px;
-    }
-
-    .evidencia-header {
-        font-size: 16px;
-    }
-}
-/* BOTÓN SUBIR EVIDENCIA */
 .btn-subir {
     display: block;
-    margin: 20px auto; /* centrado */
-    background: linear-gradient(135deg, #6c63ff, #9a8cff);
+    margin: 25px auto;
+    background: linear-gradient( 135deg, #6c63ff, #9a8cff );
     color: white;
     font-size: 18px;
     font-weight: bold;
@@ -216,6 +243,34 @@ body {
 
     .btn-subir:hover {
         transform: scale(1.05);
-        background: linear-gradient(135deg, #4b45c6, #6c63ff);
+        background: linear-gradient( 135deg, #4b45c6, #6c63ff );
     }
 
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:768px) {
+
+    .evidencias-container {
+        padding: 20px;
+    }
+
+    .main-card {
+        padding: 20px;
+        min-height: auto;
+    }
+
+    .upload-area {
+        padding: 25px;
+    }
+
+    .evidencia-header {
+        font-size: 16px;
+    }
+
+    .formats {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}

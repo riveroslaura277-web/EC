@@ -1,137 +1,392 @@
 ﻿@{
     ViewData["Title"] = "Nosotros";
+    Layout = "_Layout";
 }
+<link rel="stylesheet"href="~/css/Nosotros.css"true" />
 
-<link rel="stylesheet" href="~/css/SobreNosotros.css" />
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!--==================================================
+                    NAVBAR
+===================================================-->
 
-<div class="contenedor">
+<header class="navbar">
 
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="logo">
-            <img src="~/SOBRE NOSOTROS/Logo.png" alt="logo">
-            <div>
-                <h2>EduClick</h2>
-                <p>Aprender es la aventura más emocionante</p>
+    <!--=========================
+            LOGO
+    =========================-->
+
+    <div class="logo">
+
+        <img src="~/EVIDENCIAS/Logo.png"
+             asp-append-version="true"
+             alt="EduClick" />
+
+        <div class="logo-text">
+
+            <h2>
+
+                Edu<span>Click</span>
+
+            </h2>
+
+            <p>
+
+                Aprender es una aventura
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!--=========================
+            MENU
+    =========================-->
+
+    <nav class="menu">
+
+        <a asp-controller="Home"
+           asp-action="Index">
+
+            <i class="fa-solid fa-house"></i>
+
+            Inicio
+
+        </a>
+
+        <a asp-controller="Beneficios"
+           asp-action="Index">
+
+            <i class="fa-solid fa-star"></i>
+
+            Beneficios
+
+        </a>
+
+        <a asp-controller="Nosotros"
+           asp-action="Index"
+           class="active">
+
+            <i class="fa-solid fa-book-open"></i>
+
+            Nosotros
+
+        </a>
+
+        <a asp-controller="Contactanos"
+           asp-action="Index">
+
+            <i class="fa-solid fa-phone"></i>
+
+            Contacto
+
+        </a>
+
+    </nav>
+
+</header>
+
+<!--==================================================
+                    NOSOTROS
+===================================================-->
+
+<section class="nosotros">
+
+    <!--=====================================
+            COLUMNA IZQUIERDA
+    ======================================-->
+
+    <div class="hero-left">
+
+        <span class="etiqueta">
+
+            ⭐ NOSOTROS
+
+        </span>
+
+        <h1>
+
+            Sobre
+
+            <span>Nosotros</span>
+
+        </h1>
+
+        <p>
+
+            En EduClick creemos que cada niño aprende
+            mejor cuando se divierte.
+
+            Nuestra misión es transformar la educación
+            primaria en una experiencia interactiva,
+            segura y emocionante.
+
+        </p>
+
+
+        <div class="hero-left">
+
+            <img src="~/NOSOTROS/tigreP.png"
+                 alt="EduClick" />
+
+        </div>
+    </div>
+
+    <!--=====================================
+            TARJETAS
+    ======================================-->
+
+    <div class="cards-grid">
+        <!--=====================================
+                    TARJETA 1
+        ======================================-->
+
+        <div class="card">
+
+          
+
+            <div class="icono">
+
+                <img src="~/NOSOTROS/mision.png"
+                     asp-append-version="true"
+                     alt="Misión" />
+
             </div>
-        </div>
 
-        <nav>
-            <a asp-controller="Home" asp-action="Index">
-                <i class="fa-solid fa-house"></i>
-                <span>Inicio</span>
-            </a>
+            <h3 class="morado-text">
 
-            <a asp-controller="Beneficios" asp-action="Index">
-                <i class="fa-solid fa-star"></i>
-                <span>Beneficios</span>
-            </a>
+                Nuestra Misión
 
-            <a asp-controller="SobreNosotros" asp-action="Index">
-                <i class="fa-solid fa-book"></i>
-                <span>Nosotros</span>
-            </a>
-
-            <a asp-controller="Contacto" asp-action="Index">
-                <i class="fa-solid fa-phone"></i>
-                <span>Contacto</span>
-            </a>
-
-        </nav>
-    </header>
-
-
-    <!-- HERO -->
-    <section class="hero">
-
-        <div class="hero-texto">
-            <h1>Sobre <span>Nosotros</span></h1>
+            </h3>
 
             <p>
-                En EduClick creemos que cada niño tiene un potencial único y
-                que el aprendizaje debe ser una experiencia divertida,
-                segura e inspiradora.
+
+                Ofrecer una plataforma educativa innovadora
+                que fomente el aprendizaje integral de los
+                niños mediante actividades interactivas
+                y seguras.
+
             </p>
+
         </div>
 
-        <div class="hero-img">
-            <img src="~/SOBRE NOSOTROS/tigre.png" alt="">
-        </div>
-
-    </section>
-
-
-    <!-- TARJETAS -->
-    <section class="cards">
+        <!--=====================================
+                    TARJETA 2
+        ======================================-->
 
         <div class="card">
-            <img src="~/SOBRE NOSOTROS/nuestra mision.png">
-            <h3 class="verde">Nuestra Misión</h3>
+
+           
+
+            <div class="icono">
+
+                <img src="~/NOSOTROS/vision.png"
+                     asp-append-version="true"
+                     alt="Visión" />
+
+            </div>
+
+            <h3 class="verde-text">
+
+                Nuestra Visión
+
+            </h3>
+
             <p>
-                Ofrecer una plataforma educativa innovadora que fomente
-                el aprendizaje integral.
+
+                Ser la plataforma educativa líder
+                que inspire a las nuevas generaciones
+                a aprender, crecer y transformar
+                el mundo.
+
             </p>
+
         </div>
 
-        <div class="card">
-            <img src="~/SOBRE NOSOTROS/nuestra mision.png">
-            <h3 class="azul">Nuestra Visión</h3>
-            <p>
-                Ser una plataforma educativa líder que inspire a nuevas
-                generaciones.
-            </p>
-        </div>
+        <!--=====================================
+                    TARJETA 3
+        ======================================-->
 
         <div class="card">
-            <img src="~/SOBRE NOSOTROS/nuestros valores.png">
-            <h3 class="morado">Nuestros Valores</h3>
 
-            <ul>
+         
+
+            <div class="icono">
+
+                <img src="~/NOSOTROS/valores.png"
+                     asp-append-version="true"
+                     alt="Valores" />
+
+            </div>
+
+            <h3 class="naranja-text">
+
+                Nuestros Valores
+
+            </h3>
+
+            <ul class="lista-valores">
+
                 <li>Seguridad</li>
+
                 <li>Innovación</li>
+
                 <li>Respeto</li>
+
                 <li>Compromiso</li>
+
                 <li>Diversión</li>
+
             </ul>
+
         </div>
+
+        <!--=====================================
+                    TARJETA 4
+        ======================================-->
 
         <div class="card">
-            <img src="~/SOBRE NOSOTROS/nuestro compromiso.png">
-            <h3 class="naranja">Nuestro Compromiso</h3>
+
+           
+
+            <div class="icono">
+
+                <img src="~/NOSOTROS/compromiso .png"
+                     asp-append-version="true"
+                     alt="Compromiso" />
+
+            </div>
+
+            <h3 class="azul-text">
+
+                Compromiso Educativo
+
+            </h3>
+
             <p>
-                Brindar un entorno confiable, accesible y enriquecedor
-                para niños, padres y docentes.
+
+                Trabajamos cada día para brindar
+                un entorno confiable, accesible
+                y enriquecedor para niños,
+                padres y docentes.
+
             </p>
+
         </div>
+
+        <!--=====================================
+                    TARJETA 5
+        ======================================-->
 
         <div class="card">
-            <img src="~/SOBRE NOSOTROS/para todos.png">
-            <h3 class="turquesa">Para Todos</h3>
+
+           
+
+            <div class="icono">
+
+                <img src="~/NOSOTROS/seguro.png"
+                     asp-append-version="true"
+                     alt="Seguro" />
+
+            </div>
+
+            <h3 class="rosado-text">
+
+                Aprendizaje Seguro
+
+            </h3>
+
             <p>
-                Diseñado para acompañar a niños de diferentes edades
-                en su camino de aprendizaje.
+
+                Garantizamos un espacio digital
+                protegido, libre de contenido
+                inapropiado y diseñado
+                especialmente para niños.
+
             </p>
+
         </div>
 
-    </section>
+        <!--=====================================
+                    TARJETA 6
+        ======================================-->
 
+        <div class="card">
 
-    <!-- FOOTER CTA -->
-    <section class="cta">
+            
 
-        <img class="mascota" src="~/SOBRE NOSOTROS/tigre 2.png">
+            <div class="icono">
 
-        <div class="texto">
-            Somos más que una plataforma, somos compañeros
-            de aventura en cada paso del aprendizaje.
+                <img src="~/NOSOTROS/pensado.png"
+                     asp-append-version="true"
+                     alt="Pensado para niños" />
+
+            </div>
+
+            <h3 class="violeta-text">
+
+                Pensado para Niños
+
+            </h3>
+
+            <p>
+
+                Diseñado por expertos en educación
+                para adaptarse a las necesidades,
+                edades e intereses de cada
+                pequeño explorador.
+
+            </p>
+
         </div>
 
-        <button>¡Únete a EduClick! 🚀</button>
+    </div>
 
-        <img class="mochila" src="~/SOBRE NOSOTROS/maleta.png">
+</section>
 
-    </section>
+<!--==================================================
+                BANNER FINAL
+===================================================-->
 
-</div>
+<section class="banner-nosotros">
+
+    <div class="banner-contenido">
+
+        <div class="banner-texto">
+
+            <div class="banner-icono">
+
+                🧪
+
+            </div>
+
+            <div>
+
+                <h2>
+
+                    ¡Somos compañeros en cada aventura de aprendizaje!
+
+                </h2>
+
+                <p>
+
+                    En <strong>EduClick</strong>,
+                    cada niño cuenta,
+                    cada paso importa
+                    y <span>cada logro nos llena de alegría.</span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="banner-nosotros">
+
+            <img src="~/NOSOTROS/tigresdos.png"                
+                 alt="EduClick" />
+
+        </div>
+
+    </div>
+
+</section>

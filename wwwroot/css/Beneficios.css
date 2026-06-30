@@ -1,6 +1,6 @@
-﻿/* =======================================
-   RESET
-======================================= */
+﻿/*==================================================
+                    RESET
+==================================================*/
 
 * {
     margin: 0;
@@ -8,514 +8,516 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Segoe UI',sans-serif;
-    background: linear-gradient(135deg, #FFF176, #FFD54F, #FF6F00);
+    font-family: 'Segoe UI', sans-serif;
+    background-image: url("../BENEFICIOS/fondo.png");
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    overflow-x: hidden;
 }
 
-.contenedor {
-    width: 100%;
-}
-
-/* =======================================
-   NAVBAR
-======================================= */
+/*==================================================
+                    NAVBAR
+==================================================*/
 
 .navbar {
-    width: 98%;
-    margin: 18px auto;
-    background: #fff;
-    border-radius: 24px;
-    padding: 18px 55px;
+    width: 95%;
+    max-width: 1400px;
+    margin: 25px auto;
+    padding: 18px 35px;
+    background: #ffffff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(90,90,150,.10);
 }
+
+/*==================================================
+                    LOGO
+==================================================*/
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 15px;
 }
 
     .logo img {
-        width: 74px;
+        width: 75px;
+        transition: .35s;
     }
 
-    .logo h2 {
-        font-size: 54px;
-        font-weight: 800;
-        line-height: 1;
-    }
-
-    .logo p {
-        margin-top: 4px;
-        color: #444;
-        font-size: 14px;
-    }
-
-.verde {
-    color: #11a93f;
-}
-
-.azul {
-    color: #1d75ff;
-}
-
-nav {
-    display: flex;
-    gap: 60px;
-}
-
-    nav a {
-        text-decoration: none;
-        color: #333;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 8px;
-        font-weight: 600;
-        transition: .3s;
-    }
-
-        nav a i {
-            font-size: 34px;
-        }
-
-        nav a:hover {
-            color: #17af41;
-            transform: translateY(-3px);
-        }
-
-/* =======================================
-   HERO
-======================================= */
-
-.hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 30px 90px;
-    min-height: 420px;
-    background: linear-gradient(#eef8ff,#ffffff);
-    overflow: hidden;
-}
-
-.hero-texto h1 {
-    font-size: 76px;
-    line-height: 1.02;
-    font-weight: 800;
-    margin-bottom: 20px;
-    color:black; /* blanco para que resalte */
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.4); /* sombra para contraste */
-}
-
-.hero-texto p {
-    font-size: 22px;
-    line-height: 1.7;
-    max-width: 620px;
-    color: black;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-}
-
-.hero-imagen {
-    display: flex;
-    justify-content: center;
-}
-
-    .hero-imagen img {
-        width: 640px;
-        max-width: 100%;
-    }
-
-/* =======================================
-   GRID BENEFICIOS
-======================================= */
-
-.beneficios-grid {
-    width: 90%;
-    margin: 40px auto;
-    display: grid;
-    grid-template-columns: repeat(2,minmax(520px,1fr));
-    justify-content: center;
-    gap: 25px;
-
-}
-
-
-
-/* =======================================
-   TARJETAS
-======================================= */
-
-.card {
-    background: white;
-    border-radius: 22px;
-    padding: 22px;
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    min-height: 190px;
-    width: 100%;
-    box-shadow: 0 4px 12px rgba(0,0,0,.05);
-}
-
-    .card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 8px 25px rgba(0,0,0,.10);
-    }
-
-.icono-box {
-    width: 145px;
-    min-width: 145px;
-    height: 145px;
-    border-radius: 26px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-    .icono-box img {
-        width: 90px;
-        height: 90px;
-        object-fit: contain;
-    }
-
-/* Fondos */
-
-.bg-verde {
-    background: #eaf8eb;
-}
-
-.bg-azul {
-    background: #eaf1ff;
-}
-
-.bg-amarillo {
-    background: #fff6df;
-}
-
-.bg-morado {
-    background: #f3edff;
-}
-
-.bg-rosa {
-    background: #ffeaf2;
-}
-
-.bg-cyan {
-    background: #e9f7f7;
-}
-
-/* Texto */
-
-.card div {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.card h3 {
-    font-size: 22px;
-    margin-bottom: 12px;
-    line-height: 1.2;
-    word-break: normal;
-}
-
-.card p {
-    font-size: 17px;
-    line-height: 1.6;
-    color: #333;
-    word-break: normal;
-}
-/* ===========================================
-   COLORES DE LOS TITULOS
-=========================================== */
-
-.verde-text {
-    color: #0ea93f;
-}
-
-.azul-text {
-    color: #1d75ff;
-}
-
-.amarillo-text {
-    color: #f4a300;
-}
-
-.morado-text {
-    color: #5540d8;
-}
-
-.rosa-text {
-    color: #f03275;
-}
-
-.cyan-text {
-    color: #008e99;
-}
-
-/* ===========================================
-   FOOTER
-=========================================== */
-
-.footer-box {
-    width: 89%;
-    margin: 25px auto 50px;
-    background:transparent;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-    border: 2px solid #dcefdc;
-    border-radius: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 30px;
-    box-shadow: 0 3px 10px rgba(0,0,0,.04);
-}
-
-.footer-left {
-    width: 170px;
-    display: flex;
-    justify-content: center;
-}
-
-    .footer-left img {
-        width: 135px;
-    }
-
-.footer-center {
-    flex: 1;
-    text-align: center;
-    color:transparent;
- 
-}
-
-    .footer-center h2 {
-        font-size: 24px;
-        line-height: 1.45;
-        font-weight: 700;
-        color: #ffffff;
-        text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
-    }
-
-    .footer-center .verde {
-        color: #10a33c;
-    }
-
-    .footer-center .azul {
-        color: #1d75ff;
-    }
-
-.footer-right {
-    width: 260px;
-    display: flex;
-    justify-content: center;
-}
-
-    .footer-right button {
-        border: none;
-        background: #10b341;
-        color: white;
-        font-size: 25px;
-        font-weight: 700;
-        padding: 18px 40px;
-        border-radius: 45px;
-        cursor: pointer;
-        transition: .3s;
-        box-shadow: 0 10px 20px rgba(16,179,65,.25);
-    }
-
-        .footer-right button:hover {
-            background: #0d9837;
+        .logo img:hover {
             transform: scale(1.05);
         }
 
-/* ===========================================
-   EFECTOS GENERALES
-=========================================== */
-
-img {
-    user-select: none;
+.logo-text h2 {
+    font-size: 32px;
+    color: #3B2F80;
+    font-weight: 800;
 }
 
-button {
-    font-family: 'Segoe UI',sans-serif;
+.logo-text span {
+    color: #53C441;
 }
 
-.card img {
+/*==================================================
+                    MENU
+==================================================*/
+
+.menu {
+    display: flex;
+    gap: 15px;
+}
+
+    .menu a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 22px;
+        border-radius: 18px;
+        color: #404040;
+        font-weight: 700;
+        transition: .30s;
+    }
+
+        .menu a:hover {
+            background: #EFE8FF;
+            color: #6F3FF5;
+        }
+
+        .menu a.active {
+            background: #E8DFFF;
+            color: #6F3FF5;
+        }
+
+/*==================================================
+                    BENEFICIOS
+==================================================*/
+
+.beneficios {
+    max-width: 1400px; /* antes 1950 */
+
+    margin: 50px auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 30px;
+}
+
+/*==================================================
+                TEXTO IZQUIERDO
+==================================================*/
+
+.beneficios-info {
+    padding-top: 40px;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: #6F3FF5;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.beneficios-info h1 {
+    font-size: 52px; /* antes 65 */
+
+    color: #32206D;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+    .beneficios-info h1 span {
+        color: #6F3FF5;
+    }
+
+.beneficios-info p {
+    font-size: 18px;
+    color: #5A5A5A;
+    line-height: 1.8;
+}
+
+/*==================================================
+                IMAGEN PRINCIPAL
+==================================================*/
+
+.hero-right img {
+    width: 120%; /* antes 100% */
+    height: auto;
+    object-fit: contain;
+    transform: scale(1) translate(1px,10px);
+    filter: drop-shadow( 0 12px 20px rgba(0,0,0,.15) );
+}
+/*====================================================
+                GRID BENEFICIOS
+====================================================*/
+
+.beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px; /* antes 38px */
+}
+
+/*====================================================
+                TARJETAS
+====================================================*/
+
+.card-beneficio {
+    position: relative;
+    background: #ffffff;
+    border-radius: 22px;
+    padding: 25px 20px; /* antes 10px */
+
+    text-align: center;
+    width: 100%; /* quitar 85% */
+
+    min-height: 280px; /* antes 60px */
+
+    box-shadow: 0 8px 20px rgba(87,52,201,.10);
+    transition: .35s ease;
+    overflow: hidden;
+    border: 1px solid #f4f4f4;
+}
+
+    .card-beneficio:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 18px 30px rgba(87,52,201,.16);
+    }
+
+    /*====================================================
+            EFECTO DECORATIVO
+====================================================*/
+
+    .card-beneficio::before {
+        content: "";
+        position: absolute;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: rgba(124,77,255,.05);
+        top: -50px;
+        right: -50px;
+        transition: .4s;
+    }
+
+    .card-beneficio:hover::before {
+        transform: scale(1.3);
+    }
+/*====================================================
+                ICONOS
+====================================================*/
+
+.icono {
+    width: 90px; /* antes 120 */
+    height: 90px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #F7F8FF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: .35s;
 }
 
-.card:hover img {
-    transform: scale(1.08);
+    /* imagen dentro del icono */
+
+    .icono img {
+        width: 105px; 
+        height: 105px;
+        object-fit: contain;
+    }
+
+.card-beneficio:hover .icono {
+    transform: scale(1.08) rotate(-4deg);
 }
 
-/* ===========================================
-   RESPONSIVE
-=========================================== */
+/*====================================================
+                TITULOS
+====================================================*/
 
-@media(max-width:1300px) {
+.card-beneficio h3 {
+    font-size: 20px; /* antes 21 */
 
-    .hero {
-        padding: 35px 60px;
-    }
-
-    .hero-texto h1 {
-        font-size: 64px;
-    }
-
-    .hero-imagen img {
-        width: 520px;
-    }
-
-    .beneficios-grid {
-        grid-template-columns: repeat(2,1fr);
-    }
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #2f2f2f;
 }
 
-/* =============================== */
+/*====================================================
+                TEXTO
+====================================================*/
 
-@media(max-width:992px) {
+.card-beneficio p {
+    font-size: 14px; /* antes 15 */
 
-    .navbar {
-        flex-direction: column;
-        gap: 25px;
-        padding: 25px;
-    }
+    line-height: 1.7;
+    color: #62657B;
+    padding: 0 8px;
+}
+/*====================================================
+                BANNER FINAL
+====================================================*/
 
-    nav {
-        gap: 35px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-    }
-
-    .hero-texto {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-        .hero-texto h1 {
-            font-size: 56px;
-        }
-
-        .hero-texto p {
-            max-width: 700px;
-        }
-
-    .hero-imagen img {
-        width: 430px;
-    }
-
-    .beneficios-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .card {
-        min-height: 190px;
-    }
-
-    .footer-box {
-        flex-direction: column;
-        gap: 25px;
-        text-align: center;
-    }
-
-    .footer-right {
-        width: 100%;
-    }
+.banner-beneficios {
+    max-width: 1200px;
+    margin: 50px auto 60px;
+    padding: 0 20px;
 }
 
-/* =============================== */
+.banner-contenido {
+    background: linear-gradient( 135deg, #6F3FF5, #8A5DFF );
+    border-radius: 28px;
+    padding: 28px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    color: white;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(103,72,219,.18);
+}
 
-@media(max-width:768px) {
+    /* decoración */
 
-    .hero {
-        padding: 35px 25px;
+    .banner-contenido::before {
+        content: "";
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.08);
+        top: -40px;
+        right: -40px;
     }
 
-    .hero-texto h1 {
-        font-size: 46px;
-    }
-
-    .hero-texto p {
-        font-size: 18px;
-    }
-
-    .hero-imagen img {
-        width: 320px;
-    }
-
-    .card {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px;
-        min-height: auto;
-    }
-
-    .icono-box {
+    .banner-contenido::after {
+        content: "";
+        position: absolute;
         width: 120px;
-        min-width: 120px;
         height: 120px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.05);
+        left: -30px;
+        bottom: -30px;
     }
 
-        .icono-box img {
-            width: 75px;
-            height: 75px;
-        }
+/*====================================================
+                    TEXTO
+====================================================*/
 
-    .card div {
-        align-items: center;
-    }
-
-    .card h3 {
-        font-size: 26px;
-    }
-
-    .card p {
-        font-size: 17px;
-    }
-
-    .footer-center h2 {
-        font-size: 20px;
-    }
-
-    .footer-right button {
-        width: 100%;
-        font-size: 20px;
-        padding: 16px 20px;
-    }
+.banner-texto {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 2;
 }
 
-/* ===========================================
-   ANIMACIONES
-=========================================== */
-
-.card {
-    animation: subir .5s ease;
+.banner-icono {
+    width: 55px;
+    height: 55px;
+    border-radius: 15px;
+    background: #FFD54F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
 }
 
-@keyframes subir {
+.banner-texto h2 {
+    font-size: 24px;
+    margin-bottom: 6px;
+    font-weight: 800;
+}
+
+.banner-texto p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.banner-texto span {
+    color: #FFE082;
+    font-weight: 600;
+}
+
+/*====================================================
+                    IMAGEN
+====================================================*/
+
+.banner-personaje {
+    z-index: 5;
+}
+
+    .banner-personaje img {
+        width: 140px; /* antes 180 */
+
+        object-fit: contain;
+        transform: scale(1);
+        filter: drop-shadow( 0 8px 15px rgba(0,0,0,.15) );
+    }
+
+/*====================================================
+                    BOTON
+====================================================*/
+
+.banner-boton {
+    z-index: 2;
+}
+
+.btn-comenzar {
+    display: inline-block;
+    background: #FFD54F;
+    color: #44257D;
+    padding: 13px 22px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    transition: .30s;
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
+}
+
+    .btn-comenzar:hover {
+        transform: translateY(-3px);
+        background: #FFE77A;
+    }
+
+/*====================================================
+                ANIMACIONES
+====================================================*/
+
+.card-beneficio {
+    animation: aparecer .8s ease both;
+}
+
+    .card-beneficio:nth-child(2) {
+        animation-delay: .10s;
+    }
+
+    .card-beneficio:nth-child(3) {
+        animation-delay: .20s;
+    }
+
+    .card-beneficio:nth-child(4) {
+        animation-delay: .30s;
+    }
+
+    .card-beneficio:nth-child(5) {
+        animation-delay: .40s;
+    }
+
+    .card-beneficio:nth-child(6) {
+        animation-delay: .50s;
+    }
+
+@keyframes aparecer {
 
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(25px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/*====================================================
+                RESPONSIVE TABLET
+====================================================*/
+
+@media(max-width:1200px) {
+
+    .beneficios {
+        grid-template-columns: 1fr;
+    }
+
+    .beneficios-info {
+        text-align: center;
+        padding-top: 10px;
+    }
+
+    .beneficios-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .hero-right img {
+        width: 55%;
+    }
+}
+
+/*====================================================
+                RESPONSIVE MOBILE
+====================================================*/
+
+@media(max-width:768px) {
+
+    .beneficios-info h1 {
+        font-size: 42px;
+    }
+
+    .beneficios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .banner-contenido {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    .banner-texto {
+        flex-direction: column;
+    }
+
+    .banner-personaje img {
+        width: 110px;
+    }
+
+    .hero-right img {
+        width: 65%;
+        transform: none;
+    }
+}
+
+/*====================================================
+                SMALL MOBILE
+====================================================*/
+
+@media(max-width:480px) {
+
+    .beneficios {
+        padding: 12px;
+    }
+
+    .beneficios-info h1 {
+        font-size: 34px;
+    }
+
+    .beneficios-info p {
+        font-size: 16px;
+    }
+
+    .card-beneficio {
+        padding: 22px 18px;
+    }
+
+    .btn-comenzar {
+        width: 100%;
+        text-align: center;
     }
 }

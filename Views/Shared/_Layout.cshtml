@@ -5,34 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EduClick</title>
 
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    @await RenderSectionAsync("Styles", required: false)
+
 </head>
 
 <body>
+    <!-- CONTENEDOR GLOBAL -->
+    <div class="app-container">
 
-    <header class="navbar">
-        <div class="logo">
-            <i class="fas fa-graduation-cap"></i>
-            EduClick
-        </div>
+        <main class="page-container">
+            @RenderBody()
+        </main>
 
-        <nav>
-            <a asp-controller="Home" asp-action="Index">Inicio</a>
-            <a asp-controller="ESTU" asp-action="Index">Estudiantes</a>
-            <a asp-controller="ACU" asp-action="Index">Acudientes</a>
-            <a asp-controller="RECTOR" asp-action="Index">Rector</a>
-        </nav>
-    </header>
-
-    <main class="page-container fade-in">
-        @RenderBody()
-    </main>
+    </div>
 
     <script src="~/js/site.js"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
 
 </body>
 </html>

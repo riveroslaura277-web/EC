@@ -1,121 +1,138 @@
 ﻿@{
-    ViewData["Title"] = "Dashboard Estudiante";
-    Layout = null;
+    ViewData["Title"] = "Dashboard";
+    Layout = "_Layout";
 }
 
-<link rel="stylesheet" href="~/css/estudiante-dashboard.css" />
+<link rel="stylesheet"
+      href="~/css/estudiante-dashboard.css"
+      asp-append-version="true" />
 
-<div class="dashboard-container">
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+<div class="dashboard">
 
-        <!-- LOGO -->
-        <div class="logo-box">
+    <!--=========================================
+                SIDEBAR
+    ==========================================-->
 
-            <img src="~/ImageNinos/Logo.png" alt="Logo">
+    <aside class="sidebar-menu">
 
-            <div>
-                <h2>EduClick</h2>
-                <p>Aprender es la aventura más emocionante</p>
-            </div>
+        <div class="menu-top">
+
+            <a href="#" class="menu-item active">
+                <i class="fa-solid fa-house"></i>
+                <span>Inicio</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-file-pen"></i>
+                <span>Tareas</span>
+                <small class="badge">4</small>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-book-open-reader"></i>
+                <span>Evaluaciones</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>Juegos</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-circle-play"></i>
+                <span>Videos</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-robot"></i>
+                <span>Chat IA</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-trophy"></i>
+                <span>Retos</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-calendar-days"></i>
+                <span>Calendario</span>
+            </a>
+
+            <a href="#" class="menu-item">
+                <i class="fa-solid fa-user"></i>
+                <span>Mi Perfil</span>
+            </a>
 
         </div>
 
+        <div class="menu-bottom">
 
-        <!-- MENU -->
-        <nav class="menu">
+            <img src="~/VISTA_ESTUDIANTE/tigredos.png"
+                 asp-append-version="true" />
 
-            <a href="#" class="active">
-                <span>🏠 Inicio</span>
-            </a>
-
-            <a href="#">
-                <span>📋 Mis Materias</span>
-            </a>
-
-            <a href="#">
-                <span>📑 Actividades</span>
-            </a>
-
-            <a href="#">
-                <span>🎮 Juegos</span>
-            </a>
-
-            <a href="#">
-                <span>▶️ Videos</span>
-            </a>
-
-            <a href="#">
-                <span>🤖 Chat IA</span>
-            </a>
-
-            <a href="#">
-                <span>🏆 Retos</span>
-            </a>
-
-            <a href="#">
-                <span>🏅 Logros</span>
-            </a>
-
-            <a href="#">
-                <span>👤 Mi Perfil</span>
-            </a>
-
-        </nav>
-
-        <!-- TIGRE -->
-        <div class="tigre-box">
-            <img src="~/ImageNinos/tigre_leyendo.png" class="tigre" />
         </div>
 
     </aside>
 
-    <!-- MAIN -->
-    <main class="main-content">
 
-        <!-- TOPBAR -->
+    <!--=========================================
+                CONTENIDO PRINCIPAL
+    ==========================================-->
+
+    <div class="main-container">
+
+        <!-- HEADER -->
+
         <header class="topbar">
+
+            <div class="logo-area">
+
+                <img src="~/VISTA_ESTUDIANTE/Logo.png"
+                     class="logo"
+                     asp-append-version="true" />
+
+                <div>
+                    <h2>Edu<span>Click</span></h2>
+                    <p>Explora, aprende y crece</p>
+                </div>
+
+            </div>
+
 
             <div class="welcome">
 
                 <h1>¡Hola, Sofía! 👋</h1>
 
                 <p>
-                    Qué bueno verte de nuevo.
-                    ¡Sigue aprendiendo y alcanzando tus metas!
+                    Cada día es una nueva oportunidad para aprender
+                    algo <span>increíble.</span> ✨
                 </p>
 
             </div>
 
-            <div class="top-actions">
 
-                <!-- PUNTOS -->
-                <div class="points">
+            <div class="header-right">
 
-                    <img src="~/ImageNinos/puntos.png" alt="">
-                    <span>1200</span>
-
-                </div>
-
-                <!-- NOTIFICACION -->
                 <div class="notification">
 
-                    🔔
+                    <i class="fa-solid fa-bell"></i>
+
                     <span>3</span>
 
                 </div>
 
-                <!-- PERFIL -->
+
                 <div class="profile">
 
-                    <img src="~/ImageNinos/iconoavatar.png" alt="">
+                    <img src="~/VISTA_ESTUDIANTE/avatar.png"
+                         asp-append-version="true" />
 
                     <div>
-
-                        <h4>Sofía</h4>
-                        <p>Estudiante</p>
-
+                        <strong>Sofía</strong>
+                        <span>Estudiante</span>
                     </div>
 
                 </div>
@@ -123,194 +140,822 @@
             </div>
 
         </header>
+                <!--=========================================
+                        HERO
+        ==========================================-->
 
-        <!-- HERO -->
-        <section class="hero-section">
+        <section class="hero-grid">
 
-            <!-- BANNER -->
-            <div class="hero-left">
+            <!--==============================
+                        BANNER
+            ==============================-->
 
-                <div class="hero-text">
+            <div class="banner">
 
-                    <h2>
-                        Cada día es una nueva oportunidad para
-                        <span>aprender</span>
-                    </h2>
+                <img src="~/VISTA_ESTUDIANTE/banner.png"
+                     class="banner-img"
+                     asp-append-version="true" />
+
+                <div class="banner-content">
+
+                    <h1>
+
+                        Aprender es tu
+
+                        <span>mejor aventura</span>
+
+                    </h1>
+
+                    <div class="linea"></div>
 
                     <p>
-                        Explora, juega, descubre y aprende
-                        cosas increíbles.
+
+                        Explora, juega y descubre todo lo que puedes lograr.
+                        Aprende mientras te diviertes con actividades,
+                        retos y juegos educativos.
+
                     </p>
 
-                    <button>
-                        ¡Explorar ahora! →
-                    </button>
+                    <a href="#" class="btn-banner">
+
+                        Comenzar ahora 🚀
+
+                    </a>
 
                 </div>
 
             </div>
 
-            <!-- PROGRESO -->
-            <div class="progress-card">
 
-                <h3>Mi progreso</h3>
+            <!--==============================
+                    MI PROGRESO
+            ==============================-->
 
-                <div class="circle">
-                    <span>65%</span>
+            <aside class="progress-card">
+
+                <h2>
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    Mi progreso
+
+                </h2>
+
+
+                <div class="progress-circle">
+
+                    <div class="circle">
+
+                        <span>72%</span>
+
+                    </div>
+
+                    <h3>
+
+                        ¡Vas excelente!
+
+                    </h3>
+
                 </div>
 
-                <p>¡Vas por buen camino!</p>
 
                 <div class="stats">
 
                     <div>
+
                         ⭐
-                        <span>1200</span>
-                        <small>Puntos</small>
+
+                        <h4>1200</h4>
+
+                        <span>Puntos</span>
+
                     </div>
 
+
                     <div>
+
                         🔥
-                        <span>15</span>
-                        <small>Días</small>
+
+                        <h4>18</h4>
+
+                        <span>Días de racha</span>
+
                     </div>
 
+
                     <div>
+
                         🏅
-                        <span>7</span>
-                        <small>Nivel</small>
+
+                        <h4>7</h4>
+
+                        <span>Nivel</span>
+
                     </div>
 
                 </div>
 
-            </div>
+            </aside>
 
         </section>
 
-        <!-- MATERIAS -->
-        <section class="subjects-section">
 
-            <div class="section-header">
+        <!--=========================================
+                    EXPLORA POR TEMA
+        ==========================================-->
 
-                <h2>🍃 Mis materias</h2>
+        <section class="subjects">
 
-                <a href="#">Ver todas →</a>
+            <div class="section-title">
+
+                <h2>
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Explora por tema
+
+                </h2>
+
+
+                <a href="#">
+
+                    Ver todas
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
 
             </div>
+
 
             <div class="subjects-grid">
 
+
                 <!-- MATEMATICAS -->
-                <div class="subject-card math">
 
-                    <img src="~/ImageNinos/icono matematicas.png" alt="">
+                <a href="@Url.Action("Matematicas","Materias")"
+                   class="subject-link">
 
-                    <h3>Matemáticas</h3>
+                    <div class="subject-card blue">
 
-                    <p>
-                        Números y operaciones.
-                    </p>
+                        <img src="~/VISTA_ESTUDIANTE/MATE.png"
+                             asp-append-version="true" />
 
-                    <div class="bar">
-                        <div style="width:75%"></div>
+                        <h3>Matemáticas</h3>
+
+                        <p>
+                            Números, lógica y problemas divertidos.
+                        </p>
+
+                        <strong>75%</strong>
+
+                        <div class="progress">
+                            <div style="width:75%;"></div>
+                        </div>
+
                     </div>
 
-                    <span>75%</span>
+                </a>
 
-                </div>
-
-                <!-- LECTURA -->
-                <div class="subject-card reading">
-
-                    <img src="~/ImageNinos/icono lectura.png" alt="">
-
-                    <h3>Lectura</h3>
-
-                    <p>
-                        Mejora tu comprensión.
-                    </p>
-
-                    <div class="bar">
-                        <div style="width:60%"></div>
-                    </div>
-
-                    <span>60%</span>
-
-                </div>
 
                 <!-- CIENCIAS -->
-                <div class="subject-card science">
 
-                    <img src="~/ImageNinos/icono ciencias.png" alt="">
+                <a href="@Url.Action("Ciencias","Materias")"
+                   class="subject-link">
 
-                    <h3>Ciencias</h3>
+                    <div class="subject-card green">
 
-                    <p>
-                        Descubre el mundo.
-                    </p>
+                        <img src="~/VISTA_ESTUDIANTE/ciencias.png"
+                             asp-append-version="true" />
 
-                    <div class="bar">
-                        <div style="width:80%"></div>
+                        <h3>Ciencias</h3>
+
+                        <p>
+                            Descubre el mundo y realiza experimentos.
+                        </p>
+
+                        <strong>80%</strong>
+
+                        <div class="progress">
+                            <div style="width:80%;"></div>
+                        </div>
+
                     </div>
 
-                    <span>80%</span>
+                </a>
 
-                </div>
+
+                <!-- LENGUA -->
+
+                <a href="@Url.Action("Lengua","Materias")"
+                   class="subject-link">
+
+                    <div class="subject-card yellow">
+
+                        <img src="~/VISTA_ESTUDIANTE/lengua.png"
+                             asp-append-version="true" />
+
+                        <h3>Lengua</h3>
+
+                        <p>
+                            Lee, escribe y mejora tu comprensión.
+                        </p>
+
+                        <strong>65%</strong>
+
+                        <div class="progress">
+                            <div style="width:65%;"></div>
+                        </div>
+
+                    </div>
+
+                </a>
+                <!-- INGLES -->
+
+                <a href="@Url.Action("Ingles","Materias")"
+                   class="subject-link">
+
+                    <div class="subject-card pink">
+
+                        <img src="~/VISTA_ESTUDIANTE/ingles.png"
+                             asp-append-version="true" />
+
+                        <h3>Inglés</h3>
+
+                        <p>
+                            Aprende nuevas palabras jugando.
+                        </p>
+
+                        <strong>70%</strong>
+
+                        <div class="progress">
+                            <div style="width:70%;"></div>
+                        </div>
+
+                    </div>
+
+                </a>
+
 
                 <!-- SOCIALES -->
-                <div class="subject-card social">
 
-                    <img src="~/ImageNinos/icono sociales.png" alt="">
+                <a href="@Url.Action("Sociales","Materias")"
+                   class="subject-link">
 
-                    <h3>Sociales</h3>
+                    <div class="subject-card purple">
 
-                    <p>
-                        Aprende historia.
-                    </p>
+                        <img src="~/VISTA_ESTUDIANTE/socialess.png"
+                             asp-append-version="true" />
 
-                    <div class="bar">
-                        <div style="width:70%"></div>
+                        <h3>Sociales</h3>
+
+                        <p>
+                            Descubre la historia y culturas del mundo.
+                        </p>
+
+                        <strong>60%</strong>
+
+                        <div class="progress">
+                            <div style="width:60%;"></div>
+                        </div>
+
                     </div>
 
-                    <span>70%</span>
+                </a>
 
-                </div>
-
-                <!-- INGLES -->
-                <div class="subject-card english">
-
-                    <img src="~/ImageNinos/icono ingles.png" alt="">
-
-                    <h3>Inglés</h3>
-
-                    <p>
-                        Aprende jugando.
-                    </p>
-
-                    <div class="bar">
-                        <div style="width:65%"></div>
-                    </div>
-
-                    <span>65%</span>
-
-                </div>
 
                 <!-- TECNOLOGIA -->
-                <div class="subject-card tech">
 
-                    <img src="~/ImageNinos/icono tecnologia.png" alt="">
+                <a href="@Url.Action("Tecnologia","Materias")"
+                   class="subject-link">
 
-                    <h3>Tecnología</h3>
+                    <div class="subject-card cyan">
 
-                    <p>
-                        Explora creatividad.
-                    </p>
+                        <img src="~/VISTA_ESTUDIANTE/tecnologia.png"
+                             asp-append-version="true" />
 
-                    <div class="bar">
-                        <div style="width:85%"></div>
+                        <h3>Tecnología</h3>
+
+                        <p>
+                            Crea, explora y aprende innovación.
+                        </p>
+
+                        <strong>85%</strong>
+
+                        <div class="progress">
+                            <div style="width:85%;"></div>
+                        </div>
+
                     </div>
 
-                    <span>85%</span>
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!--=========================================
+                    CONTENIDO INFERIOR
+        ==========================================-->
+
+        <section class="bottom-grid">
+
+
+            <!--=====================================
+                    ACTIVIDAD RECIENTE
+            ======================================-->
+
+            <div class="activity card">
+
+                <div class="section-title">
+
+                    <h2>
+
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+
+                        Actividad reciente
+
+                    </h2>
+
+                    <a href="#">
+
+                        Ver todas
+
+                    </a>
+
+                </div>
+
+
+                <ul>
+
+                    <li>
+
+                        <i class="fa-solid fa-square-check"></i>
+
+                        <div>
+
+                            <strong>
+
+                                Completaste quiz de fracciones
+
+                            </strong>
+
+                            <span>
+
+                                Matemáticas
+
+                            </span>
+
+                        </div>
+
+                        <div class="points-add">
+
+                            <small>
+
+                                Hace 30 min
+
+                            </small>
+
+                            <span>
+
+                                +20 pts
+
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="fa-solid fa-circle-play"></i>
+
+                        <div>
+
+                            <strong>
+
+                                Viste video del ciclo del agua
+
+                            </strong>
+
+                            <span>
+
+                                Ciencias
+
+                            </span>
+
+                        </div>
+
+                        <div class="points-add">
+
+                            <small>
+
+                                Hace 2 horas
+
+                            </small>
+
+                            <span>
+
+                                +15 pts
+
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="fa-solid fa-comments"></i>
+
+                        <div>
+
+                            <strong>
+
+                                Participaste en foro ambiental
+
+                            </strong>
+
+                            <span>
+
+                                Ciencias Naturales
+
+                            </span>
+
+                        </div>
+
+                        <div class="points-add">
+
+                            <small>
+
+                                Ayer
+
+                            </small>
+
+                            <span>
+
+                                +10 pts
+
+                            </span>
+
+                        </div>
+
+                    </li>
+
+
+                    <li>
+
+                        <i class="fa-solid fa-gamepad"></i>
+
+                        <div>
+
+                            <strong>
+
+                                Ganaste aventura histórica
+
+                            </strong>
+
+                            <span>
+
+                                Sociales
+
+                            </span>
+
+                        </div>
+
+                        <div class="points-add">
+
+                            <small>
+
+                                Ayer
+
+                            </small>
+
+                            <span>
+
+                                +25 pts
+
+                            </span>
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!--=====================================
+                        SUGERENCIAS
+            ======================================-->
+
+            <div class="suggestions card">
+
+                <div class="section-title">
+
+                    <h2>
+
+                        💡 Sugerencias para ti
+
+                    </h2>
+
+                </div>
+
+
+                <ul>
+
+                    <li>
+
+                        <img src="~/VISTA_ESTUDIANTE/practicar.png"
+                             asp-append-version="true" />
+
+                        <div>
+
+                            <strong>
+
+                                Practica sumas y restas
+
+                            </strong>
+
+                            <span>
+
+                                Refuerza habilidades matemáticas
+
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-angle-right"></i>
+
+                    </li>
+
+
+                    <li>
+
+                        <img src="~/VISTA_ESTUDIANTE/lee.png"
+                             asp-append-version="true" />
+
+                        <div>
+
+                            <strong>
+
+                                Lee El Principito
+
+                            </strong>
+
+                            <span>
+
+                                Mejora lectura e imaginación
+
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-angle-right"></i>
+
+                    </li>
+
+
+                    <li>
+
+                        <img src="~/VISTA_ESTUDIANTE/explora.png"
+                             asp-append-version="true" />
+
+                        <div>
+
+                            <strong>
+
+                                Explora el Sistema Solar
+
+                            </strong>
+
+                            <span>
+
+                                Aprende sobre planetas
+
+                            </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-angle-right"></i>
+
+                    </li>
+
+                </ul>
+
+            </div>
+            <!--=====================================
+                    COLUMNA DERECHA
+            ======================================-->
+
+            <div class="right-column">
+
+
+                <!--==============================
+                        RETO DEL DIA
+                ==============================-->
+
+                <div class="challenge">
+
+                    <img src="~/VISTA_ESTUDIANTE/iconoEstudiante.png"
+                         class="challenge-img"
+                         asp-append-version="true" />
+
+
+                    <div class="challenge-content">
+
+                        <h2>
+
+                            🚀 Reto del día
+
+                        </h2>
+
+                        <p>
+
+                            Resuelve 10 preguntas de Matemáticas
+                            y gana estrellas.
+
+                        </p>
+
+                        <p>
+
+                            <strong>
+
+                                Recompensa:
+
+                            </strong>
+
+                            ⭐ 50 puntos
+
+                        </p>
+
+                        <a href="#"
+                           class="btn-reto">
+
+                            ¡Aceptar reto!
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!--==============================
+                        PROXIMAS TAREAS
+                ==============================-->
+
+                <div class="tasks card">
+
+                    <div class="section-title">
+
+                        <h2>
+
+                            <i class="fa-solid fa-calendar-days"></i>
+
+                            Próximas tareas
+
+                        </h2>
+
+                        <a href="#">
+
+                            Ver todas
+
+                        </a>
+
+                    </div>
+
+
+                    <ul>
+
+                        <li>
+
+                            <img src="~/VISTA_ESTUDIANTE/mapa.png"
+                                 asp-append-version="true" />
+
+                            <div>
+
+                                <strong>
+
+                                    Mapa conceptual Ecosistemas
+
+                                </strong>
+
+                                <span>
+
+                                    Ciencias Naturales
+
+                                </span>
+
+                            </div>
+
+                            <span class="badge green">
+
+                                Mañana
+
+                            </span>
+
+                        </li>
+
+
+
+                        <li>
+
+                            <img src="~/VISTA_ESTUDIANTE/ejercicio.png"
+                                 asp-append-version="true" />
+
+                            <div>
+
+                                <strong>
+
+                                    Ejercicios de fracciones
+
+                                </strong>
+
+                                <span>
+
+                                    Matemáticas
+
+                                </span>
+
+                            </div>
+
+                            <span class="badge blue">
+
+                                2 días
+
+                            </span>
+
+                        </li>
+
+
+
+                        <li>
+
+                            <img src="~/VISTA_ESTUDIANTE/resumen.png"
+                                 asp-append-version="true" />
+
+                            <div>
+
+                                <strong>
+
+                                    Revolución Francesa
+
+                                </strong>
+
+                                <span>
+
+                                    Sociales
+
+                                </span>
+
+                            </div>
+
+                            <span class="badge red">
+
+                                3 días
+
+                            </span>
+
+                        </li>
+
+
+
+                        <li>
+
+                            <img src="~/VISTA_ESTUDIANTE/energia.png"
+                                 asp-append-version="true" />
+
+                            <div>
+
+                                <strong>
+
+                                    Energías Renovables
+
+                                </strong>
+
+                                <span>
+
+                                    Tecnología
+
+                                </span>
+
+                            </div>
+
+                            <span class="badge orange">
+
+                                5 días
+
+                            </span>
+
+                        </li>
+
+                    </ul>
 
                 </div>
 
@@ -318,6 +963,6 @@
 
         </section>
 
-    </main>
+    </div>
 
 </div>

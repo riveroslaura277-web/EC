@@ -1,184 +1,352 @@
 ﻿@{
     ViewData["Title"] = "Contacto";
+    Layout = "_Layout";
 }
 
-<link rel="stylesheet" href="~/css/Contactanos.css" />
-<link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="~/css/Contactanos.css" asp-append-version="true" />
 
-<div class="contenedor">
+<!--=========================================
+                NAVBAR
+==========================================-->
 
-    <!-- NAVBAR -->
-    <header class="navbar">
+<header class="navbar">
 
-        <div class="logo">
-            <img src="~/CONTACTO/Logo.png" alt="Logo">
+    <div class="logo">
 
-            <div>
-                <h2>EduClick</h2>
-                <p>Aprender es la aventura más emocionante</p>
-            </div>
+        <img src="~/EVIDENCIAS/Logo.png"
+             asp-append-version="true"
+             alt="EduClick" />
+
+        <div class="logo-text">
+
+            <h2>Edu<span>Click</span></h2>
+
+            <p>Aprender es una aventura</p>
+
         </div>
 
-        <nav>
-            <a asp-controller="Home" asp-action="Index">
-                <i class="fa-solid fa-house"></i>
-                <span>Inicio</span>
-            </a>
+    </div>
 
-            <a asp-controller="Beneficios" asp-action="Index">
-                <i class="fa-solid fa-star"></i>
-                <span>Beneficios</span>
-            </a>
+    <nav class="menu">
 
-            <a asp-controller="SobreNosotros" asp-action="Index">
-                <i class="fa-solid fa-book"></i>
-                <span>Nosotros</span>
-            </a>
+        <a asp-controller="Home" asp-action="Index">
+            <i class="fa-solid fa-house"></i>
+            Inicio
+        </a>
 
-            <a asp-controller="Contacto" asp-action="Index">
-                <i class="fa-solid fa-phone"></i>
-                <span>Contacto</span>
-            </a>
+        <a asp-controller="Beneficios" asp-action="Index">
+            <i class="fa-solid fa-star"></i>
+            Beneficios
+        </a>
 
-        </nav>
+        <a asp-controller="Nosotros" asp-action="Index">
+            <i class="fa-solid fa-book-open"></i>
+            Nosotros
+        </a>
 
-    </header>
+        <a asp-controller="Contactanos"
+           asp-action="Index"
+           class="active">
+
+            <i class="fa-solid fa-phone"></i>
+            Contacto
+
+        </a>
+
+    </nav>
+
+</header>
 
 
-    <!-- HERO -->
+<!--=========================================
+                CONTACTO
+==========================================-->
 
-    <section class="hero">
+<section class="contacto">
 
-        <div class="hero-texto">
+    <!-- izquierda -->
 
-            <h1>Contácta<span>nos</span></h1>
+    <div class="contacto-info">
+
+        <span class="etiqueta">
+
+            ⭐ CONTACTO
+
+        </span>
+
+        <h1>
+
+            ¡Contáctanos!
+
+            <span>Estamos aquí para ayudarte</span>
+
+        </h1>
+
+        <p>
+
+            ¿Tienes dudas, sugerencias o necesitas ayuda?
+
+            Nuestro equipo está listo para acompañarte.
+
+            <strong>¡Escríbenos!</strong>
+
+        </p>
+
+        <div class="hero-right">
+
+            <img src="~/CONTACTOS/tigre.png"
+                 asp-append-version="true"
+                 alt="EduClick" />
+
+        </div>
+
+    </div>
+
+
+    <!-- tarjetas -->
+
+    <div class="contacto-grid">
+
+        <!-- tarjeta 1 -->
+
+        <div class="card-contacto">
+
+            <div class="icono">
+
+                <img src="~/CONTACTOS/correo.png"
+                     asp-append-version="true" />
+
+            </div>
+
+            <h3 class="morado">
+
+                Correo Electrónico
+
+            </h3>
 
             <p>
-                Estamos aquí para ayudarte.<br>
-                En EduClick queremos acompañarte en cada paso
-                del aprendizaje. Escríbenos, llámanos o visítanos.
+
+                Escríbenos y te responderemos
+                lo antes posible.
+
             </p>
 
+            <div class="dato morado-box">
+
+                hola@eduClick.com
+
+            </div>
+
         </div>
 
-        <div class="hero-img">
-            <img src="~/CONTACTO/tigre contactos.png" alt="">
+
+        <!-- tarjeta 2 -->
+
+        <div class="card-contacto">
+
+            <div class="icono">
+
+                <img src="~/CONTACTOS/contacto .png"
+                     asp-append-version="true" />
+
+            </div>
+
+            <h3 class="verde">
+
+                WhatsApp
+
+            </h3>
+
+            <p>
+
+                Chatea con nosotros
+                para atención más rápida.
+
+            </p>
+
+            <div class="dato verde-box">
+
+                +57 300 123 4567
+
+            </div>
+
         </div>
 
-    </section>
+
+        <!-- tarjeta 3 -->
+
+        <div class="card-contacto">
+
+            <div class="icono">
+
+                <img src="~/CONTACTOS/llamanos.png"
+                     asp-append-version="true" />
+
+            </div>
+
+            <h3 class="naranja">
+
+                Llámanos
+
+            </h3>
+
+            <p>
+
+                Estamos disponibles
+                de lunes a viernes.
+
+            </p>
+
+            <div class="dato naranja-box">
+
+                +57 601 123 4567
+
+            </div>
+
+        </div>
 
 
-    <!-- CONTACTO -->
+        <!-- tarjeta 4 -->
 
-    <section class="contacto">
+        <div class="card-contacto">
 
-        <!-- IZQUIERDA -->
+            <div class="icono">
 
-        <div class="info-cards">
+                <img src="~/CONTACTOS/ubicacion.png"
+                     asp-append-version="true" />
 
-            <div class="card">
-                <img src="~/CONTACTO/llamanos.png" alt="">
-                <h3 class="verde">Llámanos</h3>
+            </div>
+
+            <h3 class="azul">
+
+                Nuestra Ubicación
+
+            </h3>
+
+            <p>
+
+                Visítanos en nuestras oficinas
+                y conócenos en persona.
+
+            </p>
+
+            <div class="dato azul-box">
+
+                Bogotá, Colombia
+
+            </div>
+
+        </div>
+
+
+        <!-- tarjeta 5 -->
+
+        <div class="card-contacto">
+
+            <div class="icono">
+
+                <img src="~/CONTACTOS/contacto .png"
+                     asp-append-version="true" />
+
+            </div>
+
+            <h3 class="rosado">
+
+                Formulario
+
+            </h3>
+
+            <p>
+
+                Completa nuestro formulario
+                y te contactaremos.
+
+            </p>
+
+            <div class="dato rosado-box">
+
+                Ir al formulario
+
+            </div>
+
+        </div>
+
+
+        <!-- tarjeta 6 -->
+
+        <div class="card-contacto">
+
+            <div class="icono">
+
+                <img src="~/CONTACTOS/horarios.png"
+                     asp-append-version="true" />
+
+            </div>
+
+            <h3 class="violeta">
+
+                Horarios
+
+            </h3>
+
+            <p>
+
+                Estamos para ayudarte
+                en el horario que necesites.
+
+            </p>
+
+            <div class="dato violeta-box">
+
+                Lun - Vie 8am - 6pm
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!--=========================================
+                BANNER
+==========================================-->
+
+<section class="banner-contacto">
+
+    <div class="banner-contenido">
+
+        <div class="banner-texto">
+
+            <div class="banner-icono">
+
+                🧪
+
+            </div>
+
+            <div>
+
+                <h2>
+
+                    ¡Tu aprendizaje es nuestra misión!
+
+                </h2>
 
                 <p>
-                    +57 300 123 4567 <br><br>
-                    Lunes a Viernes <br>
-                    8:00 a.m - 6:00 p.m
+
+                    En EduClick cada mensaje cuenta.
+
+                    Estamos aquí para ayudarte
+
+                    <span>a crecer.</span>
+
                 </p>
-            </div>
-
-
-            <div class="card">
-                <img src="~/CONTACTO/escribenos.png" alt="">
-                <h3 class="azul">Escríbenos</h3>
-
-                <p>
-                    contacto@educlick.com <br><br>
-                    Responderemos lo antes posible.
-                </p>
-            </div>
-
-
-            <div class="card">
-                <img src="~/imagenes/ubicacion.png" alt="">
-                <h3 class="naranja">Visítanos</h3>
-
-                <p>
-                    Calle 10 # 20 - 30 <br>
-                    Bogotá, Colombia <br><br>
-                    ¡Te esperamos!
-                </p>
-            </div>
-
-
-            <div class="card">
-                <img src="~/CONTACTO/busqueta.png" alt="">
-                <h3 class="morado">Síguenos</h3>
-
-                <p>
-                    @@educlick.oficial <br><br>
-
-                    <i class="fab fa-facebook"></i>
-                    &nbsp;
-
-                    <i class="fab fa-instagram"></i>
-                    &nbsp;
-
-                    <i class="fab fa-youtube"></i>
-                </p>
-            </div>
-
-        </div>
-
-
-        <!-- FORMULARIO -->
-
-        <div class="formulario">
-
-            <h2>Envíanos un mensaje</h2>
-
-            <div class="inputs">
-
-                <input type="text" placeholder="Nombre completo">
-
-                <input type="email" placeholder="Correo electrónico">
-
-                <input type="text" placeholder="Asunto">
-
-                <textarea placeholder="Escribe tu mensaje"></textarea>
 
             </div>
 
-            <button>
-                Enviar mensaje ✈️
-            </button>
+        </div>       
 
-        </div>
+    </div>
 
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <section class="cta">
-
-        <img class="mascota"
-             src="~/CONTACTO/tigre 2.png">
-
-        <div class="texto">
-            Tu opinión es muy importante para nosotros.
-            Juntos hacemos de EduClick un lugar increíble
-            para aprender.
-        </div>
-
-        <button>
-            ¡Comencemos a hablar! 😊
-        </button>
-
-        <img class="mochila"
-             src="~/CONTACTO/maleta.png">
-
-    </section>
-
-</div>
+</section>
