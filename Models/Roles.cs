@@ -1,9 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Rol
+namespace EC.Models
 {
-    [Key]
-    public int IdRol { get; set; }
+    public class Rol
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdRol { get; set; }
 
-    public string? NombreRol { get; set; } // "Acudiente", "Estudiante"
+        public string NombreRol { get; set; } = string.Empty;
+
+        // Relación inversa (opcional)
+        public ICollection<Usuarios>? Usuarios { get; set; }
+    }
 }

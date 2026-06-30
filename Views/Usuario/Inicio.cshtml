@@ -2,24 +2,34 @@
     Layout = null;
     ViewData["Title"] = "Iniciar Sesión";
 }
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - EduClick</title>
+
     <link rel="stylesheet" href="/css/Inicio.css" asp-append-version="true" />
+
+    <!-- Font Awesome (por si no lo tienes) -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
 
     <video class="video-sesion" autoplay muted loop>
         <source src="/imagenes/video_sesion.mp4" type="video/mp4" />
         Tu navegador no soporta video.
     </video>
-    <a asp-action="Index" asp-controller="Home" class="btn-volver"> Volver al Inicio</a>
 
+    <a asp-action="Index" asp-controller="Home" class="btn-volver">
+        Volver al Inicio
+    </a>
 
     <div class="login-container">
         <div class="login-box">
+
             <h2>INICIO DE SESIÓN</h2>
             <p>Rol: <strong>@ViewBag.RolSeleccionado</strong></p>
 
@@ -30,51 +40,78 @@
                 </div>
             }
 
-            <form asp-action="Inicio" asp-controller="Usuario" method="post">
+            <!-- LOGIN FORM -->
+            <form asp-action="Inicio"
+                  asp-controller="Usuario"
+                  method="post"
+                  autocomplete="off">
+
                 <input type="hidden" name="rol" value="@ViewBag.RolSeleccionado" />
 
                 <div class="campo">
                     <span class="icono">📧</span>
-                    <input type="email" id="email" name="Email" placeholder="Correo electrónico" required />
+                    <input type="email"
+                           id="email"
+                           name="Email"
+                           placeholder="Correo electrónico"
+                           autocomplete="off"
+                           required />
                 </div>
 
                 <div class="campo">
                     <span class="icono">🔒</span>
-                    <input type="password" id="password" name="Password" placeholder="Contraseña" required />
+                    <input type="password"
+                           id="password"
+                           name="Password"
+                           placeholder="Contraseña"
+                           autocomplete="new-password"
+                           required />
                 </div>
 
                 <div class="remember">
                     <input type="checkbox" id="remember" name="remember" value="true" />
                     <label for="remember">Recordarme</label>
                 </div>
-                
-                <button type="submit" class="btn-login">Iniciar sesión</button>
-            
+
+                <button type="submit" class="btn-login">
+                    Iniciar sesión
+                </button>
+
             </form>
 
-            <!-- Botón Google -->
-            <a asp-controller="Usuario" asp-action="IniciarConGoogle" asp-route-rol="@ViewBag.RolSeleccionado" class="btn-google">
+            <!-- GOOGLE LOGIN -->
+            <a asp-controller="Usuario"
+               asp-action="IniciarConGoogle"
+               asp-route-rol="@ViewBag.RolSeleccionado"
+               class="btn-google">
+
                 <img src="~/IMG_yesid/imgGoogle.png" alt="Google" />
                 Iniciar sesión con Google
             </a>
 
-            <!-- Opciones extra -->
+            <!-- OPCIONES EXTRA -->
             <div class="extra-options">
-                <a href="https://accounts.google.com/signin/recovery"
-                   target="_blank"
-                   style="font-size: 0.8rem; opacity: 0.8;">
+
+                <a asp-controller="Usuario"
+                   asp-action="RecuperarContrasena"
+                   style="font-size:0.8rem; opacity:0.8;">
                     <i class="fa-solid fa-key"></i>
                     ¿Olvidaste tu contraseña?
                 </a>
+
                 <span> | </span>
-                <a asp-controller="Registro"
-                   asp-action="Index"
+
+                <a asp-controller="Usuario"
+                   asp-action="Registrar"
                    class="btn login">
                     <i class="fa-solid fa-user"></i>
                     Crear Cuenta Nueva
                 </a>
+
             </div>
+
         </div>
     </div>
+
 </body>
 </html>

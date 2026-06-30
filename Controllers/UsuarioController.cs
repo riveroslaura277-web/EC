@@ -1,119 +1,252 @@
 ﻿using EC.Data;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Google;
+using EC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Linq;
+using System.Text;
+using System.Security.Cryptography;
 
-namespace EC.Controllers
+
+public class UsuarioController : Controller
 {
-    public class UsuarioController : Controller
+    private readonly ApplicationDbContext _context;
+
+    public UsuarioController(ApplicationDbContext context)
     {
-        private readonly ApplicationDbContext _context;
+        _context = context;
+    }
 
-        public UsuarioController(ApplicationDbContext context)
+    // =========================
+    // LISTAR USUARIOS
+    // =========================
+    [HttpGet]
+    public IActionResult Listar()
+    {
+        var usuarios = _context.Usuarios.ToList();
+        return View(usuarios);
+    }
+    // =========================
+    // LOGIN
+    // =========================
+
+    [HttpGet]
+    public IActionResult Inicio(string rol = null)
+    {
+        ViewBag.RolSeleccionado = rol;
+        return View("~/Views/Usuario/Inicio.cshtml");
+    }
+
+    [HttpPost]
+    public IActionResult Inicio(string Email, string Password)
+    {
+        var usuario = _context.Usuarios
+            .FirstOrDefault(u => (u.Correo ?? "").ToLower() == (Email ?? "").ToLower());
+
+        if (usuario == null || usuario.Contrasena != HashearContrasena(Password))
         {
-            _context = context;
+            TempData["Error"] = "Correo o contraseña incorrectos.";
+            return View("~/Views/Usuario/Inicio.cshtml");
         }
 
-        [HttpGet]
-        public IActionResult Inicio(string rol)
+        HttpContext.Session.SetString("UsuarioEmail", usuario.Correo);
+        HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
+        HttpContext.Session.SetString("Rol", usuario.Rol ?? "");
+
+        return RedirigirPorRol(usuario.Rol ?? "");
+    }
+
+    // =========================
+    // REGISTRO
+    // =========================
+
+    [HttpGet]
+    public IActionResult Registrar()
+    {
+        return View("~/Views/Registro/Index.cshtml");
+    }
+
+    [HttpPost]
+    public IActionResult Registrar(
+        string Email,
+        string Password,
+        string ConfirmarPassword,
+        string Rol,
+        string Nombres,
+        string Apellidos)
+    {
+        if (Password != ConfirmarPassword)
         {
-            ViewBag.RolSeleccionado = rol;
-            return View();
+            TempData["Error"] = "Las contraseñas no coinciden.";
+            return View("~/Views/Registro/Index.cshtml");
         }
 
-        [HttpPost]
-        public IActionResult Inicio(string Email, string Password, string rol)
+        var existe = _context.Usuarios.FirstOrDefault(u => u.Correo == Email);
+
+        if (existe != null)
         {
-            var usuario = _context.Usuarios
-                .FirstOrDefault(u => u.Correo == Email && u.Rol == rol);
-
-            if (usuario == null || usuario.Contrasena != Password)
-            {
-                TempData["Error"] = "Correo o contraseña incorrectos.";
-                ViewBag.RolSeleccionado = rol;
-                return View();
-            }
-
-            HttpContext.Session.SetString("UsuarioEmail", usuario.Correo);
-            HttpContext.Session.SetString("UsuarioRol", usuario.Rol);
-            HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
-
-            return rol switch
-            {
-                "Administrador" => RedirectToAction("LoginAdministrador", "Usuario"),
-                "Rector" => RedirectToAction("RolRector", "Rector"),
-                "Docente" => RedirectToAction("docente", "Docente"),
-                "Estudiante" => RedirectToAction("Index", "Alumnos"),
-                "Acudiente" => RedirectToAction("LoginAcudiente", "Usuario"),
-                _ => RedirectToAction("Index", "Home")
-            };
+            TempData["Error"] = "El correo ya está registrado.";
+            return View("~/Views/Registro/Index.cshtml");
         }
 
-        [HttpGet]
-        public IActionResult IniciarConGoogle(string rol)
+        Usuarios nuevo = new Usuarios
         {
-            var properties = new AuthenticationProperties
-            {
-                RedirectUri = Url.Action("CallbackGoogle", "Usuario"),
-                Items = { { "rol", rol } }
-            };
-            return Challenge(properties, GoogleDefaults.AuthenticationScheme);
+            Correo = Email,
+            Contrasena = HashearContrasena(Password),
+            Rol = Rol,
+            Nombres = Nombres,
+            Apellidos = Apellidos,
+            FechaRegistro = DateTime.Now
+        };
+
+        _context.Usuarios.Add(nuevo);
+        _context.SaveChanges();
+
+        TempData["Success"] = "Usuario registrado correctamente.";
+
+        return RedirectToAction("Inicio");
+    }
+    // =========================
+    // RECUPERAR CONTRASEÑA
+    // =========================
+
+    [HttpGet]
+    public IActionResult RecuperarContrasena()
+    {
+        return View("~/Views/Usuario/RecuperarContrasena.cshtml");
+    }
+
+    [HttpPost]
+    public IActionResult RecuperarContrasena(string Email)
+    {
+        var usuario = _context.Usuarios.FirstOrDefault(u => u.Correo == Email);
+
+        if (usuario == null)
+        {
+            TempData["Error"] = "Ese correo no está registrado.";
+            return View("~/Views/Usuario/RecuperarContrasena.cshtml");
         }
 
-        public async Task<IActionResult> CallbackGoogle()
-        {
-            var result = await HttpContext.AuthenticateAsync(
-                GoogleDefaults.AuthenticationScheme);
+        string token = Guid.NewGuid().ToString();
 
-            if (!result.Succeeded)
+        _context.PasswordResets.Add(new PasswordReset
+        {
+            Email = Email,
+            Token = token,
+            Expira = DateTime.Now.AddMinutes(30)
+        });
+
+        _context.SaveChanges();
+
+        string enlace = Url.Action(
+            "RestablecerContrasena",
+            "Usuario",
+            new { email = Email, token = token },
+            Request.Scheme);
+
+        TempData["Success"] = "Haz clic en el siguiente enlace para cambiar la contraseña.";
+        ViewBag.Enlace = enlace;
+
+        return View("~/Views/Usuario/RecuperarContrasena.cshtml");
+    }
+
+    // =========================
+    // RESTABLECER CONTRASEÑA
+    // =========================
+
+    [HttpGet]
+    public IActionResult RestablecerContrasena(string email, string token)
+    {
+        var reset = _context.PasswordResets
+            .FirstOrDefault(r => r.Email == email &&
+                                 r.Token == token &&
+                                 r.Expira > DateTime.Now);
+
+        if (reset == null)
+        {
+            TempData["Error"] = "El enlace es inválido o expiró.";
+            return RedirectToAction("RecuperarContrasena");
+        }
+
+        ViewBag.Email = email;
+        ViewBag.Token = token;
+
+        return View("~/Views/Usuario/RestablecerContrasena.cshtml");
+    }
+
+    [HttpPost]
+    public IActionResult RestablecerContrasena(string Email, string Token, string NuevaPassword, string ConfirmarPassword)
+    {
+        if (NuevaPassword != ConfirmarPassword)
+        {
+            TempData["Error"] = "Las contraseñas no coinciden.";
+            ViewBag.Email = Email;
+            ViewBag.Token = Token;
+            return View("~/Views/Usuario/RestablecerContrasena.cshtml");
+        }
+
+        var reset = _context.PasswordResets
+            .FirstOrDefault(r => r.Email == Email &&
+                                 r.Token == Token &&
+                                 r.Expira > DateTime.Now);
+
+        if (reset == null)
+        {
+            TempData["Error"] = "El enlace es inválido o expiró.";
+            return RedirectToAction("RecuperarContrasena");
+        }
+
+        var usuario = _context.Usuarios.FirstOrDefault(u => u.Correo == Email);
+
+        if (usuario != null)
+        {
+            usuario.Contrasena = HashearContrasena(NuevaPassword);
+
+            _context.PasswordResets.Remove(reset);
+
+            _context.SaveChanges();
+        }
+
+        TempData["Success"] = "Contraseña actualizada correctamente.";
+
+        return RedirectToAction("Inicio");
+    }
+    // =========================
+    // HASH
+    // =========================
+
+    private static string HashearContrasena(string contrasena)
+    {
+        using (SHA256 sha256 = SHA256.Create())
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(contrasena);
+            byte[] hash = sha256.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+    }
+
+    // =========================
+    // REDIRECCIÓN POR ROL
+    // =========================
+
+    private IActionResult RedirigirPorRol(string rol)
+    {
+        switch (rol)
+        {
+            case "Administrador":
+                return RedirectToAction("LoginAdministrador", "Usuario");
+
+            case "Rector":
+                return RedirectToAction("RolRector", "Rector");
+
+            case "Docente":
+                return RedirectToAction("Docente", "Docente");
+
+            case "Acudiente":
+                return RedirectToAction("Padres", "Acudiente");
+
+            case "Estudiante":
+                return RedirectToAction("Index", "Alumnos");
+
+            default:
                 return RedirectToAction("Index", "Home");
-
-            var email = result.Principal?.FindFirst(ClaimTypes.Email)?.Value;
-            string rolSeleccionado = "";
-            result.Properties?.Items.TryGetValue("rol", out rolSeleccionado);
-            rolSeleccionado ??= "";
-
-            // Verificar si la BD está disponible
-            bool bdDisponible = false;
-            try
-            {
-                bdDisponible = await _context.Database.CanConnectAsync();
-            }
-            catch { }
-
-            if (bdDisponible)
-            {
-                var usuario = _context.Usuarios
-                    .FirstOrDefault(u => u.Correo == email && u.Rol == rolSeleccionado);
-
-                if (usuario == null)
-                {
-                    TempData["Error"] = $"El correo {email ?? "desconocido"} no está registrado como {rolSeleccionado} en EduClick.";
-                    return RedirectToAction("Index", "Home");
-                }
-
-                HttpContext.Session.SetString("UsuarioEmail", email ?? "");
-                HttpContext.Session.SetString("UsuarioRol", rolSeleccionado);
-                HttpContext.Session.SetInt32("UsuarioId", usuario.IdUsuario);
-            }
-            else
-            {
-                // BD no disponible - guarda sesión sin validar
-                HttpContext.Session.SetString("UsuarioEmail", email ?? "");
-                HttpContext.Session.SetString("UsuarioRol", rolSeleccionado);
-            }
-
-            return rolSeleccionado switch
-            {
-                "Administrador" => RedirectToAction("LoginAdministrador", "Usuario"),
-                "Rector" => RedirectToAction("RolRector", "Rector"),
-                "Docente" => RedirectToAction("docente", "Docente"),
-                "Estudiante" => RedirectToAction("Index", "Alumnos"),
-                "Acudiente" => RedirectToAction("LoginAcudiente", "Usuario"),
-                _ => RedirectToAction("Index", "Home")
-            };
         }
     }
 }

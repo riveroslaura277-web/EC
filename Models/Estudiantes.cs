@@ -1,5 +1,4 @@
-﻿using EC.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EC.Models
@@ -8,13 +7,17 @@ namespace EC.Models
     {
         [Key]   // PK
         public int IdEstudiante { get; set; }
-        public int IdUsuario{ get; set; }
+
+        public int IdUsuario { get; set; }
+
         public int Edad { get; set; }
-        public string? Nombre { get; set; }
-        public string Correo { get; set; }
-        public string Curso { get; set; }
+
+        // Todos obligatorios
+        public required string Nombre { get; set; }
+        public required string Correo { get; set; }
+        public required string Curso { get; set; }
 
         // Relación con Evidencias y Logros
-        public ICollection<Evidencia> Evidencias { get; set; }
+        public ICollection<Evidencia> Evidencias { get; set; } = new List<Evidencia>();
     }
 }

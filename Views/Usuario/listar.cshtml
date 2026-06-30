@@ -11,7 +11,6 @@
 <script>
     let filaActiva = null;
 
-    // Selección múltiple de filas
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll("tr[data-id]").forEach(fila => {
             fila.addEventListener("click", function (e) {
@@ -54,7 +53,7 @@
         datos.append("Nombres", filaActiva.cells[1].innerText.trim());
         datos.append("Apellidos", filaActiva.cells[2].innerText.trim());
         datos.append("Correo", filaActiva.cells[3].innerText.trim());
-        datos.append("IdRol", filaActiva.querySelector("select[name='IdRol']").value);
+        datos.append("Rol", filaActiva.querySelector("select[name='Rol']").value); // 👈 corregido
         datos.append("__RequestVerificationToken", token);
 
         fetch("/Registro/EditarInline", {
@@ -126,7 +125,7 @@
 
 <style>
     tr.seleccionado {
-        background-color: #fff9c4; /* amarillo suave */
+        background-color: #fff9c4;
     }
 </style>
 
@@ -151,22 +150,13 @@
                 <td>@u.Apellidos</td>
                 <td>@u.Correo</td>
                 <td>
-                        
-    @{
-    <select name="IdRol" class="form-select">
-        <option value="1" @(u.IdRol == 1 ? "selected" : "")>Administrador</option>
-        <option value="2" @(u.IdRol == 2 ? "selected" : "")>Rector</option>
-        <option value="3" @(u.IdRol == 3 ? "selected" : "")>Docente</option>
-        <option value="4" @(u.IdRol == 4 ? "selected" : "")>Acudiente</option>
-        <option value="5" @(u.IdRol == 5 ? "selected" : "")>Estudiante</option>
-    </select>
-    }
-
-
-    
-
-
-
+                    <select name="Rol" class="form-select">
+                        <option value="Administrador" @(u.Rol == "Administrador" ? "selected" : "")>Administrador</option>
+                        <option value="Rector" @(u.Rol == "Rector" ? "selected" : "")>Rector</option>
+                        <option value="Docente" @(u.Rol == "Docente" ? "selected" : "")>Docente</option>
+                        <option value="Secretaria" @(u.Rol == "Secretaria" ? "selected" : "")>Secretaria</option>
+                        <option value="Estudiante" @(u.Rol == "Estudiante" ? "selected" : "")>Estudiante</option>
+                    </select>
                 </td>
                 <td>@u.FechaRegistro.ToString("dd/MM/yyyy")</td>
                 <td>
@@ -186,12 +176,12 @@
         <input type="email" name="Correo" placeholder="Correo" required />
         <input type="password" name="Contraseña" placeholder="Contraseña" required />
         <input type="password" name="ConfirmarContraseña" placeholder="Confirmar" required />
-        <select name="IdRol">
-            <option value="1">Administrador</option>
-            <option value="2">Rector</option>
-            <option value="3">Docente</option>
-            <option value="4">Acudiente</option>
-            <option value="5">Estudiante</option>
+        <select name="Rol">
+            <option value="Administrador">Administrador</option>
+            <option value="Rector">Rector</option>
+            <option value="Docente">Docente</option>
+            <option value="Acudiente">Acudiente</option>
+            <option value="Estudiante">Estudiante</option>
         </select>
         <button type="submit">➕</button>
     </form>

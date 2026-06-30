@@ -55,10 +55,11 @@ namespace EC.Controllers
 
                 var evidencia = new Evidencia
                 {
+                    Texto = "Trabajo final de matemáticas",
+                    Estudiante = estudiante, // objeto existente de tipo Estudiantes
                     FechaEntrega = DateTime.Now,
-                    Estado = "Pendiente",
-                    IdEstudiante = IdEstudiante,
-                    NombreArchivo = nombreArchivo,
+                    Estado = "Entregado",
+                    NombreArchivo = "tarea.pdf",
                     NombreEstudiante = estudiante.Nombre
                 };
 

@@ -1,9 +1,8 @@
 ﻿body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    height: 100vh;
-    overflow: hidden;
-    background: url('/imagenes/fondo_roles.jpg') center;
+    min-height: 100vh;
+    overflow-y: auto;
 }
 
 /* Fondo desenfocado */

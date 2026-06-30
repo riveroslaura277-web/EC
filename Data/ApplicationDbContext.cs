@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using EC.Models;
 
-
 namespace EC.Data
 {
     public class ApplicationDbContext : DbContext
@@ -22,8 +21,8 @@ namespace EC.Data
         public DbSet<Docente> Docentes { get; set; }
         public DbSet<Acudiente> Acudientes2 { get; set; }
         public DbSet<Rector> Rectores { get; set; }
-        public DbSet<Estudiantes> Estudiante { get; set; }
-
+         public DbSet<PasswordReset> PasswordResets { get; set; }
+        public DbSet<Rol> Roles { get; set; } // relación con Usuarios
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

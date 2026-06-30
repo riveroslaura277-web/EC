@@ -53,18 +53,82 @@ namespace EC.Data
             new Acudiente { Id=9,  Nombres="Carmen",  Apellidos="Morales",  Direccion="Carrera 5 #25-60", Telefono="3109999999", NombreEstudiante="Valentina Morales",Estado="Activo"   },
             new Acudiente { Id=10, Nombres="Jaime",   Apellidos="Jiménez",  Direccion="Av. 68 #14-28",    Telefono="3200000001", NombreEstudiante="Andrés Jiménez",   Estado="Activo"   },
         };
-
         public static List<Usuarios> Usuarios() => new()
-        {
-            new Usuarios { IdUsuario=1, Nombres="Carlos",   Apellidos="Martínez", Correo="c.martinez@educlick.co", Rol="Rector",     Estado="Activo",    FechaRegistro=new DateTime(2024,1,15) },
-            new Usuarios { IdUsuario=2, Nombres="Jorge",    Apellidos="García",   Correo="j.garcia@educlick.co",   Rol="Docente",    Estado="Activo",    FechaRegistro=new DateTime(2024,1,20) },
-            new Usuarios { IdUsuario=3, Nombres="Patricia", Apellidos="López",    Correo="p.lopez@educlick.co",    Rol="Docente",    Estado="Activo",    FechaRegistro=new DateTime(2024,2,1)  },
-            new Usuarios { IdUsuario=4, Nombres="Andrea",   Apellidos="Suárez",   Correo="a.suarez@educlick.co",   Rol="Secretaria", Estado="Activo",    FechaRegistro=new DateTime(2024,2,10) },
-            new Usuarios { IdUsuario=5, Nombres="Miguel",   Apellidos="Peña",     Correo="m.pena@educlick.co",     Rol="Docente",    Estado="Pendiente", FechaRegistro=new DateTime(2024,5,20) },
-            new Usuarios { IdUsuario=6, Nombres="Luisa",    Apellidos="Ramos",    Correo="l.ramos@educlick.co",    Rol="Docente",    Estado="Pendiente", FechaRegistro=new DateTime(2024,5,22) },
-            new Usuarios { IdUsuario=7, Nombres="Fernando", Apellidos="Cruz",     Correo="f.cruz@educlick.co",     Rol="Secretaria", Estado="Pendiente", FechaRegistro=new DateTime(2024,5,25) },
-            new Usuarios { IdUsuario=8, Nombres="Teresa",   Apellidos="Molina",   Correo="t.molina@educlick.co",   Rol="Docente",    Estado="Bloqueado", FechaRegistro=new DateTime(2024,3,5)  },
-        };
+{
+    new Usuarios {
+        IdUsuario = 1,
+        Nombres = "Carlos",
+        Apellidos = "Martínez",
+        Correo = "c.martinez@educlick.co",
+        Rol = "Rector",
+        Estado = "Activo",
+        FechaRegistro = new DateTime(2024,1,15)
+    },
+    new Usuarios {
+        IdUsuario = 2,
+        Nombres = "Jorge",
+        Apellidos = "García",
+        Correo = "j.garcia@educlick.co",
+        Rol = "Docente",
+        Estado = "Activo",
+        FechaRegistro = new DateTime(2024,1,20)
+    },
+    new Usuarios {
+        IdUsuario = 3,
+        Nombres = "Patricia",
+        Apellidos = "López",
+        Correo = "p.lopez@educlick.co",
+        Rol = "Docente",
+        Estado = "Activo",
+        FechaRegistro = new DateTime(2024,2,1)
+    },
+    new Usuarios {
+        IdUsuario = 4,
+        Nombres = "Andrea",
+        Apellidos = "Suárez",
+        Correo = "a.suarez@educlick.co",
+        Rol = "Secretaria",
+        Estado = "Activo",
+        FechaRegistro = new DateTime(2024,2,10)
+    },
+    new Usuarios {
+        IdUsuario = 5,
+        Nombres = "Miguel",
+        Apellidos = "Peña",
+        Correo = "m.pena@educlick.co",
+        Rol = "Docente",
+        Estado = "Pendiente",
+        FechaRegistro = new DateTime(2024,5,20)
+    },
+    new Usuarios {
+        IdUsuario = 6,
+        Nombres = "Luisa",
+        Apellidos = "Ramos",
+        Correo = "l.ramos@educlick.co",
+        Rol = "Docente",
+        Estado = "Pendiente",
+        FechaRegistro = new DateTime(2024,5,22)
+    },
+    new Usuarios {
+        IdUsuario = 7,
+        Nombres = "Fernando",
+        Apellidos = "Cruz",
+        Correo = "f.cruz@educlick.co",
+        Rol = "Secretaria",
+        Estado = "Pendiente",
+        FechaRegistro = new DateTime(2024,5,25)
+    },
+    new Usuarios {
+        IdUsuario = 8,
+        Nombres = "Teresa",
+        Apellidos = "Molina",
+        Correo = "t.molina@educlick.co",
+        Rol = "Docente",
+        Estado = "Bloqueado",
+        FechaRegistro = new DateTime(2024,3,5)
+    }
+};
+
 
         public static List<RolViewModel> Roles() => new()
 {

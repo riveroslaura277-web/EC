@@ -66,8 +66,8 @@
                         Docente
                     </a>
 
-                    <a asp-controller="Alumnos"
-                       asp-action="Index"
+                    <a asp-controller="Usuario"
+                       asp-action="Inicio"
                        asp-route-rol="Estudiante">
                         Estudiante
                     </a>
@@ -94,14 +94,9 @@
 
             </div>
 
-            <a asp-controller="Registro"
-               asp-action="Index"
-               class="btn login">
+            <a asp-controller="Usuario" asp-action="Registrar" class="btn login">Registrarse</a>
 
-                <i class="fa-solid fa-user"></i>
-                Registrarse
 
-            </a>
 
         </div>
 

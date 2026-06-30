@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Restablecer Contraseña";
+}
+<h2>Restablecer Contraseña</h2>
+
+@if (TempData["Error"] != null)
+{
+    <div style="color:red">@TempData["Error"]</div>
+}
+@if (TempData["Success"] != null)
+{
+    <div style="color:green">@TempData["Success"]</div>
+}
+
+<form asp-action="RestablecerContrasena" asp-controller="Usuario" method="post">
+    <input type="hidden" name="Email" value="@ViewBag.Email" />
+    <input type="hidden" name="Token" value="@ViewBag.Token" />
+
+    <input type="password" name="NuevaPassword" placeholder="Nueva contraseña" required />
+    <input type="password" name="ConfirmarPassword" placeholder="Confirmar contraseña" required />
+
+    <button type="submit">Guardar nueva contraseña</button>
+</form>

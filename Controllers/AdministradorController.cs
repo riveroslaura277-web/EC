@@ -21,7 +21,8 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Estudiantes()
         {
             var estudiantes = await _context.Usuarios
-                .Where(u => u.IdRol == 5)
+                .Where(u => u.Rol == "Estudiante")
+
                 .ToListAsync();
 
             return View(estudiantes);
@@ -30,7 +31,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Docentes()
         {
             var docentes = await _context.Usuarios
-                .Where(u => u.IdRol == 3)
+                .Where(u => u.Rol == "Docentes")
                 .ToListAsync();
 
             return View(docentes);
@@ -39,7 +40,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Acudientes()
         {
             var acudientes = await _context.Usuarios
-                .Where(u => u.IdRol == 4)
+                .Where(u => u.Rol == "Acudientes")
                 .ToListAsync();
 
             return View(acudientes);
@@ -48,7 +49,7 @@ namespace WebApplication1.Controllers
         public async Task<IActionResult> Rectores()
         {
             var rectores = await _context.Usuarios
-                .Where(u => u.IdRol == 2)
+                .Where(u => u.Rol == "Rectores")
                 .ToListAsync();
 
             return View(rectores);

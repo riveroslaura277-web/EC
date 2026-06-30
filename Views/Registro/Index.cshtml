@@ -20,37 +20,42 @@
         <h2>¡REGÍSTRATE!</h2>
         <p>Crea tu cuenta y comienza esta gran aventura.</p>
 
-        @if (ViewBag.Error != null)
+        @if (TempData["Error"] != null)
         {
-            <div class="error-box">@ViewBag.Error</div>
-        }
-        @if (TempData["Mensaje"] != null)
-        {
-            <div class="mensaje-popup @(TempData["Tipo"])">
-                <span class="cerrar" onclick="this.parentElement.style.display='none'">✖</span>
-                <p>@TempData["Mensaje"]</p>
-            </div>
+            <div class="error-box">@TempData["Error"]</div>
         }
 
-        <form asp-controller="Registro" asp-action="Registrar" method="post">
-            <input type="text" name="Nombres" placeholder="Nombres" required />
-            <input type="text" name="Apellidos" placeholder="Apellidos" required />
-            <input type="email" name="Correo" placeholder="Correo" required />
-            <input type="password" name="Contrasena" placeholder="Contraseña" required />
-            <input type="password" name="ConfirmarContrasena" placeholder="Confirmar Contraseña" required />
+        @if (TempData["Success"] != null)
+        {
+            <div class="success-box">@TempData["Success"]</div>
+        }
 
+        <form asp-controller="Usuario" asp-action="Registrar" method="post" autocomplete="off">
 
-            <select name="IdRol" required>
+            <input type="text" name="Nombres" placeholder="Nombres" autocomplete="off" required />
+
+            <input type="text" name="Apellidos" placeholder="Apellidos" autocomplete="off" required />
+
+            <input type="email" name="Email" placeholder="Correo" autocomplete="off" required />
+
+            <input type="password" name="Password" placeholder="Contraseña" autocomplete="new-password" required />
+
+            <input type="password" name="ConfirmarPassword" placeholder="Confirmar Contraseña" autocomplete="new-password" required />
+
+            <select name="Rol" autocomplete="off" required>
                 <option value="">Seleccione un rol</option>
-                <option value="4">Estudiante</option>
-                <option value="5">Acudiente</option>
-            
+                <option value="Estudiante">Estudiante</option>
+                <option value="Acudiente">Acudiente</option>
+                <option value="Docente">Docente</option>
+                <option value="Rector">Rector</option>
+                <option value="Administrador">Administrador</option>
             </select>
 
             <div class="contenedor-botones">
                 <button type="submit" class="btn-crear">Crear Cuenta</button>
                 <a asp-controller="Home" asp-action="Index" class="btn-crear">Volver a Inicio</a>
             </div>
+
         </form>
     </div>
 
