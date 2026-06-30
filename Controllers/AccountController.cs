@@ -33,7 +33,8 @@ namespace EC.Controllers
         // Google redirige aquí después de autenticar
         public async Task<IActionResult> GoogleCallback()
         {
-            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            // ✅ Aquí debe ser GoogleDefaults, no Cookie
+            var result = await HttpContext.AuthenticateAsync(GoogleDefaults.AuthenticationScheme);
             if (!result.Succeeded)
                 return RedirectToAction("Login");
 
@@ -50,7 +51,6 @@ namespace EC.Controllers
 
             if (usuario == null)
             {
-                // El correo no está registrado en tu sistema
                 TempData["Error"] = "Tu correo no está registrado en EduClick.";
                 return RedirectToAction("Login");
             }
@@ -76,7 +76,7 @@ namespace EC.Controllers
             var identity = new ClaimsIdentity(nuevosClaims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
 
-            // Reemplaza la cookie con los nuevos claims (incluyendo el rol)
+            // ✅ Guardar la cookie con los claims (correo + rol)
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
             // Redirigir según el rol
